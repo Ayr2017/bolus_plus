@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organisation;
 use Illuminate\Http\Request;
 
 class OrganisationsController extends Controller
@@ -12,7 +13,10 @@ class OrganisationsController extends Controller
      */
     public function index()
     {
-        //
+        $organisations = Organisation::orderBy('name')->get();
+        $title = "Organisations";
+
+        return view('admin.organisations.index', compact('organisations', 'title'));
     }
 
     /**
@@ -20,7 +24,10 @@ class OrganisationsController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Create Organisation";
+        $organisations = Organisation::orderBy('name')->get();
+
+        return view('admin.organisations.create', compact('organisations', 'title'));
     }
 
     /**
