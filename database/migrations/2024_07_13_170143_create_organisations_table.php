@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('organisations', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
+            $table->string('name');
+            $table->unsignedBigInteger('structural_unit_name')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable()->index();
             $table->timestamps();
         });
     }
