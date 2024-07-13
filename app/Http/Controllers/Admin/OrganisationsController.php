@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organisation;
+use App\Models\StructuralUnit;
 use Illuminate\Http\Request;
 
 class OrganisationsController extends Controller
@@ -26,8 +27,9 @@ class OrganisationsController extends Controller
     {
         $title = "Create Organisation";
         $organisations = Organisation::orderBy('name')->get();
+        $structural_units = StructuralUnit::orderBy('name')->get();
 
-        return view('admin.organisations.create', compact('organisations', 'title'));
+        return view('admin.organisations.create', compact('organisations', 'title', 'structural_units'));
     }
 
     /**
@@ -35,7 +37,14 @@ class OrganisationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:organisations|max:255',
+            'structural_unit_id' => 'required|exists:structural_units,id|max:255',
+            'parent_id' => 'nullable|max:255',
+        ]);
+
+        $organisation = Organisation::create($validatedData);
+        return redirect()->route('admin.organisations.index')->with('success', 'Organisation created successfully.');
     }
 
     /**

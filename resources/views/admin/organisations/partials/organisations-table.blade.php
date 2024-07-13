@@ -5,7 +5,7 @@
             <th>Id</th>
             <th>Organisation</th>
             <th>Parent</th>
-            <th>User</th>
+            <th>Unit</th>
         </tr>
         </thead>
         <tbody>
@@ -13,8 +13,9 @@
         <tr>
             <td>{{$organisation->id}}</td>
             <td>{{$organisation->name}}</td>
-            <td>{{$organisation->parent?->name}}</td>
-            <td>{{$employee->structural_unit_name}}</td>
+            <td>{{$organisation->parent?->name ?? 'No'}}</td>
+            <td>{{$organisation->structuralUnit?->name}}</td>
+
         </tr>
         @endforeach
         </tbody>

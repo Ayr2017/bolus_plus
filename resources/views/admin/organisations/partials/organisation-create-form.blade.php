@@ -1,12 +1,16 @@
-<form action="{{route('admin.employees.store')}}" method="POST">
+<form action="{{route('admin.organisations.store')}}" method="POST">
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Название</label>
         <input type="text" class="form-control" id="name"  name="name" aria-describedby="name">
     </div>
     <div class="mb-3">
-        <label for="name" class="form-label">Структурное название</label>
-        <input type="text" class="form-control" id="structural_unit_name"  name="structural_unit_name" aria-describedby="structural_unit_name">
+        <label for="structural_unit_id" class="form-label">Структурное название</label>
+        <select class="form-select" aria-label="Пример выбора по умолчанию" id="structural_unit_id" name="structural_unit_id">
+            @foreach($structural_units as $structural_unit)
+                <option value="{{$structural_unit->id}}">{{$structural_unit->name}}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="mb-3">
