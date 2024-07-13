@@ -16,7 +16,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
+<body class="d-flex flex-column" >
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
@@ -72,9 +72,34 @@
         </div>
     </nav>
 
-    <main class="py-4">
-        @yield('content')
+    <main class="flex-grow-1 d-flex align-items-stretch" style="min-height: 100vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 sidebar bg-secondary py-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-9 content" style="min-height: 100vh">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
     </main>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <p class="mb-0">&copy; {{ date('Y') }} Your Company</p>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

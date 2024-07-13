@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Employee;
-use App\Models\Organisation;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class EmployeesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $employees = Employee::all();
-        return view('admin.employees.index', compact('employees'));
+        //
     }
 
     /**
@@ -24,15 +19,7 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        $users = User::orderBy('name')->get();
-        $organisations = Organisation::orderBy('name')->get();
-        $title = "Add Employee";
-
-        return view('admin.employees.create', [
-            'users' => $users,
-            'title' => $title,
-            'organisations' => $organisations,
-            ]);
+        //
     }
 
     /**
@@ -46,9 +33,9 @@ class EmployeesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Employee $employee)
+    public function show(string $id)
     {
-        return view('admin.employees.show', compact('employee'));
+        //
     }
 
     /**
