@@ -24,4 +24,9 @@ class Animal extends Model
     {
         return $this->belongsTo(Organisation::class);
     }
+
+    public function breed():BelongsTo
+    {
+        return $this->belongsTo(Breed::class);
+    }
 }

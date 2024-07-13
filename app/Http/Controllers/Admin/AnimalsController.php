@@ -41,6 +41,8 @@ class AnimalsController extends Controller
             'name' => 'required',
             'organisation_id' => 'required',
             'number' => 'required',
+            'breed_id' => 'nullable|exists:breeds,id',
+            'birthday' => 'nullable|date',
         ]);
 
         $animal = Animal::create($validatedData);
