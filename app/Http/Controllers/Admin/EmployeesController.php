@@ -40,7 +40,14 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'position' => 'required',
+            'organisation_id' => 'required|exists:organisations,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $employee = Employee::create($validatedData);
+        return redirect()->route('admin.employees.index')->with('success', 'Employee has been added');
     }
 
     /**
