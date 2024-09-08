@@ -10,7 +10,10 @@ use Illuminate\Support\Str;
 class Breed extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'uuid',
+        'name'
+    ];
 
     public static function boot()
     {

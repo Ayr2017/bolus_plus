@@ -10,7 +10,24 @@ use Illuminate\Support\Str;
 class Animal extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'uuid',
+        'name',
+        'number',
+        'organisation_id',
+        'birthday',
+        'breed_id',
+        'number_rshn',
+        'bolus_id',
+        'number_rf',
+        'number_tavro',
+        'number_tag',
+        'tag_color',
+        'number_collar',
+        'status_id',
+        'sex',
+        'withdrawn_at',
+    ];
 
     public static function boot(): void
     {

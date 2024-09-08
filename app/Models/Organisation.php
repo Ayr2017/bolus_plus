@@ -11,7 +11,12 @@ use Illuminate\Support\Str;
 class Organisation extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'uuid',
+        'name',
+        'structural_unit_id',
+        'parent_id',
+    ];
     public function employees():HasMany
     {
         return $this->hasMany(Employee::class);

@@ -19,6 +19,16 @@ return new class extends Migration
             $table->unsignedBigInteger('organisation_id')->unique();
             $table->dateTime('birthday')->nullable();
             $table->unsignedBigInteger('breed_id')->nullable();
+            $table->string('number_rshn')->nullable();
+            $table->bigInteger('bolus_id')->nullable();
+            $table->string('number_rf')->nullable();
+            $table->string('number_tavro')->nullable();
+            $table->string('number_tag')->nullable();
+            $table->string('tag_color')->nullable();
+            $table->string('number_collar')->nullable();
+            $table->string('status_id')->nullable();
+            $table->enum('sex',['female', 'male'])->nullable();
+            $table->dateTime('withdrawal_at')->nullable();
             $table->timestamps();
         });
     }

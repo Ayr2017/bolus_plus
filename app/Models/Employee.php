@@ -10,7 +10,12 @@ use Illuminate\Support\Str;
 class Employee extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'uuid',
+        'position',
+        'organisation_id',
+        'user_id',
+    ];
     public static function boot()
     {
         parent::boot();

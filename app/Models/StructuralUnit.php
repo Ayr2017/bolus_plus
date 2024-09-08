@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class StructuralUnit extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'uuid',
+        'name',
+    ];
 }
