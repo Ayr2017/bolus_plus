@@ -13,17 +13,20 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body class="d-flex flex-column" >
+<body class="d-flex flex-column">
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -50,7 +53,8 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
@@ -74,6 +78,9 @@
 
     <main class="flex-grow-1 d-flex align-items-stretch" style="min-height: 100vh">
         <div class="container">
+            @include('layouts.partials.error-toast')
+            @include('layouts.partials.success-toast')
+
             <div class="row">
                 <div class="col-md-3 sidebar bg-secondary py-3">
                     <ul class="nav flex-column">
@@ -84,7 +91,8 @@
                             <a class="nav-link text-light" href="{{route('admin.employees.index')}}">Employees</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{route('admin.organisations.index')}}">Organisations</a>
+                            <a class="nav-link text-light"
+                               href="{{route('admin.organisations.index')}}">Organisations</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{route('admin.animals.index')}}">Animals</a>
