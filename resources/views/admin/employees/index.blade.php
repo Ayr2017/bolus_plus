@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Employees</h1>
+    <h1>{{$title}}</h1>
 
     <div class="card">
         <div class="card-header">

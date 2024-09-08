@@ -19,7 +19,10 @@ class EmployeesController extends Controller
     public function index(EmployeeService $employeeService )
     {
         $employees = Employee::all();
-        return view('admin.employees.index', compact('employees'));
+        return view('admin.employees.index', [
+            'employees'=>$employees,
+            'title' => 'Employees',
+        ]);
     }
 
     /**
@@ -58,7 +61,12 @@ class EmployeesController extends Controller
      */
     public function show(Employee $employee)
     {
-        return view('admin.employees.show', compact('employee'));
+        return view('admin.employees.show', [
+            'employee'=>$employee,
+            'title' => 'Employee',
+            'users' => User::all(),
+            'organisations' => Organisation::all(),
+        ]);
     }
 
     /**
