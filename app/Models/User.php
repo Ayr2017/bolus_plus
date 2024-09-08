@@ -44,4 +44,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'user_id', 'id');
+    }
+
+    public function currentEmployee()
+    {
+        return $this->hasOne(Employee::class, 'user_id', 'current_employee_id');
+    }
 }
