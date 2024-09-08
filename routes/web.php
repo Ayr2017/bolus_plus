@@ -20,3 +20,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('organisations', OrganisationsController::class);
     Route::resource('users', UsersController::class);
 });
+
+Route::resource('employees', EmployeesController::class);
+
