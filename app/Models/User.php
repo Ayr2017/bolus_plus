@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -50,8 +51,15 @@ class User extends Authenticatable
         return $this->hasMany(Employee::class, 'user_id', 'id');
     }
 
-    public function currentEmployee()
+    public function currentEmployee():BelongsTo
     {
-        return $this->hasOne(Employee::class, 'user_id', 'current_employee_id');
+        return $this->belongsTo(Employee::class, 'current_employee_id', 'id');
+    }
+
+    public function setCurrentEmployee(Employee $employee):bool
+    {
+        return $this->update([
+            'current_employee_id' => $employee->id,
+        ]);
     }
 }

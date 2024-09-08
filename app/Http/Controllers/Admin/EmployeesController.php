@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entity\CurrentEmployee;
+use App\Entity\CurrentEmployeeInterface;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Organisation;
 use App\Models\User;
+use App\Services\Employee\EmployeeService;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
@@ -13,7 +16,7 @@ class EmployeesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(EmployeeService $employeeService )
     {
         $employees = Employee::all();
         return view('admin.employees.index', compact('employees'));

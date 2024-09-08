@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Entity\CurrentEmployee;
+use App\Entity\CurrentEmployeeInterface;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
