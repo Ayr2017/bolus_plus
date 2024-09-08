@@ -1,0 +1,13 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use \App\Services\Service;
+
+class $CLASS_NAME$ extends Service
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
