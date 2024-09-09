@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Employee\EditEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -45,7 +46,7 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Employee  $employee)
+    public function edit(Employee  $employee, EditEmployeeRequest $request)
     {
         return view('employees.edit',[
             'employee' => $employee,
