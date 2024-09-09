@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Breed\StoreBreedRequest;
+use App\Http\Requests\Breed\UpdateBreedRequest;
 use App\Models\Breed;
 use Illuminate\Http\Request;
 
@@ -46,25 +47,35 @@ class BreedsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Breed $breed)
     {
-        //
+        return view('breeds.show', [
+            'breed' => $breed,
+            'title' => 'Breed',
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Breed $breed)
     {
-        //
+        return view('breeds.edit', [
+            'breed' => $breed,
+            'title' => 'Edit Breed',
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBreedRequest $request, Breed $breed)
     {
-        //
+        $result = $breed->update($request->validated());
+        return redirect()->route('breeds.show', [
+            'breed' => $breed,
+            'title' => 'Breed',
+            ]);
     }
 
     /**
