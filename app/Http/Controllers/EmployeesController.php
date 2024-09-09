@@ -45,9 +45,12 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Employee  $employee)
     {
-        //
+        return view('employees.edit',[
+            'employee' => $employee,
+            'title' => 'Edit employee',
+        ]);
     }
 
     /**

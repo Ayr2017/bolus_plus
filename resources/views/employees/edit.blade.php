@@ -10,13 +10,10 @@
             </div>
         </div>
         <div class="card-body">
-            <p>Organisation:{{$employee->organisation->name}}</p>
-            <p>Position: {{$employee->position}}</p>
-            <p>User: {{$employee->user->fullName}}</p>
-            <p>Created at: {{$employee->created_at}}</p>
+
         </div>
         <div class="card-footer">
-            <a href="{{route('admin.employees.edit',['employee'=>$employee])}}" class="btn btn-sm btn-outline-primary">Edit</a>
+            <a href="{{route('employees.edit',['employee'=>$employee])}}" class="btn btn-sm btn-outline-primary">Edit</a>
         </div>
     </div>
 @endsection

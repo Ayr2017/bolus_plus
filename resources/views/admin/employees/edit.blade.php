@@ -1,3 +1,22 @@
-<div>
-    <!-- Let all your things have their places; let each part of your business have its time. - Benjamin Franklin -->
-</div>
+@extends('layouts.admin')
+
+@section('content')
+    <h1>{{$title}}</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="">
+                <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.employees.index')}}">Employees</a>
+                <a href="{{route('admin.employees.show',['employee'=>$employee])}}" class="btn btn-sm btn-outline-secondary">Show</a>
+
+            </div>
+        </div>
+        <div class="card-body">
+            @include('admin.employees.partials.employee-edit-form')
+        </div>
+        <div class="card-footer">
+{{--            <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.employees.index')}}" > All employees</a>--}}
+
+        </div>
+    </div>
+@endsection

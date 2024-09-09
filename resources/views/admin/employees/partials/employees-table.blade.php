@@ -12,7 +12,7 @@
         @foreach($employees as $employee)
         <tr>
             <td>
-                <a href="{{route('employees.show',['employee' => $employee])}}">
+                <a href="{{route('admin.employees.show',['employee' => $employee])}}">
                     {{$employee->id}}
                 </a>
             </td>

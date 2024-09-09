@@ -72,9 +72,16 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Employee $employee)
     {
-        //
+        $users = User::all();
+        $organisations = Organisation::all();
+        return view('admin.employees.edit',[
+            'employee' => $employee,
+            'title' => 'Edit employee',
+            'users' => $users,
+            'organisations' => $organisations,
+        ]);
     }
 
     /**
