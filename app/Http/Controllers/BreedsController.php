@@ -73,8 +73,7 @@ class BreedsController extends Controller
     {
         $result = $breed->update($request->validated());
         return redirect()->route('breeds.show', [
-            'breed' => $breed,
-            'title' => 'Breed',
+            'breed' => $breed
             ]);
     }
 

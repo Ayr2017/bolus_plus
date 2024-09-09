@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\EditEmployeeRequest;
+use App\Http\Requests\Employee\UpdateEmployeePermissionsRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class EmployeesController extends Controller
 {
@@ -48,9 +50,14 @@ class EmployeesController extends Controller
      */
     public function edit(Employee  $employee, EditEmployeeRequest $request)
     {
+        $permissions = Permission
+            ::orderByRaw('SUBSTRING_INDEX(SUBSTRING_INDEX(name, " ", 2), " ", -1)')
+            ->get();
+
         return view('employees.edit',[
             'employee' => $employee,
             'title' => 'Edit employee',
+            'permissions' => $permissions,
         ]);
     }
 
@@ -68,5 +75,10 @@ class EmployeesController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function updatePermissions(UpdateEmployeePermissionsRequest $request, Employee $employee)
+    {
+        dd($request->validated());
     }
 }

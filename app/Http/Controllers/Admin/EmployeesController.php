@@ -10,6 +10,7 @@ use App\Models\Organisation;
 use App\Models\User;
 use App\Services\Employee\EmployeeService;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class EmployeesController extends Controller
 {
@@ -76,11 +77,16 @@ class EmployeesController extends Controller
     {
         $users = User::all();
         $organisations = Organisation::all();
+        $permissions = Permission
+            ::orderByRaw('SUBSTRING_INDEX(SUBSTRING_INDEX(name, " ", 2), " ", -1)')
+            ->get()
+            ->chunk(3);
         return view('admin.employees.edit',[
             'employee' => $employee,
             'title' => 'Edit employee',
             'users' => $users,
             'organisations' => $organisations,
+            'permissions' => $permissions,
         ]);
     }
 
@@ -89,7 +95,7 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request->all());
     }
 
     /**

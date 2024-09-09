@@ -24,6 +24,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('organisations', OrganisationsController::class);
     Route::resource('users', UsersController::class);
     Route::resource('permissions', PermissionsController::class);
+
+    Route::patch('employees/{employee}/permissions', [EmployeesController::class, 'updatePermissions'])->name('employees.permissions.update');
 });
 
 Route::resource('employees', EmployeesController::class);

@@ -8,15 +8,13 @@
             <div class="">
                 <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.employees.index')}}">Employees</a>
                 <a href="{{route('admin.employees.show',['employee'=>$employee])}}" class="btn btn-sm btn-outline-secondary">Show</a>
-
+                @include('admin.employees.partials.employee-permissions-modal', ['permissions_chunk' => $permissions])
             </div>
         </div>
         <div class="card-body">
             @include('admin.employees.partials.employee-edit-form')
         </div>
         <div class="card-footer">
-{{--            <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.employees.index')}}" > All employees</a>--}}
-
         </div>
     </div>
 @endsection
