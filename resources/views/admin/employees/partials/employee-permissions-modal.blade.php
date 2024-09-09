@@ -23,7 +23,7 @@
                                 <div class="mb-3">
                                     <div class="d-flex justify-content-between">
                                         <label for="permissions_ids_{{$permission->id}}">{{$permission->name}}</label>
-                                        <input type="checkbox" name="permissions_ids[]" value="{{$permission->id}}" id="permissions_ids{{$permission->id}}">
+                                        <input type="checkbox" name="permissions_names[]" value="{{$permission->name}}" id="permissions_names{{$permission->id}}" {{$employee->hasAnyPermission($permission->name) ? 'checked' : ''}}>
                                     </div>
                                 </div>
                             @endforeach

@@ -6,16 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 
 class Employee extends Model
 {
-    use HasFactory;
+    use HasFactory, HasPermissions, HasRoles;
     protected $fillable = [
         'uuid',
         'position',
         'organisation_id',
         'user_id',
     ];
+    protected string $guard_name = 'web';
+
+
     public static function boot()
     {
         parent::boot();

@@ -22,7 +22,7 @@ class UpdateEmployeePermissionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'permissions_ids'=> 'required|array',
+            'permissions_names'=> 'required|array',
         ];
     }
 }

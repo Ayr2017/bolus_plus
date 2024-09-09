@@ -79,6 +79,11 @@ class EmployeesController extends Controller
 
     public function updatePermissions(UpdateEmployeePermissionsRequest $request, Employee $employee)
     {
-        dd($request->validated());
+        $result = $employee->syncPermissions($request->validated());
+        if($result){
+            return redirect()->back()->with('success', 'Permissions updated.');
+        }
+
+        return redirect()->back()->with('error', 'Permissions not updated.');
     }
 }
