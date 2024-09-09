@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AnimalsController;
 use App\Http\Controllers\Admin\EmployeesController as AdminEmployeesController;
+use App\Http\Controllers\BreedsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\Admin\OrganisationsController;
 use App\Http\Controllers\Admin\PermissionsController;
@@ -26,4 +27,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 });
 
 Route::resource('employees', EmployeesController::class);
+Route::resource('breeds', BreedsController::class);
 

@@ -82,23 +82,9 @@
             @include('layouts.partials.success-toast')
 
             <div class="row">
-                <div class="col-md-3 sidebar bg-secondary py-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{route('admin.employees.index')}}">Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light"
-                               href="{{route('admin.organisations.index')}}">Organisations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{route('admin.animals.index')}}">Animals</a>
-                        </li>
-                    </ul>
-                </div>
+                <aside class="col-md-3 sidebar bg-secondary py-3">
+                    @include('layouts.partials.sidebars.admin-sidebar')
+                </aside>
                 <div class="col-md-9 content" style="min-height: 100vh">
                     @yield('content')
                 </div>
