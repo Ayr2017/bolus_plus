@@ -15,4 +15,10 @@
     <li class="nav-item">
         <a class="nav-link text-light" href="{{route('breeds.index')}}">Breeds</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link text-light" href="{{route('admin.roles.index')}}">Roles</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-light" href="{{route('admin.permissions.index')}}">Permissions</a>
+    </li>
 </ul>

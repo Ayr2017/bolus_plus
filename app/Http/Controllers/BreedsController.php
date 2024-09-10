@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Breed\EditBreedRequest;
 use App\Http\Requests\Breed\StoreBreedRequest;
 use App\Http\Requests\Breed\UpdateBreedRequest;
 use App\Models\Breed;
@@ -58,7 +59,7 @@ class BreedsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Breed $breed)
+    public function edit(EditBreedRequest $request, Breed $breed)
     {
         return view('breeds.edit', [
             'breed' => $breed,
