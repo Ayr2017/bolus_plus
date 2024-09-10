@@ -81,9 +81,9 @@ class EmployeesController extends Controller
     {
         $result = $employee->syncPermissions($request->validated());
         if($result){
-            return redirect()->back()->with('success', 'Permissions updated.');
+            return redirect()->back()->with('message', 'Permissions updated.');
         }
 
-        return redirect()->back()->with('error', 'Permissions not updated.');
+        return redirect()->back()->withErrors(['message'=> 'Permissions not updated.']);
     }
 }
