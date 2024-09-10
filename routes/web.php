@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\Admin\AnimalsController;
 use App\Http\Controllers\Admin\EmployeesController as AdminEmployeesController;
-use App\Http\Controllers\Admin\RolesController;
-use App\Http\Controllers\BreedsController;
-use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\Admin\OrganisationsController;
 use App\Http\Controllers\Admin\PermissionsController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\BreedsController;
+use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

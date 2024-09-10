@@ -21,4 +21,7 @@
     <li class="nav-item">
         <a class="nav-link text-light" href="{{route('admin.permissions.index')}}">Permissions</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link text-light" href="{{route('admin.users.index')}}">Users</a>
+    </li>
 </ul>
