@@ -26,12 +26,16 @@ class RolesController extends Controller
 
     public function store(StoreRoleRequest $request, RoleService $roleService)
     {
+        session()->flashInput($request->input());
         return $roleService->storeRole($request->validated());
     }
 
     public function show(Role $role)
     {
-
+        return view('admin.roles.show',[
+            'title' => 'Role',
+            'role' => $role,
+        ]);
     }
 
     public function edit(Role $role)
