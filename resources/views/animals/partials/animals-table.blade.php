@@ -15,7 +15,7 @@
         <tr>
             <td>{{$animal->id}}</td>
             <td>
-                <a href="{{route('admin.animals.show', ['animal' => $animal])}}">
+                <a href="{{route('animals.show', ['animal' => $animal])}}">
                     {{$animal->name}}
                 </a>
             </td>
@@ -23,7 +23,7 @@
             <td>{{$animal->organisation?->name}}</td>
             <td>{{$animal->created_at}}</td>
             <td>
-                <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.animals.show', ['animal' => $animal])}}">
+                <a class="btn btn-sm btn-outline-secondary" href="{{route('animals.show', ['animal' => $animal])}}">
                     Редактировать
                 </a>
             </td>

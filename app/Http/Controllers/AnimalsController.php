@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Animal;
 use App\Models\Organisation;
 use Illuminate\Http\Request;
@@ -16,7 +15,7 @@ class AnimalsController extends Controller
     {
         $animals = Animal::all();
         $title = "Animals";
-        return view('admin.animals.index', compact('animals', 'title'));
+        return view('animals.index', compact('animals', 'title'));
     }
 
     /**
@@ -26,7 +25,7 @@ class AnimalsController extends Controller
     {
         $title = "Add Animal";
         $organisations = Organisation::orderBy('name')->get();
-        return view('admin.animals.create',[
+        return view('animals.create',[
             'title' => $title,
             'organisations' => $organisations
         ]);
@@ -46,7 +45,7 @@ class AnimalsController extends Controller
         ]);
 
         $animal = Animal::create($validatedData);
-        return redirect()->route('admin.animals.index');
+        return redirect()->route('animals.index');
     }
 
     /**
@@ -54,7 +53,7 @@ class AnimalsController extends Controller
      */
     public function show(Animal $animal)
     {
-        return view('admin.animals.show', [
+        return view('animals.show', [
             'animal' => $animal,
             'title' => "Animals"
         ]);

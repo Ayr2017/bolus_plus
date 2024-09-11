@@ -1,4 +1,4 @@
-<form action="{{route('admin.animals.store')}}" method="POST">
+<form action="{{route('animals.store')}}" method="POST">
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Название</label>

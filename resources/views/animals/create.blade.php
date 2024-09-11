@@ -4,7 +4,7 @@
     <h1>{{$title}}</h1>
     <div class="">
         <div class="col-6">
-            @include('admin.animals.partials.animal-create-form')
+            @include('animals.partials.animal-create-form')
         </div>
 
     </div>
