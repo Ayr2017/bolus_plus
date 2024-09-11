@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('number_collar')->nullable();
             $table->string('status_id')->nullable();
             $table->enum('sex',['female', 'male'])->nullable();
-            $table->dateTime('withdrawal_at')->nullable();
+            $table->dateTime('withdrawn_at')->nullable();
             $table->timestamps();
         });
     }
