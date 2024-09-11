@@ -13,6 +13,9 @@
         <a class="nav-link text-light" href="{{route('animals.index')}}">Animals</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link text-light" href="{{route('statuses.index')}}">Statuses</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link text-light" href="{{route('breeds.index')}}">Breeds</a>
     </li>
     <li class="nav-item">

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\BreedsController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\StatusesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 Route::resource('animals', AnimalsController::class);
 Route::resource('employees', EmployeesController::class);
 Route::resource('breeds', BreedsController::class);
+Route::resource('statuses', BreedsController::class);
+Route::resource('statuses', StatusesController::class);
 
