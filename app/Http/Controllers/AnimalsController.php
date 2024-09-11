@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Animal;
 use App\Models\Organisation;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class AnimalsController extends Controller
@@ -25,9 +26,11 @@ class AnimalsController extends Controller
     {
         $title = "Add Animal";
         $organisations = Organisation::orderBy('name')->get();
+        $statuses = Status::orderBy('name')->get();
         return view('animals.create',[
             'title' => $title,
-            'organisations' => $organisations
+            'organisations' => $organisations,
+            'statuses' => $statuses,
         ]);
     }
 
