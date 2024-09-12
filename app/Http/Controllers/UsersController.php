@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -39,23 +42,31 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user):View
     {
-        //
+        return view('users.show', [
+            'user' =>  $user,
+            'title' => User::class,
+            ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user) :View
     {
-        //
+        $roles = Role::orderBy('name')->get()->chunk(3);
+        return view('users.edit', [
+            'user' => $user,
+            'title' => User::class,
+            'roles' => $roles,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
         //
     }

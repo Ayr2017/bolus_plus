@@ -31,7 +31,9 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::resource('employees', AdminEmployeesController::class);
     Route::resource('organisations', OrganisationsController::class);
     Route::resource('permissions', PermissionsController::class);
+
     Route::patch('employees/{employee}/permissions', [EmployeesController::class, 'updatePermissions'])->name('employees.permissions.update');
+    Route::patch('users/{user}/roles', [UsersController::class, 'updateRoles'])->name('users.roles.update');
 });
 
 
