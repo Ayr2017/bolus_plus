@@ -87,7 +87,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="tag_color" class="form-label">Number color</label>
+            <label for="tag_color" class="form-label">Tag color</label>
             <input type="color" class="form-control form-control-sm form-control-color" id="tag_color" name="tag_color"
                    aria-describedby="tag_color">
         </div>

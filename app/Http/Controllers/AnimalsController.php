@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Animal\StoreAnimalRequest;
 use App\Models\Animal;
+use App\Models\Bolus;
+use App\Models\Breed;
 use App\Models\Organisation;
 use App\Models\Status;
 use Illuminate\Http\Request;
@@ -24,31 +27,29 @@ class AnimalsController extends Controller
      */
     public function create()
     {
-        $title = "Add Animal";
         $organisations = Organisation::orderBy('name')->get();
         $statuses = Status::orderBy('name')->get();
+        $breeds = Breed::orderBy('name')->get();
+        $boluses = Bolus::orderBy('number')->get();
+
         return view('animals.create',[
-            'title' => $title,
             'organisations' => $organisations,
             'statuses' => $statuses,
+            'breeds' => $breeds,
+            'boluses' => $boluses,
+            'title' => "Add Animal",
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAnimalRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'organisation_id' => 'required',
-            'number' => 'required',
-            'breed_id' => 'nullable|exists:breeds,id',
-            'birthday' => 'nullable|date',
-        ]);
+        $validatedData = $request->validated();
 
-        $animal = Animal::create($validatedData);
-        return redirect()->route('animals.index');
+        $animal = Animal::firstOrCreate(['number' => $validatedData['number']],$validatedData);
+        return redirect()->route('animals.index')->with('message', 'Animal created successfully.')->with('created_animal', $animal);
     }
 
     /**
