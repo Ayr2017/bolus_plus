@@ -14,4 +14,6 @@ class Bolus extends Model
         'batch_number',
         'produced_at',
     ];
+
+    protected $table='boluses';
 }

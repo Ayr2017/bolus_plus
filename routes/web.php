@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnimalsController;
+use App\Http\Controllers\BolusesController;
 use App\Http\Controllers\BreedsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeesController as AdminEmployeesController;
@@ -23,6 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth:web'], function () {
     Route::resource('users', UsersController::class);
     Route::resource('animals', AnimalsController::class);
+    Route::resource('boluses', BolusesController::class);
     Route::resource('employees', EmployeesController::class);
     Route::resource('breeds', BreedsController::class);
     Route::resource('statuses', BreedsController::class);
