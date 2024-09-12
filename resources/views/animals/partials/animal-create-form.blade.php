@@ -73,6 +73,24 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label for="bolus_id" class="form-label">Bolus</label>
+            <select class="form-select form-select-sm" aria-label="Пример выбора по умолчанию" id="bolus_id" name="bolus_id">
+                @foreach($boluses as $bolus)
+                    <option value="{{$bolus->id}}" {{old('bolus_id') == $bolus ? 'selected' : ''}}>{{$bolus->number}} / {{$bolus->version}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="breed_id" class="form-label">Breed</label>
+            <select class="form-select form-select-sm" aria-label="Пример выбора по умолчанию" id="breed_id" name="breed_id">
+                @foreach($breeds as $breed)
+                    <option value="{{$breed->id}}" {{old('breed_id') == $bolus ? 'selected' : ''}}>{{$breed->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
 
         <div class="mb-3">
             <label for="birthday" class="form-label">Birthday</label>
