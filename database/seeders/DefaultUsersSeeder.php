@@ -29,7 +29,6 @@ class DefaultUsersSeeder extends Seeder
                 ['email'=>$this->admin['email']],
                 [
                     'name' => $this->admin['name'],
-                    'phone' => $this->admin['phone'],
                     'password' => Hash::make($this->admin['password']),
                     'email_verified_at'=>date("Y-m-d H:i:s"),
                 ]);
