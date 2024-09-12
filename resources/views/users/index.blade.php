@@ -6,11 +6,11 @@
     <div class="card">
         <div class="card-header">
             <div class="">
-                <a class="btn btn-sm btn-outline-primary" href="{{route('employees.create')}}">Create</a>
+                <a class="btn btn-sm btn-outline-primary" href="{{route('users.create')}}">Create</a>
             </div>
         </div>
         <div class="card-body">
-            @include('employees.partials.employees-table')
+            @include('users.partials.users-table')
         </div>
         <div class="card-footer"></div>
     </div>

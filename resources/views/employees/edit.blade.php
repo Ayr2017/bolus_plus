@@ -6,14 +6,16 @@
     <div class="card">
         <div class="card-header">
             <div class="">
-                <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.employees.index')}}">Employees</a>
+                <a class="btn btn-sm btn-outline-secondary" href="{{route('employees.index')}}">Employees</a>
+                <a href="{{route('employees.show',['employee'=>$employee])}}"
+                   class="btn btn-sm btn-outline-secondary">Show</a>
+                @include('employees.partials.employee-permissions-modal', ['permissions_chunk' => $permissions])
             </div>
         </div>
         <div class="card-body">
-
+            @include('employees.partials.employee-edit-form')
         </div>
         <div class="card-footer">
-            <a href="{{route('employees.edit',['employee'=>$employee])}}" class="btn btn-sm btn-outline-primary">Edit</a>
         </div>
     </div>
 @endsection

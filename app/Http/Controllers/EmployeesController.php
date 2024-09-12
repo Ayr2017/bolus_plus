@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Employee\EditEmployeeRequest;
-use App\Http\Requests\Employee\UpdateEmployeePermissionsRequest;
+use App\Entity\CurrentEmployee;
+use App\Entity\CurrentEmployeeInterface;
 use App\Models\Employee;
+use App\Models\Organisation;
+use App\Models\User;
+use App\Services\Employee\EmployeeService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -13,9 +16,13 @@ class EmployeesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(EmployeeService $employeeService )
     {
-        return view('employees.index');
+        $employees = Employee::all();
+        return view('employees.index', [
+            'employees'=>$employees,
+            'title' => 'Employees',
+        ]);
     }
 
     /**
@@ -23,7 +30,15 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $users = User::orderBy('name')->get();
+        $organisations = Organisation::orderBy('name')->get();
+        $title = "Add Employee";
+
+        return view('employees.create', [
+            'users' => $users,
+            'title' => $title,
+            'organisations' => $organisations,
+            ]);
     }
 
     /**
@@ -31,7 +46,14 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('employees.index');
+        $validatedData = $request->validate([
+            'position' => 'required',
+            'organisation_id' => 'required|exists:organisations,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $employee = Employee::create($validatedData);
+        return redirect()->route('employees.index')->with('success', 'Employee has been added');
     }
 
     /**
@@ -39,24 +61,30 @@ class EmployeesController extends Controller
      */
     public function show(Employee $employee)
     {
-        return view('employees.show',[
-            'title' => 'Employee '.$employee->id,
-            'employee' => $employee,
+        return view('employees.show', [
+            'employee'=>$employee,
+            'title' => 'Employee',
+            'users' => User::all(),
+            'organisations' => Organisation::all(),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Employee  $employee, EditEmployeeRequest $request)
+    public function edit(Employee $employee)
     {
+        $users = User::all();
+        $organisations = Organisation::all();
         $permissions = Permission
             ::orderByRaw('SUBSTRING_INDEX(SUBSTRING_INDEX(name, " ", 2), " ", -1)')
-            ->get();
-
+            ->get()
+            ->chunk(3);
         return view('employees.edit',[
             'employee' => $employee,
             'title' => 'Edit employee',
+            'users' => $users,
+            'organisations' => $organisations,
             'permissions' => $permissions,
         ]);
     }
@@ -66,7 +94,7 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -75,15 +103,5 @@ class EmployeesController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function updatePermissions(UpdateEmployeePermissionsRequest $request, Employee $employee)
-    {
-        $result = $employee->syncPermissions($request->validated());
-        if($result){
-            return redirect()->back()->with('message', 'Permissions updated.');
-        }
-
-        return redirect()->back()->withErrors(['message'=> 'Permissions not updated.']);
     }
 }
