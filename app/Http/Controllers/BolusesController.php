@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Bolus\CreateBolusRequest;
 use App\Http\Requests\Bolus\IndexBolusRequest;
+use App\Http\Requests\Bolus\ShowBolusRequest;
 use App\Http\Requests\Bolus\StoreBolusRequest;
 use App\Http\Requests\Bolus\UpdateBolusRequest;
 use App\Models\Bolus;
@@ -52,7 +53,7 @@ class BolusesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Bolus $bolus)
+    public function show(ShowBolusRequest $showBolusRequest,Bolus $bolus)
     {
         return view('boluses.show',[
             'bolus' => $bolus,

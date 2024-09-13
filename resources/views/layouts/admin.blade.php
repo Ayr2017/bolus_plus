@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+{{--    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">--}}
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -55,7 +55,7 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 {{ Auth::user()->name }}
                             </a>
 

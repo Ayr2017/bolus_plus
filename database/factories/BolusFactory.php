@@ -18,10 +18,10 @@ class BolusFactory extends Factory
     public function definition(): array
     {
         return [
-            'number' => Str::ulid($this->faker->unique()->dateTime()),
-            'version' => $this->faker->numberBetween(1, 10),
-            'batch_number' => $this->faker->unique()->randomNumber(),
-            'produced_at' => $this->faker->dateTime(),
+            'number' => Str::ulid($this->faker->unique()->dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null))->toString(),
+            'version' => strval($this->faker->numberBetween(1, 10)),
+            'batch_number' => strval($this->faker->unique()->randomNumber()),
+            'produced_at' => $this->faker->dateTime()->format('Y-m-d H:i:s'),
         ];
     }
 }
