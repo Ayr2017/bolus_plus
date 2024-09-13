@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Bolus\CreateBolusRequest;
+use App\Http\Requests\Bolus\IndexBolusRequest;
 use App\Http\Requests\Bolus\StoreBolusRequest;
 use App\Http\Requests\Bolus\UpdateBolusRequest;
 use App\Models\Bolus;
 use App\Services\Bolus\BolusService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,7 @@ class BolusesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexBolusRequest $request):View
     {
         $boluses = Bolus::orderBy('number')->get();
         return view('boluses.index',[
