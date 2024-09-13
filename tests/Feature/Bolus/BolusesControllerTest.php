@@ -82,5 +82,4 @@ use Tests\TestCase;
         $response->assertStatus(302);
         $response->assertRedirect('/boluses');
     }
-
 }
