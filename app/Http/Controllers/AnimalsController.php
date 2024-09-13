@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Animal\StoreAnimalRequest;
+use App\Http\Requests\Animal\UpdateAnimalRequest;
 use App\Models\Animal;
 use App\Models\Bolus;
 use App\Models\Breed;
 use App\Models\Organisation;
 use App\Models\Status;
+use App\Services\Animal\AnimalService;
 use Illuminate\Http\Request;
 
 class AnimalsController extends Controller
@@ -66,17 +68,33 @@ class AnimalsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Animal $animal)
     {
-        //
+        $organisations = Organisation::orderBy('name')->get();
+        $statuses = Status::orderBy('name')->get();
+        $breeds = Breed::orderBy('name')->get();
+        $boluses = Bolus::orderBy('number')->get();
+
+        return view('animals.edit',[
+            'animal' => $animal,
+            'organisations' => $organisations,
+            'statuses' => $statuses,
+            'breeds' => $breeds,
+            'boluses' => $boluses,
+            'title' => "Edit Animal",
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAnimalRequest $request, Animal $animal, AnimalService $animalService)
     {
-        //
+        $animal = $animalService->updateAnimal($request->validated(), $animal);
+        if($animal){
+            return redirect()->route('animals.index')->with('message', 'Animal updated successfully.');
+        }
+        return redirect()->back()->withErrors(['message'=> 'Something went wrong.']);
     }
 
     /**
