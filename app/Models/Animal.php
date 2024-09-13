@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class Animal extends Model
@@ -42,8 +44,24 @@ class Animal extends Model
         return $this->belongsTo(Organisation::class);
     }
 
+    public function bolus():BelongsTo
+    {
+        return $this->belongsTo(Bolus::class);
+    }
     public function breed():BelongsTo
     {
         return $this->belongsTo(Breed::class);
+    }
+
+    public function status():BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function birthdayYmd():Attribute
+    {
+        return Attribute::make(
+            get: fn()=>Carbon::make($this->birthday)?->format('Y-m-d'),
+        );
     }
 }
