@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_type_id')->constrained('event_types');
+            $table->string('event_type');
             $table->jsonb('data');
+            $table->foreignId('creator_id')->constrained('users');
+            $table->string('event_category');
             $table->timestamps();
         });
     }
