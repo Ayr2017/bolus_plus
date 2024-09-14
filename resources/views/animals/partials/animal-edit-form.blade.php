@@ -113,5 +113,6 @@
     <div class="my-1 border-top pt-2 border-2">
         <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
         <a href="{{route('animals.show',['animal' => $animal])}}" class="btn btn-outline-secondary btn-sm">Show</a>
+        @include('layouts.partials.delete-modal',['item'=>$animal, 'message'=>'Animal will delete','route'=>route('animals.destroy',['animal'=>$animal])])
     </div>
 </form>
