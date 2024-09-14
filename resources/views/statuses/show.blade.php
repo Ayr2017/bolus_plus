@@ -6,7 +6,6 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-header">
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route('statuses.index')}}">All statuses</a>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -26,6 +25,10 @@
                             <td>{{$status->name}}</td>
                         </tr>
                         <tr>
+                            <th>Description</th>
+                            <td>{{$status->description}}</td>
+                        </tr>
+                        <tr>
                             <th>Slug</th>
                             <td>{{$status->slug}}</td>
                         </tr>
@@ -37,7 +40,9 @@
                     </table>
                 </div>
                 <div class="card-footer">
+                    <a class="btn btn-sm btn-outline-secondary" href="{{route('statuses.index')}}">All statuses</a>
                     <a class="btn btn-sm btn-outline-primary" href="{{route('statuses.edit',['status' => $status])}}">Edit</a>
+                    @include('layouts.partials.delete-modal',['item'=>$status, 'message' => 'Status will delete', 'route' => route('statuses.destroy',['status' => $status])])
                 </div>
             </div>
         </div>

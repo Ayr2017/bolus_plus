@@ -11,7 +11,7 @@ class UpdateStatusRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasRole('admin');
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string|unique:statuses,name'.$this->get('id'),
+            'name'=>'required|string|unique:statuses,name,'.$this->status->id,
             'description'=>'nullable|string',
         ];
     }

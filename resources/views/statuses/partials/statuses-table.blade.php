@@ -12,11 +12,13 @@
         @foreach($statuses as $status)
             <tr>
                 <td>
-                    <a href="{{route('statuses.show',['status' => $status])}}">
-                        {{$status->id}}
-                    </a>
+                    {{$status->id}}
                 </td>
-                <td>{{$status->name}}</td>
+                <td>
+                    <a href="{{route('statuses.show',['status' => $status])}}">
+                        {{$status->name}}
+                    </a>
+                    </td>
                 <td>{{$status->slug}}</td>
                 <td>{{$status->created_at}}</td>
             </tr>

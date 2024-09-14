@@ -6,7 +6,6 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-header">
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route('breeds.index')}}">All breeds</a>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -37,7 +36,9 @@
                     </table>
                 </div>
                 <div class="card-footer">
+                    <a class="btn btn-sm btn-outline-secondary" href="{{route('breeds.index')}}">All breeds</a>
                     <a class="btn btn-sm btn-outline-primary" href="{{route('breeds.edit',['breed' => $breed])}}">Edit</a>
+                    @include('layouts.partials.delete-modal',['item'=>$breed, 'message' =>null, 'route' => route('breeds.destroy',['breed' => $breed])])
                 </div>
             </div>
         </div>

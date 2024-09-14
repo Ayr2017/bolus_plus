@@ -45,4 +45,18 @@ class StatusService extends Service
         return null;
 
     }
+
+    public function deleteStatus(array $validated, Status $status):bool
+    {
+        try {
+            $result = $status->delete();
+            if($result){
+                return true;
+            }
+        }catch (\Throwable $throwable){
+            Log::error(message: __METHOD__ . " " . $throwable->getMessage());
+        }
+
+        return false;
+    }
 }

@@ -19,7 +19,7 @@ class AnimalsController extends Controller
      */
     public function index()
     {
-        $animals = Animal::all();
+        $animals = Animal::orderBy('name')->get();
         $title = "Animals";
         return view('animals.index', compact('animals', 'title'));
     }

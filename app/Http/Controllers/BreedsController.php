@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Breed\DeleteBreedRequest;
 use App\Http\Requests\Breed\EditBreedRequest;
 use App\Http\Requests\Breed\StoreBreedRequest;
 use App\Http\Requests\Breed\UpdateBreedRequest;
 use App\Models\Breed;
+use App\Services\Breed\BreedService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BreedsController extends Controller
@@ -35,14 +38,17 @@ class BreedsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBreedRequest $request)
+    public function store(StoreBreedRequest $request, BreedService $breedService): RedirectResponse
     {
-        $breed = Breed::create($request->validated());
-        session()->flashInput($request->input());
+        $breed = $breedService->storeBreed($request->validated());
+        if($breed){
+            return redirect()->route('breeds.index')
+                ->with('message', 'Breed created.')
+                ->with('breed_id', $breed->id)
+                ->withInput();
+        }
+        return back()->withInput()->withErrors(['message' => 'Breed could not be created.']);
 
-        return redirect()->route('breeds.index')
-            ->with('message', 'Breed created.')
-            ->with('breed_id', $breed->id);
     }
 
     /**
@@ -70,19 +76,27 @@ class BreedsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBreedRequest $request, Breed $breed)
+    public function update(UpdateBreedRequest $request, Breed $breed, BreedService $breedService)
     {
-        $result = $breed->update($request->validated());
-        return redirect()->route('breeds.show', [
-            'breed' => $breed
-            ]);
+        $breed = $breedService->updateBreed($request->validated(), $breed);
+        if($breed){
+            return redirect()->route('breeds.show', [
+                'breed' => $breed
+            ])->with('message', 'Breed updated.');
+        }
+        return back()->withInput()->withErrors(['message' => 'Breed update failed.']);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DeleteBreedRequest $request, Breed $breed, BreedService $breedService): RedirectResponse
     {
-        //
+        $result = $breedService->deleteBreed($request->validated(), $breed);
+        if($result){
+            return redirect()->route('breeds.index')->with('message', 'Breed deleted.');
+        }
+        return back()->withInput();
     }
 }
