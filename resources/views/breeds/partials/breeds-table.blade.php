@@ -11,11 +11,13 @@
         @foreach($breeds as $breed)
             <tr>
                 <td>
+                    {{$breed->id}}
+                </td>
+                <td>
                     <a href="{{route('breeds.show',['breed' => $breed])}}">
-                        {{$breed->id}}
+                        {{$breed->name}}
                     </a>
                 </td>
-                <td>{{$breed->name}}</td>
                 <td>{{$breed->created_at}}</td>
             </tr>
         @endforeach
