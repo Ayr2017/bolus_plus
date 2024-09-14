@@ -12,10 +12,11 @@
         @foreach($organisations as $organisation)
         <tr>
             <td>{{$organisation->id}}</td>
-            <td>{{$organisation->name}}</td>
+            <td>
+                <a href="{{route('organisations.show',['organisation' => $organisation])}}">{{$organisation->name}}</a>
+            </td>
             <td>{{$organisation->parent?->name ?? 'No'}}</td>
             <td>{{$organisation->structuralUnit?->name}}</td>
-
         </tr>
         @endforeach
         </tbody>

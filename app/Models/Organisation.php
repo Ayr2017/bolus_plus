@@ -34,6 +34,10 @@ class Organisation extends Model
     {
         return $this->belongsTo(StructuralUnit::class);
     }
+    public function parent():BelongsTo
+    {
+        return $this->belongsTo(Organisation::class, 'parent_id', 'id');
+    }
     public function animals():hasMany
     {
         return $this->hasMany(Animal::class, 'organisation_id');

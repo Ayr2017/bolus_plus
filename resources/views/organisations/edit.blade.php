@@ -1,3 +1,11 @@
-<div>
-    <!-- Let all your things have their places; let each part of your business have its time. - Benjamin Franklin -->
-</div>
+@extends('layouts.admin')
+
+@section('content')
+    <h1>{{$title}}</h1>
+    <div class="">
+        <div class="col-12">
+            @include('organisations.partials.organisation-edit-form')
+        </div>
+
+    </div>
+@endsection
