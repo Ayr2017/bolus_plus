@@ -18,6 +18,7 @@
     </div>
 
     <div class="my-1 border-top pt-2 border-2">
-        <button type="submit" class="btn btn-outline-primary btn-sm">Сохранить</button>
+        <a href="{{route('events.index')}}"  class="btn btn-outline-secondary btn-sm">Cancel</a>
+        <button type="submit" class="btn btn-outline-primary btn-sm">Save</button>
     </div>
 </form>
