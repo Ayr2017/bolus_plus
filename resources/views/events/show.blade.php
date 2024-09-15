@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <h1>{{$title}}</h1>
@@ -36,8 +36,10 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route('events.index')}}">All events</a>
-                    <a class="btn btn-sm btn-outline-primary" href="{{route('events.edit',['event' => $event])}}">Edit</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{route('events.index')}}">All
+                        events</a>
+                    <a class="btn btn-sm btn-outline-primary"
+                       href="{{route('events.edit',['event' => $event])}}">Edit</a>
                     @include('layouts.partials.delete-modal',['item'=>$event, 'message'=>'Event will delete','route'=>route('events.destroy',['event'=>$event])])
                 </div>
             </div>
