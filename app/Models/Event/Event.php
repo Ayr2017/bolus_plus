@@ -2,6 +2,7 @@
 
 namespace App\Models\Event;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,5 +21,13 @@ class Event extends Model
         self::creating(function ($model) {
             $model->creator_id = auth()->id();
         });
+    }
+
+    public function data(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? collect(json_decode($value, true)) : null,
+            set: fn ($value) => $value ? json_encode($value) : null,
+        );
     }
 }

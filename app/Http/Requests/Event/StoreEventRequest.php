@@ -2,14 +2,24 @@
 
 namespace App\Http\Requests\Event;
 
+use AllowDynamicProperties;
 use App\Enums\EventCategoriesEnum;
 use App\Enums\EventTypesEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\App;
 use ReflectionEnum;
 
-class StoreEventRequest extends FormRequest
+#[AllowDynamicProperties] class StoreEventRequest extends FormRequest
 {
+    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    {
+        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
+        $eventType = request()->request->get('event_type') ?? null;
+        if($eventType) {
+            $this->strategy = App::make('\App\Strategies\\'.$eventType.'Strategy');
+        }
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -29,16 +39,7 @@ class StoreEventRequest extends FormRequest
             'description' => 'required|string',
             'event_type' => 'required|string',
             'event_category' => 'required|string',
-        ],$this->getRules());
-    }
-
-    private function getRules(): array
-    {
-        $eventType = $this->event_type;
-        if($eventType){
-            return (new ( (new ReflectionEnum(EventTypesEnum::class))->getCase($eventType)->getValue()->value))::STORE_RULES;
-        }
-        return [];
+        ], $this->getRules());
     }
 
     protected function prepareForValidation(): void
@@ -46,5 +47,10 @@ class StoreEventRequest extends FormRequest
         $this->merge([
             'event_category' => (EventCategoriesEnum::MANUAL)->name,
         ]);
+    }
+
+    private function getRules(): array
+    {
+        return $this->strategy->validateData('store');
     }
 }
