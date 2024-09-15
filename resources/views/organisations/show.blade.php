@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <h1>{{$title}}</h1>
@@ -32,9 +32,9 @@
                             <th>Parent</th>
                             <td>
                                 @if($organisation->parent)
-                                <a href="{{route('organisations.show',['organisation'=>$organisation->parent?->id])}}">
-                                    {{$organisation->parent?->name}}
-                                </a>
+                                    <a href="{{route('organisations.show',['organisation'=>$organisation->parent?->id])}}">
+                                        {{$organisation->parent?->name}}
+                                    </a>
                                 @else
                                     no parent
                                 @endif
@@ -49,8 +49,10 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route('organisations.index')}}">All organisations</a>
-                    <a class="btn btn-sm btn-outline-primary" href="{{route('organisations.edit',['organisation' => $organisation])}}">Edit</a>
+                    <a class="btn btn-sm btn-outline-secondary"
+                       href="{{route('organisations.index')}}">All organisations</a>
+                    <a class="btn btn-sm btn-outline-primary"
+                       href="{{route('organisations.edit',['organisation' => $organisation])}}">Edit</a>
                     @include('layouts.partials.delete-modal',['item'=>$organisation, 'message'=>'Animal will delete','route'=>route('organisations.destroy',['organisation'=>$organisation])])
                 </div>
             </div>

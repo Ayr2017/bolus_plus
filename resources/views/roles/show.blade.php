@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <h1>{{$title}}</h1>
@@ -16,11 +16,13 @@
         <div class="card-body border-top">
             <h5>Permissions</h5>
             @foreach($role->permissions as $permission)
-                <span class="mx-1 p-1 {{$loop->iteration%2 == 0 ? 'bg-info-subtle' : 'bg-warning-subtle'}}">{{$permission->name}}</span>
+                <span
+                    class="mx-1 p-1 {{$loop->iteration%2 == 0 ? 'bg-info-subtle' : 'bg-warning-subtle'}}">{{$permission->name}}</span>
             @endforeach
         </div>
         <div class="card-footer">
-            <a href="{{route('admin.roles.edit',['role'=>$role])}}" class="btn btn-sm btn-outline-primary">Edit</a>
+            <a href="{{route('admin.roles.edit',['role'=>$role])}}"
+               class="btn btn-sm btn-outline-primary">Edit</a>
         </div>
     </div>
 @endsection

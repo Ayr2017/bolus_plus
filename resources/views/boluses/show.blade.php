@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <h1>{{$title}}</h1>
@@ -6,7 +6,8 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-header">
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route('boluses.index')}}">All boluses</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{route('boluses.index')}}">All
+                        boluses</a>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -45,7 +46,8 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-sm btn-outline-primary" href="{{route('boluses.edit',['bolus' => $bolus])}}">Edit</a>
+                    <a class="btn btn-sm btn-outline-primary"
+                       href="{{route('boluses.edit',['bolus' => $bolus])}}">Edit</a>
                 </div>
             </div>
         </div>
