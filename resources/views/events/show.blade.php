@@ -28,10 +28,7 @@
                             <th>Type</th>
                             <td>{{$event->event_type}}</td>
                         </tr>
-                        <tr>
-                            <th>Data</th>
-                            <td>{{$event->data}}</td>
-                        </tr>
+                        @include('events.partials.show.'.$view_name)
                         </tbody>
                     </table>
                 </div>

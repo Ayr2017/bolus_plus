@@ -36,7 +36,7 @@ use ReflectionEnum;
     public function rules(): array
     {
         return array_merge([
-            'description' => 'required|string',
+            'data.description' => 'required|string',
             'event_type' => 'required|string',
             'event_category' => 'required|string',
         ], $this->getRules());

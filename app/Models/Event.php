@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models\Event;
+namespace App\Models;
 
 use AllowDynamicProperties;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\App;
 
 #[AllowDynamicProperties] class Event extends Model
 {

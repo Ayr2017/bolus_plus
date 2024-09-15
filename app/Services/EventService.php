@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Event\Event;
+use App\Models\Event;
 use Illuminate\Support\Facades\Log;
 
 class EventService extends Service

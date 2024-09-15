@@ -6,7 +6,7 @@ use App\Enums\EventTypesEnum;
 use App\Http\Requests\Event\EventCreateRequest;
 use App\Http\Requests\Event\ShowEventRequest;
 use App\Http\Requests\Event\StoreEventRequest;
-use App\Models\Event\Event;
+use App\Models\Event;
 use App\Services\EventService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -51,10 +51,7 @@ class EventsController extends Controller
     {
         $event = $eventService->storeEvent($request->validated());
         if($event){
-            return view('events.show', [
-                'event' => $event,
-                'title' => '',
-                ])->with('message', 'Event created.');
+            return redirect(route('events.show', ['event' => $event]))->with('message', 'Event created.');
         }
         return back()->withErrors(['message' => 'Something went wrong. Please try again.']);
     }
@@ -64,9 +61,14 @@ class EventsController extends Controller
      */
     public function show(ShowEventRequest $request, Event $event)
     {
+        $viewName = Str::kebab($event->event_type);
+        $eventType = $event->event_type;
+
         return view('events.show', [
             'title' => 'Event',
             'event' => $event,
+            'event_type' => $eventType,
+            'view_name' => $viewName,
         ]);
     }
 
