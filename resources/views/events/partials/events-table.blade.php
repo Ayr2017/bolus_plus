@@ -4,6 +4,7 @@
         <tr>
             <th>Id</th>
             <th>Event type</th>
+            <th>Type</th>
             <th>Creator</th>
             <th>Event category</th>
             <th>Created at</th>
@@ -19,7 +20,7 @@
                     </a>
                 </td>
                 <td>{{$event->event_type}}</td>
-                <td>{{$event->creator_id}}</td>
+                <td>{{$event->creator->name}}</td>
                 <td>{{$event->event_category}}</td>
                 <td>{{$event->created_at}}</td>
 

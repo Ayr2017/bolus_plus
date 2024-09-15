@@ -3,9 +3,11 @@
 namespace App\Models\Event;
 
 use AllowDynamicProperties;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\App;
 
 #[AllowDynamicProperties] class Event extends Model
@@ -31,5 +33,10 @@ use Illuminate\Support\Facades\App;
             get: fn ($value) => $value ? collect(json_decode($value, true)) : null,
             set: fn ($value) => $value ? json_encode($value) : null,
         );
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 }
