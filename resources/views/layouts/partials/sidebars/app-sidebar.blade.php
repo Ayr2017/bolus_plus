@@ -2,7 +2,7 @@
     <ul class="nav flex-column nav-pills">
         <li class="nav-item">
             <a
-                class="nav-link {{ request()->routeIs('home') ? 'active' : 'link-body-emphasis'  }}"
+                class="nav-link {{ request()->routeIs('home') || request()->is('/') ? 'active' : 'link-body-emphasis'  }}"
                 href="{{route('home')}}"
             >
                 <i class="bi bi-house-door me-2"></i>
