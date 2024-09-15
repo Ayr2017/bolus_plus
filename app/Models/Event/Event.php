@@ -2,11 +2,13 @@
 
 namespace App\Models\Event;
 
+use AllowDynamicProperties;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
-class Event extends Model
+#[AllowDynamicProperties] class Event extends Model
 {
     use HasFactory;
     protected $fillable = [

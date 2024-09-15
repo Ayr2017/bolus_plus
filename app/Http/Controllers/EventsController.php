@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\EventTypesEnum;
 use App\Http\Requests\Event\EventCreateRequest;
+use App\Http\Requests\Event\ShowEventRequest;
 use App\Http\Requests\Event\StoreEventRequest;
 use App\Models\Event\Event;
 use App\Services\EventService;
@@ -61,9 +62,12 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(ShowEventRequest $request, Event $event)
     {
-        //
+        return view('events.show', [
+            'title' => 'Event',
+            'event' => $event,
+        ]);
     }
 
     /**
