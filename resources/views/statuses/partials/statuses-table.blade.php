@@ -1,28 +1,28 @@
 <div class="table-responsive">
-    <table class="table table-stripped table-bordered table-sm">
+    <table class="table">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Slug</th>
-            <th>Created at</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Created at</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach($statuses as $status)
-            <tr>
-                <td>
-                    {{$status->id}}
-                </td>
-                <td>
-                    <a href="{{route('statuses.show',['status' => $status])}}">
-                        {{$status->name}}
-                    </a>
+            @foreach($statuses as $status)
+                <tr>
+                    <td>
+                        {{$status->id}}
                     </td>
-                <td>{{$status->slug}}</td>
-                <td>{{$status->created_at}}</td>
-            </tr>
-        @endforeach
+                    <td>
+                        <a href="{{route('statuses.show',['status' => $status])}}">
+                            {{$status->name}}
+                        </a>
+                        </td>
+                    <td>{{$status->slug}}</td>
+                    <td>{{$status->created_at}}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

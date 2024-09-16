@@ -25,10 +25,12 @@
                 @include('layouts.partials.success-toast')
 
                 <div class="row h-100">
-                    <aside class="col-md-3 py-3 border rounded-3">
-                        @include('layouts.partials.sidebars.app-sidebar')
+                    <aside class="col-md-3">
+                        <div class="p-3 border rounded-3">
+                            @include('layouts.partials.sidebars.app-sidebar')
+                        </div>
                     </aside>
-                    <div class="col-md-9 content">
+                    <div class="col-md-9 content ">
                         @yield('content')
                     </div>
                 </div>

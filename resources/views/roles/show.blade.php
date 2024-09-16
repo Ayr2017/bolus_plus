@@ -1,28 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{$title}}</h1>
+    <div class="pb-2 mb-3 border-bottom d-flex align-items-center justify-content-between">
+        <h2>{{$title}}</h2>
 
-    <div class="card">
-        <div class="card-header">
-            <div class="">
-                <a class="btn btn-sm btn-outline-secondary" href="{{route('admin.roles.index')}}">Roles</a>
-            </div>
-        </div>
-        <div class="card-body">
-            <p>Name:{{$role->name}}</p>
-            <p>Guard: {{$role->guard_name}}</p>
-        </div>
-        <div class="card-body border-top">
-            <h5>Permissions</h5>
-            @foreach($role->permissions as $permission)
-                <span
-                    class="mx-1 p-1 {{$loop->iteration%2 == 0 ? 'bg-info-subtle' : 'bg-warning-subtle'}}">{{$permission->name}}</span>
-            @endforeach
-        </div>
-        <div class="card-footer">
-            <a href="{{route('admin.roles.edit',['role'=>$role])}}"
-               class="btn btn-sm btn-outline-primary">Edit</a>
-        </div>
+        <a
+            class="btn btn-outline-secondary"
+            href="{{route('admin.roles.index')}}"
+        >
+            Roles
+        </a>
+        <a
+            href="{{route('admin.roles.edit', ['role'=>$role])}}"
+            class="btn btn-sm btn-outline-primary"
+        >
+            Edit
+        </a>
+    </div>
+
+    <div class="my-4">
+        <p>Name:{{$role->name}}</p>
+        <p>Guard: {{$role->guard_name}}</p>
+
+        <h5>Permissions</h5>
+        @foreach($role->permissions as $permission)
+            <span
+                class="mx-1 p-1 {{
+                    $loop->iteration%2 == 0
+                    ? 'bg-info-subtle'
+                    : 'bg-warning-subtle'
+                }}"
+            >
+                {{$permission->name}}
+            </span>
+        @endforeach
     </div>
 @endsection

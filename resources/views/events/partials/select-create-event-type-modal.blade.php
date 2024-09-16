@@ -1,9 +1,3 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-        data-bs-target="#select_create_event_modal">
-    Create
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="select_create_event_modal" tabindex="-1" aria-labelledby="select_create_event_modalLabel"
      aria-hidden="true">

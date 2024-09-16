@@ -4,5 +4,5 @@
         <label for="name" class="form-label">Название</label>
         <input type="text" class="form-control" id="name"  name="name" aria-describedby="name">
     </div>
-    <button type="submit" class="btn btn-outline-primary btn-sm">Сохранить</button>
+    <button type="submit" class="btn btn-outline-primary">Сохранить</button>
 </form>

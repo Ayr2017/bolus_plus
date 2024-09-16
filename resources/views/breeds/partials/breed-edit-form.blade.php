@@ -5,6 +5,6 @@
         <label for="name" class="form-label">Название</label>
         <input type="text" class="form-control" id="name"  name="name" aria-describedby="name" value="{{old('name') ?? $breed->name}}">
     </div>
-    <button type="submit" class="btn btn-outline-primary btn-sm">Обновить</button>
-    <a class="btn btn-sm btn-outline-secondary" href="{{route('breeds.show',['breed' => $breed])}}">Отмена</a>
+    <button type="submit" class="btn btn-outline-primary">Обновить</button>
+    <a class="btn btn-outline-secondary" href="{{route('breeds.show',['breed' => $breed])}}">Отмена</a>
 </form>

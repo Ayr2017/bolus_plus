@@ -8,8 +8,8 @@
 
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control form-control-sm" id="description"  name="description" aria-describedby="description">{{old('description') ?? $status->description}}</textarea>
+        <textarea class="form-control " id="description"  name="description" aria-describedby="description">{{old('description') ?? $status->description}}</textarea>
     </div>
-    <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
-    <a class="btn btn-sm btn-outline-secondary" href="{{route('statuses.show',['status' => $status])}}">Отмена</a>
+    <button type="submit" class="btn btn-outline-primary">Update</button>
+    <a class="btn btn-outline-secondary" href="{{route('statuses.show',['status' => $status])}}">Отмена</a>
 </form>
