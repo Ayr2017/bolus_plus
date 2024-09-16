@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{$title}}</h1>
-    <div class="">
-        <div class="col-12">
-            @include('events.partials.event-create.'.$form_name)
-        </div>
+    <div class="pb-2 mb-3 border-bottom d-flex align-items-center justify-content-between">
+        <h2>{{$title}}</h2>
+    </div>
 
+    <div class="my-4">
+        @include('events.partials.event-create.'.$form_name)
     </div>
 @endsection

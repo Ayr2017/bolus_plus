@@ -16,5 +16,5 @@
                 <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phone"
                        value="{{old('phone') ?? $user->phone}}">
             </div>
-            <button type="submit" class="btn btn-outline-primary btn-sm">Сохранить</button>
+            <button type="submit" class="btn btn-outline-primary">Сохранить</button>
     </form>

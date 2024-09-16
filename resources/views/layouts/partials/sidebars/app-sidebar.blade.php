@@ -38,20 +38,29 @@
         </li>
         <li class="nav-item">
             <a
-                class="nav-link {{ request()->routeIs('statuses.*') ? 'active' : 'link-body-emphasis'  }}"
-                href="{{route('statuses.index')}}"
-            >
-                <i class="bi bi-check-circle me-2"></i>
-                Statuses
-            </a>
-        </li>
-        <li class="nav-item">
-            <a
                 class="nav-link {{ request()->routeIs('breeds.*') ? 'active' : 'link-body-emphasis'  }}"
                 href="{{route('breeds.index')}}"
             >
                 <i class="bi bi-boxes me-2"></i>
                 Breeds
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ request()->routeIs('events.*') ? 'active' : 'link-body-emphasis'  }}"
+                href="{{route('events.index')}}"
+            >
+                <i class="bi bi-calendar4-event me-2"></i>
+                Events
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ request()->routeIs('statuses.*') ? 'active' : 'link-body-emphasis'  }}"
+                href="{{route('statuses.index')}}"
+            >
+                <i class="bi bi-check-circle me-2"></i>
+                Statuses
             </a>
         </li>
         <li class="nav-item">

@@ -2,11 +2,11 @@
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control form-control-sm" id="name"  name="name" aria-describedby="name" value="{{old('name')}}">
+        <input type="text" class="form-control " id="name"  name="name" aria-describedby="name" value="{{old('name')}}">
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea class="form-control form-control-sm" id="description"  name="description" aria-describedby="description">{{old('description')}}</textarea>
+        <textarea class="form-control " id="description"  name="description" aria-describedby="description">{{old('description')}}</textarea>
     </div>
-    <button type="submit" class="btn btn-outline-primary btn-sm">Сохранить</button>
+    <button type="submit" class="btn btn-outline-primary">Сохранить</button>
 </form>

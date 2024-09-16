@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#user_roles_modal">
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#user_roles_modal">
     Permissions
 </button>
 
@@ -33,8 +33,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="submit" class="btn btn-sm btn-outline-primary">Обновить</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-outline-primary">Обновить</button>
                 </div>
             </form>
         </div>

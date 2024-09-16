@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{$title}}</h1>
-    <div class="">
+    <div class="pb-2 mb-3 border-bottom d-flex align-items-center justify-content-between">
+        <h2>{{$title}}</h2>
+    </div>
+
+    <div class="my-4 row">
         <div class="col-6">
             @include('employees.partials.employee-create-form')
         </div>
-
     </div>
 @endsection

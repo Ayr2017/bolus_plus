@@ -1,45 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{$title}}</h1>
-    <div class="">
-        <div class="col-6">
-            <div class="card ">
-                <div class="card-header">
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <td></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{$event->id}}</td>
-                        </tr>
-                        <tr>
-                            <th>Category</th>
-                            <td>{{$event->event_category}}</td>
-                        </tr>
-                        <tr>
-                            <th>Type</th>
-                            <td>{{$event->event_type}}</td>
-                        </tr>
-                        @include('events.partials.show.'.$view_name)
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer">
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route('events.index')}}">All
-                        events</a>
-                    <a class="btn btn-sm btn-outline-primary"
-                       href="{{route('events.edit',['event' => $event])}}">Edit</a>
-                    @include('layouts.partials.delete-modal',['item'=>$event, 'message'=>'Event will delete','route'=>route('events.destroy',['event'=>$event])])
-                </div>
-            </div>
-        </div>
+    <div class="pb-2 mb-3 border-bottom d-flex align-items-center justify-content-between">
+        <h2>{{$title}}</h2>
+
+        <a
+            class="btn btn-outline-secondary"
+            href="{{route('events.index')}}"
+        >
+            All events
+        </a>
+        <a
+            class="btn btn-outline-primary"
+            href="{{route('events.edit',['event' => $event])}}"
+        >
+            Edit
+        </a>
+    </div>
+
+    <div class="my-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{$event->id}}</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td>{{$event->event_category}}</td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td>{{$event->event_type}}</td>
+                </tr>
+                @include('events.partials.show.'.$view_name)
+            </tbody>
+        </table>
+
+        @include(
+            'layouts.partials.delete-modal',
+            [
+                'item'=>$event,
+                'message'=>'Event will delete',
+                'route'=>route('events.destroy', ['event'=>$event])
+            ]
+        )
     </div>
 @endsection

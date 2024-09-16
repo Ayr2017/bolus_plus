@@ -20,5 +20,5 @@
             @endforeach
         </select>
     </div>
-    <button type="submit" class="btn btn-outline-primary btn-sm">Сохранить</button>
+    <button type="submit" class="btn btn-outline-primary">Сохранить</button>
 </form>
