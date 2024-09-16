@@ -6,6 +6,7 @@ use App\Http\Controllers\BreedsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeesController as AdminEmployeesController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\EventTypesController;
 use App\Http\Controllers\OrganisationsController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::resource('employees', AdminEmployeesController::class);
     Route::resource('organisations', OrganisationsController::class);
     Route::resource('permissions', PermissionsController::class);
+    Route::resource('event-types', EventTypesController::class);
 
     Route::patch('employees/{employee}/permissions', [EmployeesController::class, 'updatePermissions'])->name('employees.permissions.update');
     Route::patch('users/{user}/roles', [UsersController::class, 'updateRoles'])->name('users.roles.update');
