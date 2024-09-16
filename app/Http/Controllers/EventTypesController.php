@@ -11,7 +11,9 @@ class EventTypesController extends Controller
      */
     public function index()
     {
-        return view('event-types.index');
+        return view('event-types.index',[
+            'title'=>'Event Types',
+        ]);
     }
 
     /**
@@ -19,7 +21,9 @@ class EventTypesController extends Controller
      */
     public function create()
     {
-        return view('event-types.create');
+        return view('event-types.create',[
+            'title'=>'Create Event Type',
+        ]);
     }
 
     /**
