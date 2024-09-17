@@ -6,5 +6,8 @@
     </div>
 
     <div class="my-4" id="events-type-app">
+        <div class="col-6">
+            @include('event-types.partials.create-event-type-form')
+        </div>
     </div>
 @endsection
