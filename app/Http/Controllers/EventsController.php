@@ -35,13 +35,11 @@ class EventsController extends Controller
      */
     public function create(EventCreateRequest $request)
     {
-        $formName = Str::kebab($request->event_type);
-        $eventType = $request->event_type;
+        $event_type = EventType::find($request->input('event_type_id'));
 
         return view('events.create', [
             'title' => 'Create Event',
-            'form_name' => $formName,
-            'event_type' => $eventType,
+            'event_type' => $event_type,
         ]);
     }
 
