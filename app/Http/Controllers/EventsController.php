@@ -33,9 +33,11 @@ class EventsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(EventCreateRequest $request)
+    public function create(EventCreateRequest $request):View
     {
-        $event_type = EventType::firstWhere('slug',$request->input('event_type'));
+        $event_type = EventType
+            ::with(['storeRules'])
+            ->firstWhere('slug',$request->input('event_type'));
 
         return view('events.create', [
             'title' => 'Create Event',

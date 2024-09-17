@@ -1,15 +1,14 @@
 <form action="{{route('events.store')}}" method="POST" class="row">
     @csrf
-    <input type="hidden" name="event_type" value="{{$event_type}}">
-    @foreach($event_type->store_rules as $rule)
-
-        @if(in_array('date', $rule['rules']))
+    <input type="hidden" name="event_type" value="{{$event_type->name}}">
+    @foreach($event_type->storeRules as $rule)
+        @if( $rule->rules->contains('date'))
             <div class="mb-3">
-                <label for="data.start_at" class="form-label">{{$rule['title']}}</label>
-                <input type="datetime-local" class="form-control form-control-sm" id="data.{{$rule['name']}}" name="data[{{$rule['name']}}]"
-                       aria-describedby="data.start_at" value="{{old('data.'.$rule['name'])}}">
+                <label for="data.start_at" class="form-label">{{$rule->title}}</label>
+                <input type="datetime-local" class="form-control form-control-sm" id="data.{{$rule->name}}" name="data[{{$rule->name}}]"
+                       aria-describedby="data.start_at" value="{{old('data.'.$rule->name)}}">
             </div>
-        @elseif(in_array('text', $rule['rules']))
+        @elseif($rule->rules->contains('text'))
             <div class="mb-3">
                 <label for="description" class="form-label">{{$rule['title']}}</label>
                 <textarea name="data[{{$rule['name']}}]" class="form-control ">{{old('data.'.$rule['name'])}}</textarea>

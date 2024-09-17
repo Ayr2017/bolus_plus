@@ -22,7 +22,14 @@ class EventCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'event_type' => ['required', 'string'],
         ];
+    }
+
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'event_type' => $this->input('event_type'),
+        ]);
     }
 }
