@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\EventTypesEnum;
 use App\Http\Requests\Event\EventCreateRequest;
 use App\Http\Requests\Event\ShowEventRequest;
 use App\Http\Requests\Event\StoreEventRequest;
 use App\Models\Event;
+use App\Models\EventType;
 use App\Services\EventService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,11 +21,12 @@ class EventsController extends Controller
     public function index()
     {
         $events = Event::query()->get();
-        $eventTypesEnum = EventTypesEnum::cases();
+        $eventTypes = EventType::orderBy('name')->get();
+
         return view('events.index', [
             'events' => $events,
             'title' => 'Events',
-            'event_types' => $eventTypesEnum,
+            'event_types' => $eventTypes,
         ]);
     }
 

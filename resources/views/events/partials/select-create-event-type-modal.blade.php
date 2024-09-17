@@ -10,8 +10,8 @@
             <div class="modal-body">
                 @foreach($event_types as $event_type)
                     <p>
-                        <a href="{{route('events.create',['event_type' => $event_type->name])}}">
-                            {!! $event_type->icon() !!} {{$event_type->description()}}
+                        <a href="{{route('events.create',['event_type' => $event_type->slug])}}">
+                            {!! $event_type->icon ?? '<i class="bi bi-calendar-event"></i>'!!} {{$event_type->name}}
                         </a>
                     </p>
 

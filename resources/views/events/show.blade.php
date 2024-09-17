@@ -39,7 +39,6 @@
                     <th>Type</th>
                     <td>{{$event->event_type}}</td>
                 </tr>
-                @include('events.partials.show.'.$view_name)
             </tbody>
         </table>
 
