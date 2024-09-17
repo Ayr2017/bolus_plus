@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->json('store_rules')->nullable();
             $table->json('update_rules')->nullable();
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }

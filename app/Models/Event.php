@@ -37,4 +37,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }
+
+    public function eventType(): BelongsTo
+    {
+        return $this->belongsTo(EventType::class, 'event_type', 'id');
+    }
 }

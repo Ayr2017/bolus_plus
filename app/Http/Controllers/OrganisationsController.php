@@ -12,6 +12,7 @@ use App\Services\Organisation\OrganisationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class OrganisationsController extends Controller
 {
@@ -43,7 +44,6 @@ class OrganisationsController extends Controller
      */
     public function store(StoreOrganisationRequest $request, OrganisationService $organisationService):View|RedirectResponse
     {
-        dd($request->validated());
         $organisation =$organisationService->storeOrganisation($request->validated());
         if($organisation){
             return redirect()->route('organisations.index')->with('success', 'Organisation created successfully.');

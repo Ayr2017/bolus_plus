@@ -1,0 +1,93 @@
+[
+    {
+        "id": 1,
+        "name":"Действующие ограничения",
+        "slug": "CURRENT_RESTRICTIONS",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 2,
+        "name":"Изменение группы",
+        "slug": "GROUP_CHANGE",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 3,
+        "name":"Охота",
+        "slug": "HEAT",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 4,
+        "name":"Синхронизация",
+        "slug": "SYNCHRONIZATION",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 5,
+        "name":"Осеменение",
+        "slug": "INSEMINATION",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 6,
+        "name":"Проверка стельности",
+        "slug": "PREGNANCY_CHECK",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 7,
+        "name":"Стресс/Болезнь",
+        "slug": "STRESS",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 8,
+        "name":"Запуск",
+        "slug": "LAUNCH",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 9,
+        "name":"Отел",
+        "slug": "CALVING",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    },
+    {
+        "id": 10,
+        "name":"Аборт",
+        "slug": "ABORTION",
+        "description": null,
+        "store_rules": [],
+        "update_rules": [],
+        "icon": ""
+    }
+]
+
