@@ -43,6 +43,7 @@ class OrganisationsController extends Controller
      */
     public function store(StoreOrganisationRequest $request, OrganisationService $organisationService):View|RedirectResponse
     {
+        dd($request->validated());
         $organisation =$organisationService->storeOrganisation($request->validated());
         if($organisation){
             return redirect()->route('organisations.index')->with('success', 'Organisation created successfully.');

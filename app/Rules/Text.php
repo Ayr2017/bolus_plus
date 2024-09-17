@@ -15,7 +15,7 @@ class Text implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (gettype($value) !== 'string') {
-            $fail('The :attribute must be string.');
+            $fail("The $attribute must be string.");
         }
     }
 }
