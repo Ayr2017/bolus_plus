@@ -35,7 +35,7 @@ class EventsController extends Controller
      */
     public function create(EventCreateRequest $request)
     {
-        $event_type = EventType::find($request->input('event_type_id'));
+        $event_type = EventType::firstWhere('slug',$request->input('event_type'));
 
         return view('events.create', [
             'title' => 'Create Event',

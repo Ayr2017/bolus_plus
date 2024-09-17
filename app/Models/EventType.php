@@ -9,19 +9,27 @@ use Illuminate\Database\Eloquent\Model;
 class EventType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id',
+        'name',
+        'description',
+        'slug',
+        'store_rules',
+        'update_rules',
+    ];
 
     public function storeRules():Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value ? collect(json_decode($value, true)) : collect(),
-            set: fn ($value) => $value ? collect(json_encode($value)) : null
+            set: fn ($value) => $value ? json_encode($value) : null
         );
     }
     public function updateRules():Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value ? collect(json_decode($value, true)) : collect(),
-            set: fn ($value) => $value ? collect(json_encode($value)) : null
+            set: fn ($value) => $value ? json_encode($value) : null
         );
     }
 }

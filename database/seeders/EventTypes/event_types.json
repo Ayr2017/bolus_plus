@@ -4,7 +4,29 @@
         "name":"Действующие ограничения",
         "slug": "CURRENT_RESTRICTIONS",
         "description": null,
-        "store_rules": [],
+        "store_rules": [
+            {
+                "id": 1,
+                "number": 1,
+                "name": "start_at",
+                "title": "Начало",
+                "rules": ["date","required"]
+            },
+            {
+                "id": 2,
+                "number": 2,
+                "name": "end_at",
+                "title": "Начало",
+                "rules": ["date","required"]
+            },
+            {
+                "id": 3,
+                "number": 3,
+                "name": "description",
+                "title": "Описание",
+                "rules": ["text","required"]
+            }
+        ],
         "update_rules": [],
         "icon": ""
     },
@@ -13,8 +35,8 @@
         "name":"Изменение группы",
         "slug": "GROUP_CHANGE",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -22,8 +44,8 @@
         "name":"Охота",
         "slug": "HEAT",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -31,8 +53,8 @@
         "name":"Синхронизация",
         "slug": "SYNCHRONIZATION",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -40,8 +62,8 @@
         "name":"Осеменение",
         "slug": "INSEMINATION",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -49,8 +71,8 @@
         "name":"Проверка стельности",
         "slug": "PREGNANCY_CHECK",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -58,8 +80,8 @@
         "name":"Стресс/Болезнь",
         "slug": "STRESS",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -67,8 +89,8 @@
         "name":"Запуск",
         "slug": "LAUNCH",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -76,8 +98,8 @@
         "name":"Отел",
         "slug": "CALVING",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     },
     {
@@ -85,8 +107,8 @@
         "name":"Аборт",
         "slug": "ABORTION",
         "description": null,
-        "store_rules": [],
-        "update_rules": [],
+        "store_rules": {},
+        "update_rules": {},
         "icon": ""
     }
 ]
