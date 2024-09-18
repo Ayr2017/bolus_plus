@@ -30,4 +30,17 @@ class StoreFieldRequest extends FormRequest
             'description' => 'nullable|string',
         ];
     }
+
+    public function prepareForValidation():void
+    {
+        $optionsArray = explode(',',$this->options);
+        $options = [];
+        foreach ($optionsArray as $option) {
+            $options[] = trim($option);
+        }
+        $options = array_filter(array_unique($options));
+        $this->merge([
+            'options' => $options ?? [],
+        ]);
+    }
 }

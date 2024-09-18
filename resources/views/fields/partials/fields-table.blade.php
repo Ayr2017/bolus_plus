@@ -3,6 +3,7 @@
         <thead>
         <tr>
             <th>Id</th>
+            <th>Title</th>
             <th>Name</th>
             <th>Type</th>
             <th>Number</th>
@@ -15,12 +16,13 @@
             <tr>
                 <td>{{$field->id}}</td>
                 <td>
+                    <a href="{{route('fields.show',[$field])}}">{{$field->title}}</a></td>
+                <td>{{$field->name}}</td>
+                <td>
                     <a href="{{route('fields.show', ['field' => $field])}}">
-                        {{$field->event_type}}
+                        {{$field->eventType->name}}
                     </a>
                 </td>
-                <td>{{$field->name}}</td>
-                <td>{{$field->type}}</td>
                 <td>{{$field->number}}</td>
                 <td>{{$field->description}}</td>
                 <td>{{$field->created_at}}</td>

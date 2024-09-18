@@ -29,6 +29,11 @@
         <input type="text" class="form-control form-control-sm" id="description" name="description"
                aria-describedby="description" value="{{old('description')}}">
     </div>
+    <div class="mb-3">
+        <label for="options" class="form-label">Options</label>
+        <input type="text" class="form-control form-control-sm" id="options" name="options"
+               aria-describedby="options" value="{{old('options')}}">
+    </div>
     <div class="my-1 border-top pt-2 border-2">
         <a href="{{route('fields.index')}}" class="btn btn-sm  btn-outline-secondary">Cancel</a>
         <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
