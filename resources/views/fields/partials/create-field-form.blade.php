@@ -11,12 +11,22 @@
                aria-describedby="title" value="{{old('title')}}">
     </div>
     <div class="mb-3">
-        <label for="title" class="form-label">Type</label>
-        <select class="form-select form-select-sm" id="type" name="event_type_id"
+        <label for="title" class="form-label">Event type</label>
+        <select class="form-select form-select-sm" id="event_type" name="event_type_id"
                aria-describedby="type">
             @foreach($event_types as $event_type)
                 <option value="{{$event_type->id}}">{{$event_type->name}}</option>
             @endforeach
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="title" class="form-label">Type</label>
+        <select class="form-select form-select-sm" id="type" name="type"
+               aria-describedby="type">
+                <option value="text">text</option>
+                <option value="textarea">textarea</option>
+                <option value="datetime-local">datetime-local</option>
+                <option value="number">number</option>
         </select>
     </div>
     <div class="mb-3">

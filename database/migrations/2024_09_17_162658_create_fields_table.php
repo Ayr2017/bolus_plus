@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('number');
             $table->string('title')->nullable();
             $table->foreignId('event_type_id')->constrained('event_types');
+            $table->string('type');
             $table->json('options')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

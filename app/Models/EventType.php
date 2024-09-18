@@ -17,18 +17,10 @@ class EventType extends Model
         'slug',
     ];
 
-    public function eventRules(): HasMany
+    public function fields(): HasMany
     {
-        return $this->hasMany(EventRule::class);
+        return $this->hasMany(Field::class);
     }
 
-    public function storeRules(): HasMany
-    {
-        return $this->hasMany(EventRule::class)->where('rule_method', 'store');
-    }
-    public function updateRules(): HasMany
-    {
-        return $this->hasMany(EventRule::class)->where('rule_method', 'update');
-    }
 
 }

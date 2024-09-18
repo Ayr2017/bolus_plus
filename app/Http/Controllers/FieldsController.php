@@ -30,7 +30,7 @@ class FieldsController extends Controller
      */
     public function create():View
     {
-        $eventTypes = EventType::orderBy('name')->get();
+        $eventTypes = EventType::query()->orderBy('name')->get();
         return view('fields.create',[
             'event_types' => $eventTypes,
             'title' => 'Add Field',
@@ -40,7 +40,7 @@ class FieldsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFieldRequest $request, FieldService $fieldService)
+    public function store(StoreFieldRequest $request, FieldService $fieldService): RedirectResponse
     {
         $field = $fieldService->storeField($request->validated());
         if($field){

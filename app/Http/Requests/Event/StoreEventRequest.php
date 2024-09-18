@@ -5,21 +5,15 @@ namespace App\Http\Requests\Event;
 use AllowDynamicProperties;
 use App\Enums\EventCategoriesEnum;
 use App\Enums\EventTypesEnum;
+use App\Models\EventType;
+use App\Models\Field;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\App;
+use JetBrains\PhpStorm\NoReturn;
 use ReflectionEnum;
 
 #[AllowDynamicProperties] class StoreEventRequest extends FormRequest
 {
-    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
-    {
-        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
-        $eventType = request()->request->get('event_type') ?? null;
-        if($eventType) {
-            $this->strategy = App::make('\App\Strategies\\'.$eventType.'Strategy');
-        }
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -36,21 +30,27 @@ use ReflectionEnum;
     public function rules(): array
     {
         return array_merge([
-            'data.description' => 'required|string',
-            'event_type' => 'required|string',
+            'event_type_id' => 'required|exists:event_types,id',
             'event_category' => 'required|string',
-        ], $this->getRules());
+            'data.start_at' => 'nullable|date',
+        ], []);
     }
 
-    protected function prepareForValidation(): void
+    protected function prepareForValidation()
     {
-        $this->merge([
-            'event_category' => (EventCategoriesEnum::MANUAL)->name,
+        return $this->merge([
+            'event_category' => 'MANUAL',
         ]);
     }
 
-    private function getRules(): array
+
+    public function getRules(): array
     {
-        return $this->strategy->validateData('store');
+        $eventType = EventType::with('fields.rules')->find($this->event_type_id);
+        $this->rules = [];
+        $eventType->fields->map(function (Field $field) {
+            $this->rules["data.".$field->name] = $field->rules->pluck('rule')->toArray();
+        });
+        return $this->rules;
     }
 }

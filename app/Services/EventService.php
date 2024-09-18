@@ -14,7 +14,6 @@ class EventService extends Service
 
     public function storeEvent(array $data): ?Event
     {
-
         try {
             $event = Event::query()->create($data);
             if ($event) {

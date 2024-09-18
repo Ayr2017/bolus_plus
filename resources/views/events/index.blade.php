@@ -6,7 +6,7 @@
 
         <button
             type="button"
-            class="btn btn-outline-primary"
+            class="btn btn-sm btn-outline-primary"
             data-bs-toggle="modal"
             data-bs-target="#select_create_event_modal"
         >

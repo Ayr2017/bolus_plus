@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('field_rules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('field_id');
-            $table->enum('method',['sore','update']);
-            $table->json('rules')->nullable();
+            $table->enum('method',['store','update']);
+            $table->string('rule');
             $table->timestamps();
-            $table->index(['field_id', 'method']);
+            $table->index(['field_id', 'method', 'rule']);
         });
     }
 

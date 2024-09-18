@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Field extends Model
@@ -16,6 +17,7 @@ class Field extends Model
         'number',
         'slug',
         'title',
+        'type',
         'event_type_id',
         'options',
         'description',
@@ -43,5 +45,18 @@ class Field extends Model
     public function eventType(): BelongsTo
     {
         return $this->belongsTo(EventType::class);
+    }
+
+    public function rules():HasMany
+    {
+        return $this->hasMany(FieldRule::class);
+    }
+    public function storeRules():HasMany
+    {
+        return $this->hasMany(FieldRule::class)->where('method', 'store');
+    }
+    public function updateRules():HasMany
+    {
+        return $this->hasMany(FieldRule::class)->where('method', 'update');
     }
 }
