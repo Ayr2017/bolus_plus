@@ -16,5 +16,5 @@
         <label for="icon" class="form-label">Icon</label>
         <input type="text" class="form-control form-control-sm" id="icon"  name="icon" aria-describedby="slug" value="{{old('icon')}}">
     </div>
-    <button type="submit" class="btn btn-outline-primary">Сохранить</button>
+    <button type="submit" class="btn btn-sm btn-outline-primary">Сохранить</button>
 </form>

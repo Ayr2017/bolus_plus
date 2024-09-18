@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventType\ShowEventTypeRequest;
 use App\Http\Requests\EventType\StoreEventTypeRequest;
+use App\Http\Requests\EventType\UpdateEventTypeRequest;
 use App\Models\EventType;
 use App\Services\EventType\EventTypeService;
 use Illuminate\Contracts\View\View;
@@ -50,25 +51,35 @@ class EventTypesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ShowEventTypeRequest $request, EventType $eventType)
     {
-        //
+        return view('event-types.show',[
+            'title'=>'Show Event Type',
+            'event_type'=>$eventType
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(EventType $eventType): View
     {
-        //
+        return view('event-types.edit',[
+            'title'=>'Edit Event Type',
+            'event_type'=>$eventType
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateEventTypeRequest $request, EventType $eventType, EventTypeService $eventTypeService): RedirectResponse
     {
-        //
+        $eventType = $eventTypeService->updateEventType($request->validated(), $eventType);
+        if($eventType){
+            return redirect()->route('event-types.show',['event_type'=>$eventType]);
+        }
+        return back()->withInput()->withErrors(['message' => 'Event type failed to update.']);
     }
 
     /**

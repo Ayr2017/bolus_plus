@@ -26,4 +26,17 @@ class EventTypeService extends Service
 
         return null;
     }
+
+    public function updateEventType(mixed $validated, EventType $eventType): ?EventType
+    {
+        try {
+            $result = $eventType->update($validated);
+            if($result){
+                return $eventType;
+            }
+        }catch (\Exception $exception){
+            Log::error(__METHOD__." ".$exception->getMessage());
+        }
+        return null;
+    }
 }
