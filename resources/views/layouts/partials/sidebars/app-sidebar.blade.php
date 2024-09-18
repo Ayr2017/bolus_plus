@@ -65,6 +65,15 @@
         </li>
         <li class="nav-item">
             <a
+                class="nav-link {{ request()->routeIs('fields.*') ? 'active' : 'link-body-emphasis'  }}"
+                href="{{route('fields.index')}}"
+            >
+                <i class="bi bi-calendar4-event me-2"></i>
+                Fields
+            </a>
+        </li>
+        <li class="nav-item">
+            <a
                 class="nav-link {{ request()->routeIs('statuses.*') ? 'active' : 'link-body-emphasis'  }}"
                 href="{{route('statuses.index')}}"
             >

@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeesController as AdminEmployeesController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\EventTypesController;
+use App\Http\Controllers\FieldsController;
 use App\Http\Controllers\OrganisationsController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
@@ -29,6 +30,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::resource('boluses', BolusesController::class);
     Route::resource('employees', EmployeesController::class);
     Route::resource('events', EventsController::class);
+    Route::resource('fields', FieldsController::class);
     Route::resource('breeds', BreedsController::class);
     Route::resource('statuses', BreedsController::class);
     Route::resource('statuses', StatusesController::class);
