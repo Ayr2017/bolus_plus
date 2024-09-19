@@ -27,17 +27,4 @@ class Heat extends EventData implements EventDataInterface
         'data.insemination_end_at' => 'required|date',
         'date.is_inseminated' => 'nullable|boolean',
     ];
-
-//    public function getFields()
-//    {
-//        $slug = Str::upper(Str::slug(class_basename($this), '_'));
-//        return EventType
-//            ::with(['fields'])
-//            ->firstWhere('slug', $slug)->fields;
-//    }
-
-
-
-
-
 }
