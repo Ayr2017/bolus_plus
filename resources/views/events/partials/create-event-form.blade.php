@@ -7,7 +7,7 @@
                 <div class="mb-3">
                     <label for="data.start_at" class="form-label">{{$field->title}}</label>
                     <input type="datetime-local" class="form-control form-control-sm" id="data.{{$field->name}}" name="data[{{$field->name}}]"
-                           aria-describedby="data.start_at" value="{{old($field->name)}}">
+                           aria-describedby="data.start_at" value="{{old($field->name) ?? "2024-01-01T01:09:09"}}">
                 </div>
                 @break
             @case('text')

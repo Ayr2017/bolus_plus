@@ -4,7 +4,6 @@
         <tr>
             <th>Id</th>
             <th>Event type</th>
-            <th>Type</th>
             <th>Creator</th>
             <th>Event category</th>
             <th>Created at</th>
@@ -13,17 +12,19 @@
         <tbody>
         @foreach($events as $event)
             <tr>
-                <td>{{$event->id}}</td>
                 <td>
                     <a href="{{route('events.show', ['event' => $event])}}">
-                        {{$event->event_type}}
+                        {{$event->id}}
+                    </a>
+                    </td>
+                <td>
+                    <a href="{{route('event-types.show', ['event_type' => $event->event_type_id])}}">
+                        {{$event->eventType->name}}
                     </a>
                 </td>
-                <td>{{$event->event_type}}</td>
                 <td>{{$event->creator->name}}</td>
                 <td>{{$event->event_category}}</td>
                 <td>{{$event->created_at}}</td>
-
             </tr>
         @endforeach
         </tbody>

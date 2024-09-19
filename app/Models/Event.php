@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 {
     use HasFactory;
     protected $fillable = [
-        'event_type',
+        'event_type_id',
+        'type',
         'data',
         'event_category',
     ];
@@ -40,6 +41,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
     public function eventType(): BelongsTo
     {
-        return $this->belongsTo(EventType::class, 'event_type', 'id');
+        return $this->belongsTo(EventType::class, 'event_type_id', 'id');
+    }
+
+    public function getPreparedData()
+    {
+        $eventTypes = EventType::all();
+
     }
 }
