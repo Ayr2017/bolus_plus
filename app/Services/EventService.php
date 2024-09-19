@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Event;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class EventService extends Service
 {
@@ -24,5 +26,11 @@ class EventService extends Service
         }
 
         return null;
+    }
+
+    public function getEventDataClass($eventType)
+    {
+        return  App::make('\App\Entity\EventData\\'.Str::replace('_','',Str::title($eventType->slug)));
+
     }
 }

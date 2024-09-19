@@ -2,7 +2,7 @@
 
 namespace App\Entity\EventData;
 
-class CurrentRestrictions implements EventData
+class CurrentRestrictions extends EventData implements EventDataInterface
 {
     public string $name = 'CurrentRestrictions';
     public string $view = 'current-restrictions';

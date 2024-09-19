@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Event;
 
 use AllowDynamicProperties;
-use App\Entity\EventData\EventData;
+use App\Entity\EventData\EventDataInterface;
 use App\Enums\EventCategoriesEnum;
 use App\Enums\EventTypesEnum;
 use App\Models\EventType;

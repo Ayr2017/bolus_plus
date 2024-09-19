@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('fields', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
+            $table->string('name');
+            $table->string('slug');
             $table->integer('number');
             $table->string('title')->nullable();
             $table->foreignId('event_type_id')->constrained('event_types');
             $table->string('type');
             $table->json('options')->nullable();
             $table->string('description')->nullable();
+            $table->unique(['event_type_id', 'name']);
+            $table->unique(['event_type_id', 'slug']);
             $table->timestamps();
         });
     }

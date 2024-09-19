@@ -11,6 +11,7 @@ use App\Models\Restriction;
 use App\Services\EventService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -61,16 +62,16 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowEventRequest $request, Event $event)
+    public function show(ShowEventRequest $request, Event $event, EventService $eventService):View
     {
-        $viewName = Str::kebab($event->event_type);
-        $eventType = $event->event_type;
+        $eventType = $event->eventType;
+        $eventDataClass = $eventService->getEventDataClass($eventType);
 
         return view('events.show', [
             'title' => 'Event',
             'event' => $event,
             'event_type' => $eventType,
-            'view_name' => $viewName,
+            'event_data' => $eventDataClass,
         ]);
     }
 
