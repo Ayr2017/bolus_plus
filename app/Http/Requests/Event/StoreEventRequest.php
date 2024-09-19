@@ -3,12 +3,14 @@
 namespace App\Http\Requests\Event;
 
 use AllowDynamicProperties;
+use App\Entity\EventData\EventData;
 use App\Enums\EventCategoriesEnum;
 use App\Enums\EventTypesEnum;
 use App\Models\EventType;
 use App\Models\Field;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use JetBrains\PhpStorm\NoReturn;
 use ReflectionEnum;
 
@@ -32,8 +34,7 @@ use ReflectionEnum;
         return array_merge([
             'event_type_id' => 'required|exists:event_types,id',
             'event_category' => 'required|string',
-            'data.start_at' => 'nullable|date',
-        ], []);
+        ], $this->getRules());
     }
 
     protected function prepareForValidation()
@@ -47,10 +48,7 @@ use ReflectionEnum;
     public function getRules(): array
     {
         $eventType = EventType::with('fields.rules')->find($this->event_type_id);
-        $this->rules = [];
-        $eventType->fields->map(function (Field $field) {
-            $this->rules["data.".$field->name] = $field->rules->pluck('rule')->toArray();
-        });
-        return $this->rules;
+        $eventData = App::make('App\Entity\EventData\\'.Str::remove('_',Str::title(($eventType->slug))));
+        return $eventData->storeRules;
     }
 }

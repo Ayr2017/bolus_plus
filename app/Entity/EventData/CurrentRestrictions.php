@@ -14,6 +14,7 @@ class CurrentRestrictions implements EventData
         'data.status_id' => 'required|integer',
         'data.restriction_id' => 'required|exists:restrictions,id',
         'data.restricted_by' => 'required|string',
+        'data.description' => 'nullable|string',
     ];
     public array $updateRules = [
         'data.start_at' => 'nullable|date',
@@ -23,5 +24,6 @@ class CurrentRestrictions implements EventData
         'data.status_id' => 'nullable|integer',
         'data.restriction_id' => 'nullable|exists:restrictions,id',
         'data.restricted_by' => 'nullable|string',
+        'data.description' => 'nullable|string',
     ];
 }

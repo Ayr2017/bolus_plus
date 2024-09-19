@@ -4,6 +4,7 @@ namespace App\View\Components\Event;
 
 use AllowDynamicProperties;
 use App\Models\Restriction;
+use App\Models\Status;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -19,6 +20,7 @@ use Illuminate\View\Component;
     )
     {
         $this->restrictions = Restriction::query()->get();
+        $this->statuses = Status::query()->get();
     }
 
     /**
@@ -30,6 +32,8 @@ use Illuminate\View\Component;
         //TODO: если есть файл то
         return view("events.partials.data.$formName",[
             'restrictions' => $this->restrictions,
+            'event_type' => $this->eventType,
+            'statuses' => $this->statuses,
         ]);
         //TODO: если нет, то вернуть пустой с ошибкой
     }

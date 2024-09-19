@@ -39,12 +39,10 @@ class EventsController extends Controller
         $event_type = EventType
             ::with(['fields.storeRules'])
             ->firstWhere('slug',$request->input('event_type'));
-        $restrictions = Restriction::query()->get();
 
         return view('events.create', [
             'title' => 'Create Event',
             'event_type' => $event_type,
-            'restrictions' => $restrictions,
         ]);
     }
 
