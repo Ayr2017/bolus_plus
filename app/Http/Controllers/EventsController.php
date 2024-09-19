@@ -7,6 +7,7 @@ use App\Http\Requests\Event\ShowEventRequest;
 use App\Http\Requests\Event\StoreEventRequest;
 use App\Models\Event;
 use App\Models\EventType;
+use App\Models\Restriction;
 use App\Services\EventService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,10 +39,12 @@ class EventsController extends Controller
         $event_type = EventType
             ::with(['fields.storeRules'])
             ->firstWhere('slug',$request->input('event_type'));
+        $restrictions = Restriction::query()->get();
 
         return view('events.create', [
             'title' => 'Create Event',
             'event_type' => $event_type,
+            'restrictions' => $restrictions,
         ]);
     }
 

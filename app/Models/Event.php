@@ -44,9 +44,4 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         return $this->belongsTo(EventType::class, 'event_type_id', 'id');
     }
 
-    public function getPreparedData()
-    {
-        $eventTypes = EventType::all();
-
-    }
 }
