@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Field\FieldTypeEnum;
 use App\Http\Requests\Field\StoreFieldRequest;
 use App\Http\Requests\Field\UpdateFieldRequest;
 use App\Models\EventType;
@@ -53,7 +54,7 @@ class FieldsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Field $field)
+    public function show(Field $field):View
     {
         return view('fields.show',[
             'field' => $field,
@@ -66,9 +67,13 @@ class FieldsController extends Controller
      */
     public function edit(Field $field): View
     {
+        $eventTypes = EventType::query()->orderBy('name')->get();
+        $fieldTypeEnum = FieldTypeEnum::cases();
         return view('fields.edit',[
             'title' => 'Field',
             'field' => $field,
+            'event_types' => $eventTypes,
+            'field_type_enum' => $fieldTypeEnum,
         ]);
     }
 

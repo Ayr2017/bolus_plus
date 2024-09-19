@@ -22,12 +22,26 @@ class UpdateFieldRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string|unique:fields,name',
+            'name' => 'required|string|unique:fields,name',
             'number' => 'nullable|integer',
-            'title' => 'nullable|string|unique:fields,title',
-            'event_type_id' => 'nullable|exists:event_types,id',
+            'title' => 'required|string|unique:fields,title',
+            'type' => 'required|string',
+            'event_type_id' => 'required|exists:event_types,id',
             'options' => 'nullable|array',
             'description' => 'nullable|string',
         ];
+    }
+
+    public function prepareForValidation():void
+    {
+        $optionsArray = explode(',',$this->options);
+        $options = [];
+        foreach ($optionsArray as $option) {
+            $options[] = trim($option);
+        }
+        $options = array_filter(array_unique($options));
+        $this->merge([
+            'options' => $options ?? [],
+        ]);
     }
 }
