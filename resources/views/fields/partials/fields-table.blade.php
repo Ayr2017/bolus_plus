@@ -6,7 +6,7 @@
             <th>Title</th>
             <th>Name</th>
             <th>Type</th>
-            <th>Number</th>
+            <th>Order</th>
             <th>Description</th>
             <th>Created at</th>
         </tr>
@@ -23,7 +23,7 @@
                         {{$field->eventType->name}}
                     </a>
                 </td>
-                <td>{{$field->number}}</td>
+                <td>{{$field->order}}</td>
                 <td>{{$field->description}}</td>
                 <td>{{$field->created_at}}</td>
 

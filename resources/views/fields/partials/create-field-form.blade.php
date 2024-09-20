@@ -30,9 +30,9 @@
         </select>
     </div>
     <div class="mb-3">
-        <label for="number" class="form-label">Number</label>
-        <input min="0" type="number" class="form-control form-control-sm" id="number" name="number"
-               aria-describedby="number" value="{{old('number')}}">
+        <label for="order" class="form-label">Number</label>
+        <input min="0" type="number" class="form-control form-control-sm" id="order" name="order"
+               aria-describedby="order" value="{{old('order')}}">
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
@@ -43,6 +43,16 @@
         <label for="options" class="form-label">Options</label>
         <input type="text" class="form-control form-control-sm" id="options" name="options"
                aria-describedby="options" value="{{old('options')}}">
+    </div>
+    <div class="mb-3">
+        <label for="rule_store" class="form-label">Rules for store (json)</label>
+        <textarea class="form-control form-control-sm" id="rule_store" name="rule_store"
+                  aria-describedby="rule_store" >{{old('rule_store')}}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="rule_update" class="form-label">Rules for update (json)</label>
+        <textarea class="form-control form-control-sm" id="rule_update" name="rule_update"
+                  aria-describedby="rule_update" >{{old('rule_update')}}</textarea>
     </div>
     <div class="my-1 border-top pt-2 border-2">
         <a href="{{route('fields.index')}}" class="btn btn-sm  btn-outline-secondary">Cancel</a>

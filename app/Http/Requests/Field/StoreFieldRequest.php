@@ -29,6 +29,8 @@ class StoreFieldRequest extends FormRequest
             'event_type_id' => 'required|exists:event_types,id',
             'options' => 'nullable|array',
             'description' => 'nullable|string',
+            'rule_store' => 'nullable|string',
+            'rule_update' => 'nullable|string',
         ];
     }
 

@@ -43,8 +43,8 @@
                 <td>{{$field->name}}</td>
             </tr>
             <tr>
-                <th>Number</th>
-                <td>{{$field->name}}</td>
+                <th>Order</th>
+                <td>{{$field->order}}</td>
             </tr>
             <tr>
                 <th>Event type</th>

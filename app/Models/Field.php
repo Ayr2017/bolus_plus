@@ -14,13 +14,15 @@ class Field extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'number',
+        'order',
         'slug',
         'title',
         'type',
         'event_type_id',
         'options',
         'description',
+        'rule_store',
+        'rule_update',
         ];
 
     public static function boot()
@@ -47,16 +49,5 @@ class Field extends Model
         return $this->belongsTo(EventType::class);
     }
 
-    public function rules():HasMany
-    {
-        return $this->hasMany(FieldRule::class);
-    }
-    public function storeRules():HasMany
-    {
-        return $this->hasMany(FieldRule::class)->where('method', 'store');
-    }
-    public function updateRules():HasMany
-    {
-        return $this->hasMany(FieldRule::class)->where('method', 'update');
-    }
+
 }

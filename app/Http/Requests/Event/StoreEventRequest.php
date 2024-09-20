@@ -47,8 +47,8 @@ use ReflectionEnum;
 
     public function getRules(): array
     {
-        $eventType = EventType::with('fields.rules')->find($this->event_type_id);
-        $eventData = App::make('App\Entity\EventData\\'.Str::remove('_',Str::title(($eventType->slug))));
+        $eventType = EventType::with('fields')->find($this->event_type_id)->fields();
+        dd($eventType);
         return $eventData->storeRules;
     }
 }

@@ -19,7 +19,7 @@ class EventType extends Model
 
     public function fields(): HasMany
     {
-        return $this->hasMany(Field::class)->orderBy('number');
+        return $this->hasMany(Field::class)->orderBy('order');
     }
 
 

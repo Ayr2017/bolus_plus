@@ -38,7 +38,7 @@ class EventsController extends Controller
     public function create(EventCreateRequest $request):View
     {
         $event_type = EventType
-            ::with(['fields.storeRules'])
+            ::with(['fields'])
             ->firstWhere('slug',$request->input('event_type'));
 
         return view('events.create', [

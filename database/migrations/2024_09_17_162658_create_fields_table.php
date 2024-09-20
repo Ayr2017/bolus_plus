@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->integer('number');
+            $table->integer('order')->default(0);
             $table->string('title')->nullable();
             $table->foreignId('event_type_id')->constrained('event_types');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->json('options')->nullable();
             $table->string('description')->nullable();
+            $table->string('rule_update')->nullable();
+            $table->string('rule_store')->nullable();
             $table->unique(['event_type_id', 'name']);
             $table->unique(['event_type_id', 'slug']);
             $table->timestamps();
