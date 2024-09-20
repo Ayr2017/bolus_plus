@@ -47,8 +47,7 @@ use ReflectionEnum;
 
     public function getRules(): array
     {
-        $eventType = EventType::with('fields')->find($this->event_type_id)->fields();
-        dd($eventType);
-        return $eventData->storeRules;
+        $rules = EventType::with('fields')->find($this->event_type_id)->fields->pluck('rule_store','name')->toArray();
+        return array_filter($rules);
     }
 }

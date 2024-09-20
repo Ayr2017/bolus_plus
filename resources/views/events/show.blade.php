@@ -43,12 +43,12 @@
                     <th>Creator</th>
                     <td>{{$event->creator->name}}</td>
                 </tr>
-            @foreach($event_data->getFields() as $key=>$value)
+            @foreach($fields as $field)
                 <tr>
                     <th>
-                        {{$value->title}}
+                        {{$field->title}}
                     </th>
-                    <td>{{$event->data->get($value->name)}}</td>
+                    <td>{{$event->data->get(strtolower($field->slug))}}</td>
                 </tr>
             @endforeach
             </tbody>

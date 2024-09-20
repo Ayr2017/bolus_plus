@@ -65,13 +65,13 @@ class EventsController extends Controller
     public function show(ShowEventRequest $request, Event $event, EventService $eventService):View
     {
         $eventType = $event->eventType;
-        $eventDataClass = $eventService->getEventDataClass($eventType);
+        $fields = $eventType->fields;
 
         return view('events.show', [
             'title' => 'Event',
             'event' => $event,
             'event_type' => $eventType,
-            'event_data' => $eventDataClass,
+            'fields' => $fields,
         ]);
     }
 
