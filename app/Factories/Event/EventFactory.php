@@ -10,6 +10,6 @@ class EventFactory
 {
     public static function create(Event $event)
     {
-            return  App::make('\App\Models\Event\\'.Str::headline(Str::lower($event->eventType->slug)))::find($event->id);
+            return  App::make('\App\Models\Event\\'.ucfirst(Str::camel(Str::lower($event->eventType->slug))))::find($event->id);
     }
 }

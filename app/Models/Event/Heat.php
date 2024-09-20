@@ -14,18 +14,7 @@ class Heat extends Event
             get: fn () =>  boolval($this->data?->get('is_inseminated')) ? 'YES'  : 'NO',
         );
     }
-    public function startAt():Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => Carbon::make($this->data->get('start_at'))?->format('Y-m-d H:i:s') ?? null,
-        );
-    }
-    public function endAt():Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => Carbon::make($this->data->get('end_at'))?->format('Y-m-d H:i:s') ?? null,
-        );
-    }
+
     public function inseminationStartAt():Attribute
     {
         return Attribute::make(

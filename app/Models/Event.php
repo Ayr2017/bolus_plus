@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 #[AllowDynamicProperties] class Event extends Model implements EventInterface
 {
@@ -49,6 +50,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     public function eventType(): BelongsTo
     {
         return $this->belongsTo(EventType::class, 'event_type_id', 'id');
+    }
+
+    public function startAt():Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::make($this->data->get('start_at'))?->format('Y-m-d H:i:s') ?? null,
+        );
+    }
+    public function endAt():Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::make($this->data->get('end_at'))?->format('Y-m-d H:i:s') ?? null,
+        );
     }
 
 }
