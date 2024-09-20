@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Entity\CurrentEmployee;
-use App\Entity\CurrentEmployeeInterface;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
