@@ -11,7 +11,7 @@ class Heat extends Event
     public function isInseminated():Attribute
     {
         return Attribute::make(
-            get: fn ($value) =>  $value ? 'YES'  : 'NO',
+            get: fn () =>  boolval($this->data?->get('is_inseminated')) ? 'YES'  : 'NO',
         );
     }
     public function startAt():Attribute
