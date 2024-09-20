@@ -16,8 +16,7 @@ class CurrentRestrictions extends EventData implements EventDataInterface
         'data.restricted_by' => 'required|string',
         'data.description' => 'nullable|string',
     ];
-    public array $updateRules = [
-        'data.start_at' => 'nullable|date',
+    public array $updateRules = [        'data.start_at' => 'nullable|date',
         'data.end_at' => 'nullable|date',
         'data.restriction_start_at' => 'nullable|date',
         'data.restriction_end_at' => 'nullable|date',

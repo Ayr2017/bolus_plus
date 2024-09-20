@@ -48,7 +48,7 @@
                     <th>
                         {{$field->title}}
                     </th>
-                    <td>{{$event->data->get(strtolower($field->slug))}}</td>
+                    <td>{{$event->{strtolower($field->slug)} }}</td>
                 </tr>
             @endforeach
             </tbody>

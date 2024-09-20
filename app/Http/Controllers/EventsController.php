@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Factories\Event\EventFactory;
 use App\Http\Requests\Event\EventCreateRequest;
 use App\Http\Requests\Event\ShowEventRequest;
 use App\Http\Requests\Event\StoreEventRequest;
@@ -66,6 +67,7 @@ class EventsController extends Controller
     {
         $eventType = $event->eventType;
         $fields = $eventType->fields;
+        $event = EventFactory::create($event);
 
         return view('events.show', [
             'title' => 'Event',

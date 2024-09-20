@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use AllowDynamicProperties;
+use App\Models\Event\EventInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[AllowDynamicProperties] class Event extends Model
+#[AllowDynamicProperties] class Event extends Model implements EventInterface
 {
     use HasFactory;
     protected $fillable = [
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         'data',
         'event_category',
     ];
+    protected $table = 'events';
 
     protected $casts = [
         'data' => 'array',
