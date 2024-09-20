@@ -30,7 +30,7 @@
         </select>
     </div>
     <div class="mb-3">
-        <label for="order" class="form-label">Number</label>
+        <label for="order" class="form-label">Order</label>
         <input min="0" type="number" class="form-control form-control-sm" id="order" name="order"
                aria-describedby="order" value="{{old('order')}}">
     </div>
@@ -45,12 +45,12 @@
                aria-describedby="options" value="{{old('options')}}">
     </div>
     <div class="mb-3">
-        <label for="rule_store" class="form-label">Rules for store (json)</label>
+        <label for="rule_store" class="form-label">Rules for store (string)</label>
         <textarea class="form-control form-control-sm" id="rule_store" name="rule_store"
                   aria-describedby="rule_store" >{{old('rule_store')}}</textarea>
     </div>
     <div class="mb-3">
-        <label for="rule_update" class="form-label">Rules for update (json)</label>
+        <label for="rule_update" class="form-label">Rules for update (string)</label>
         <textarea class="form-control form-control-sm" id="rule_update" name="rule_update"
                   aria-describedby="rule_update" >{{old('rule_update')}}</textarea>
     </div>

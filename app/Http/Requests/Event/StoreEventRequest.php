@@ -50,4 +50,5 @@ use ReflectionEnum;
         $rules = EventType::with('fields')->find($this->event_type_id)->fields->pluck('rule_store','name')->toArray();
         return array_filter($rules);
     }
+
 }

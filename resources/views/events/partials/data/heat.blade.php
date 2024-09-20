@@ -19,7 +19,8 @@
            aria-describedby="data.insemination_end_at" value="{{old('data.insemination_end_at') ?? (isset($event) ? $event?->data?->get('insemination_end_at') : null)}}">
 </div>
 <div class="mb-3">
+    <input type="hidden" name="data[is_inseminated]" value="0">
     <label for="data.is_inseminated" class="form-label">Is inseminated:</label>
     <input type="checkbox" class="form-check form-check-sm" id="data.is_inseminated" name="data[is_inseminated]"
-           aria-describedby="data.is_inseminated" value="{{old('data.is_inseminated') ?? (isset($event) ? $event?->data?->get('is_inseminated') : null)}}">
+           aria-describedby="data.is_inseminated" value="1" {{old('data.is_inseminated') ?? (isset($event) ? $event?->data?->get('is_inseminated') : null)}}>
 </div>

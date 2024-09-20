@@ -23,7 +23,7 @@ class StoreFieldRequest extends FormRequest
     {
         return [
             'name' => 'required|string|unique:fields,name',
-            'number' => 'nullable|integer',
+            'order' => 'nullable|integer',
             'title' => 'required|string|unique:fields,title',
             'type' => 'required|string',
             'event_type_id' => 'required|exists:event_types,id',
