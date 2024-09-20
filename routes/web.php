@@ -42,4 +42,10 @@ Route::group(['middleware' => 'auth:web'], function () {
 
     Route::patch('employees/{employee}/permissions', [EmployeesController::class, 'updatePermissions'])->name('employees.permissions.update');
     Route::patch('users/{user}/roles', [UsersController::class, 'updateRoles'])->name('users.roles.update');
+
+    Route::get('/test',function(){
+//        (new \App\Services\BolusReading\BolusReadingApiService())->auth();
+//        (new \App\Services\BolusReading\BolusReadingApiService())->getReadings();
+        (new \App\Services\BolusReading\BolusReadingApiService())->pullRecords('37a022f5-0dc9-4936-aac7-1da036eef6a1');
+    });
 });
