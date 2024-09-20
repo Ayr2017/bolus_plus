@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('boluses', function (Blueprint $table) {
             $table->id();
             $table->string('number');
+            $table->string('device_number')->nullable();
             $table->string('version')->nullable();
             $table->string('batch_number')->nullable();
             $table->dateTime('produced_at')->nullable();
