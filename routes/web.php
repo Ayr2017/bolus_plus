@@ -46,6 +46,6 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/test',function(){
 //        (new \App\Services\BolusReading\BolusReadingApiService())->auth();
 //        (new \App\Services\BolusReading\BolusReadingApiService())->getReadings();
-        (new \App\Services\BolusReading\BolusReadingApiService())->pullRecords('37a022f5-0dc9-4936-aac7-1da036eef6a1');
+//        (new \App\Services\BolusReading\BolusReadingApiService())->pullRecords('37a022f5-0dc9-4936-aac7-1da036eef6a1');
     });
 });
