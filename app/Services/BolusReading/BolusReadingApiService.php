@@ -6,12 +6,17 @@ use AllowDynamicProperties;
 use App\Models\BolusReading;
 use \App\Services\Service;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
-#[AllowDynamicProperties] class BolusReadingApiService extends Service
+class BolusReadingApiService extends Service
 {
+    protected BolusReading $bolus;
+    protected string $cookie = '';
+    protected string $url;
+    protected string $login;
+    protected string $password;
     public function __construct()
     {
         parent::__construct();
@@ -35,9 +40,8 @@ use Illuminate\Support\Str;
                 'password' => $this->password,
                 'credentials' => base64_encode($this->login . ':' . $this->password),
             ]);
-        $this->cookie = ($response->json())['result'];
-        session()->put('token', $this->cookie);
 
+        cache()->set('token', $response->json()['result']);
     }
 
     /**
@@ -45,12 +49,16 @@ use Illuminate\Support\Str;
      */
     public function getReadings($deviceNumber)
     {
-
+        $query =[
+            'deviceId' => $deviceNumber,
+            'startDate' => $this->getStartDate(),
+            'endDate' => $this->getEndDate(),
+        ];
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Cookie' => session('token', null),
-        ])->get($this->url . '/record/all?deviceId=' . $deviceNumber);
+            'Cookie' => cache('token'),
+        ])->get($this->url . '/record/all', $query);
 
         if ($response->json()['state'] == 'FAULT') {
             \Laravel\Prompts\info('FAULT');
@@ -58,6 +66,7 @@ use Illuminate\Support\Str;
             $this->auth();
             $this->getReadings($deviceNumber);
         }
+        Log::info('>>> ', $response->json());
         return $response->json();
     }
 
@@ -90,5 +99,18 @@ use Illuminate\Support\Str;
         }
 
 
+    }
+
+    private function getStartDate()
+    {
+        $latestData = BolusReading::query()->latest('date')->first()?->date;
+        if ($latestData) {
+            return Carbon::make($latestData)->format('d.m.Y');
+        }
+        return Carbon::make('2024-01-01')->format('d.m.Y');
+    }
+    private function getEndDate()
+    {
+        return Carbon::make(Carbon::now())->format('d.m.Y');
     }
 }

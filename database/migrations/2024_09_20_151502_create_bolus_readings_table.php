@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bolus_readings', function (Blueprint $table) {
             $table->id();
-            $table->dateTimeTz('date');
+            $table->dateTimeTz('date')->index();
             $table->string('device_number');
             $table->decimal('RSSI', 8,2)->nullable();
             $table->decimal('AmM', 8,2)->nullable();

@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Log;
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected BolusReadingApiService $apiService;
-    public $timeout = 3600;
+    public $timeout = 60;
+    public $tries = 2;
     public string $bolusNumber;
 
     /**
