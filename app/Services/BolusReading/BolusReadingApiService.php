@@ -5,6 +5,7 @@ namespace App\Services\BolusReading;
 use AllowDynamicProperties;
 use App\Models\BolusReading;
 use \App\Services\Service;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -19,9 +20,12 @@ use Illuminate\Support\Str;
         $this->password = config('api.password');
     }
 
-    public function auth()
+    /**
+     * @throws ConnectionException
+     */
+    public function auth(): void
     {
-        Log::info('start auth');
+        \Laravel\Prompts\info('start auth');
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
@@ -33,14 +37,14 @@ use Illuminate\Support\Str;
             ]);
         $this->cookie = ($response->json())['result'];
         session()->put('token', $this->cookie);
-        Log::info('token: ' . $this->cookie);
-        Log::info('token s: ' . session('token'));
 
     }
 
+    /**
+     * @throws ConnectionException
+     */
     public function getReadings($deviceNumber)
     {
-        Log::info('start getReadings');
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
@@ -49,42 +53,38 @@ use Illuminate\Support\Str;
         ])->get($this->url . '/record/all?deviceId=' . $deviceNumber);
 
         if ($response->json()['state'] == 'FAULT') {
-            Log::info('FAULT');
+            \Laravel\Prompts\info('FAULT');
 
             $this->auth();
-            $this->getReadings('37a022f5-0dc9-4936-aac7-1da036eef6a1');
+            $this->getReadings($deviceNumber);
         }
-        Log::info('result : ', $response->json());
         return $response->json();
     }
 
-    public function pullRecords($deviceNumber)
+    /**
+     * @throws ConnectionException
+     */
+    public function pullRecords($deviceNumber): void
     {
         $readingsArray = $this->getReadings($deviceNumber);
         if ($readingsArray['state'] != 'OK') {
-            dump('failed');
+            \Laravel\Prompts\info('failed');
         }
-
-
         $results = $readingsArray['result'];
         foreach ($results as $key => $result) {
             $code = $result['code'];
             foreach ($result['records'] as $record) {
                 try {
                     preg_match('/^-?\d+(\.\d{1,2})?/', $record['value'], $matches);
-//                    if($code == 'VB'){
-//                        dd(floatval($matches[0]));
-//                    }
-                    BolusReading::updateOrCreate([
+
+                    $reading = BolusReading::updateOrCreate([
                         'device_number' => $deviceNumber,
                         'date' => $record['date'],
                     ], [
-                        'date' => $record['date'],
-                        'device_number' => $deviceNumber,
                         $code => floatval($matches[0]),
                     ]);
                 } catch (\Exception $exception) {
-                    dd( $record, $exception->getMessage());
+                    Log::error( __METHOD__." ". $exception->getMessage());
                 }
             }
         }

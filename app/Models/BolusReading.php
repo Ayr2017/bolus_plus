@@ -12,6 +12,7 @@ class BolusReading extends Model
         'date',
         'device_number',
         'RSSI',
+        'VB',
         'AmM',
         'CmM',
         'AdX',
