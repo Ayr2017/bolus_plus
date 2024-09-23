@@ -48,9 +48,12 @@ class DashboardsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Dashboard $dashboard)
     {
-        //
+        return view('dashboards.show',[
+            'dashboard'=>$dashboard,
+            'title'=>$dashboard->name,
+        ]);
     }
 
     /**
