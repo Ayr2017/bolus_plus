@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\BolusesController;
 use App\Http\Controllers\BreedsController;
+use App\Http\Controllers\DashboardsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeesController as AdminEmployeesController;
 use App\Http\Controllers\EventsController;
@@ -28,6 +29,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::resource('users', UsersController::class);
     Route::resource('animals', AnimalsController::class);
     Route::resource('boluses', BolusesController::class);
+    Route::resource('dashboards', DashboardsController::class);
     Route::resource('employees', EmployeesController::class);
     Route::resource('events', EventsController::class);
     Route::resource('fields', FieldsController::class);

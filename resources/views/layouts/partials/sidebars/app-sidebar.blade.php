@@ -108,5 +108,14 @@
                 Users
             </a>
         </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ request()->routeIs('dashboards.*') ? 'active' : 'link-body-emphasis'  }}"
+                href="{{route('dashboards.index')}}"
+            >
+                <i class="bi bi-bar-chart"></i>
+                Dashboards
+            </a>
+        </li>
     </ul>
 </div>
