@@ -27,6 +27,18 @@ class BolusReading extends Model
     ];
 
     protected $casts = [
+        'RSSI' => 'float',
+        'VB' => 'float',
+        'AmM' => 'float',
+        'CmM' => 'float',
+        'AdX' => 'float',
+        'AdY' => 'float',
+        'AdZ' => 'float',
+        'CdX' => 'float',
+        'CdY' => 'float',
+        'CdZ' => 'float',
+        'PH' => 'float',
+        'PN' => 'float',
         'UT' => 'float',
     ];
 }
