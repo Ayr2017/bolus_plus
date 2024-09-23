@@ -5,6 +5,7 @@ namespace App\Services\BolusReading;
 use App\Models\BolusReading;
 use \App\Services\Service;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Collection;
 
 class BolusReadingService extends Service
 {
@@ -13,7 +14,7 @@ class BolusReadingService extends Service
         parent::__construct();
     }
 
-    public function getBolusReadings(array $validated)
+    public function getBolusReadings(array $validated): ?Collection
     {
         try {
             $bolusReadings = BolusReading::query()->get();
