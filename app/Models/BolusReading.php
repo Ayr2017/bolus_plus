@@ -25,4 +25,8 @@ class BolusReading extends Model
         'PN',
         'UT',
     ];
+
+    protected $casts = [
+        'UT' => 'float',
+    ];
 }
