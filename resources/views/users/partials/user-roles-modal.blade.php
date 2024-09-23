@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#user_roles_modal">
-    Permissions
+<button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#user_roles_modal">
+    Roles
 </button>
 
 <!-- Modal -->
@@ -7,7 +7,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <form action="{{route('users.roles.update',['user' => $user])}}" method="POST">
+            <form action="{{route('users.update-roles',['user' => $user])}}" method="POST">
                 @method('patch')
                 @csrf
                 <div class="modal-header">
@@ -22,8 +22,8 @@
                             @foreach($roles as $role)
                                 <div class="mb-3">
                                     <div class="d-flex justify-content-between">
-                                        <label for="roles_ids_{{$role->id}}">{{$role->name}}</label>
-                                        <input type="checkbox" name="roles_names[]" value="{{$role->name}}" id="roles_names{{$role->id}}" {{$user->hasAnyPermission($role->name) ? 'checked' : ''}}>
+                                        <label for="roles_ids_{{$role->id}}">{{$role->name}} </label>
+                                        <input type="checkbox" name="roles_names[]" value="{{$role->name}}" id="roles_names{{$role->id}}" {{$user->hasRole($role->name) ? 'checked' : ''}}>
                                     </div>
                                 </div>
                             @endforeach
@@ -33,8 +33,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="submit" class="btn btn-outline-primary">Обновить</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Обновить</button>
                 </div>
             </form>
         </div>

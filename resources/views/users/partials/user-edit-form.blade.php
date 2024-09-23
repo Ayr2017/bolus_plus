@@ -3,18 +3,18 @@
         @method('PATCH')
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="name"
+                <input type="text" class="form-control form-control-sm" id="name" name="name" aria-describedby="name"
                        value="{{old('name') ?? $user->name}}">
             </div>
             <div class="mb-3">
                 <label for="surname" class="form-label">Surname</label>
-                <input type="text" class="form-control" id="surname" name="surname" aria-describedby="surname"
+                <input type="text" class="form-control form-control-sm" id="surname" name="surname" aria-describedby="surname"
                        value="{{old('surname') ?? $user->surname}}">
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phone"
+                <input type="text" class="form-control form-control-sm" id="phone" name="phone" aria-describedby="phone"
                        value="{{old('phone') ?? $user->phone}}">
             </div>
-            <button type="submit" class="btn btn-outline-primary">Сохранить</button>
+            <button type="submit" class="btn btn-sm btn-outline-primary">Сохранить</button>
     </form>

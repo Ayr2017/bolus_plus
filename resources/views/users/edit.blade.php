@@ -6,14 +6,14 @@
 
         <div class="d-flex gap-1">
             <a
-                class="btn btn-outline-secondary"
+                class="btn btn-sm btn-outline-secondary"
                 href="{{route('users.index')}}"
             >
-                Employees
+                Users
             </a>
             <a
                 href="{{route('users.show',['user'=>$user])}}"
-                class="btn btn-outline-secondary"
+                class="btn btn-sm btn-outline-secondary"
             >
                 Show
             </a>

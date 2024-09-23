@@ -8,7 +8,7 @@
 
     <div class="my-4">
         @include('employees.partials.employee-edit-form')
-
+        <hr>
         <a
             href="{{route('employees.show',['employee'=>$employee])}}"
             class="btn btn-sm btn-outline-secondary"

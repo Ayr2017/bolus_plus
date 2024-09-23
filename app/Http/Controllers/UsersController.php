@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UpdateRolesRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use App\Services\User\UserService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -44,6 +47,7 @@ class UsersController extends Controller
      */
     public function show(User $user):View
     {
+        $user->load(['roles']);
         return view('users.show', [
             'user' =>  $user,
             'title' => User::class,
@@ -56,6 +60,8 @@ class UsersController extends Controller
     public function edit(User $user) :View
     {
         $roles = Role::orderBy('name')->get()->chunk(3);
+        $user->load(['roles']);
+
         return view('users.edit', [
             'user' => $user,
             'title' => User::class,
@@ -77,5 +83,15 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function updateRoles(UpdateRolesRequest $request, User $user, UserService $userService): RedirectResponse
+    {
+        $result = $userService->updateRoles($request->validated(), $user);
+        if($result){
+            return redirect()->route('users.edit', ['user' => $user])->with('message', 'Roles updated successfully!');
+        }
+
+        return redirect()->route('users.edit', ['user' => $user])->withErrors(['message'=> 'Roles updating failed!']);
     }
 }
