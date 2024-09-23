@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Dashboard\StoreDashboardRequest;
+use App\Models\Dashboard;
 use App\Services\Dashboard\DashboardService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -12,10 +13,12 @@ class DashboardsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
+        $dashboards = Dashboard::with('media')->get();
         return view('dashboards.index',[
             'title'=>'Dashboards',
+            'dashboards'=>$dashboards,
         ]);
     }
 

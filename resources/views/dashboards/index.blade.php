@@ -12,4 +12,6 @@
             Create
         </a>
     </div>
+    @dump($dashboards)
+
 @endsection
