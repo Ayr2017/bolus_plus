@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Dashboard\StoreDashboardRequest;
+use App\Models\BolusReading;
 use App\Models\Dashboard;
 use App\Services\Dashboard\DashboardService;
 use Illuminate\Contracts\View\View;
@@ -48,11 +49,13 @@ class DashboardsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dashboard $dashboard)
+    public function show(Dashboard $dashboard):View
     {
+        $bolusReadings = BolusReading::all();
         return view('dashboards.show',[
             'dashboard'=>$dashboard,
             'title'=>$dashboard->name,
+            'bolus_readings'=>$bolusReadings,
         ]);
     }
 
