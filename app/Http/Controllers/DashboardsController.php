@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Dashboard\StoreDashboardRequest;
+use App\Services\Dashboard\DashboardService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -30,9 +32,14 @@ class DashboardsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDashboardRequest $request, DashboardService $dashboardService)
     {
-        //
+        $result = $dashboardService->storeDashboard($request->validated(), $request->file('picture'));
+        if($result){
+            return redirect()->route('dashboards.index')->with('message','Dashboard created successfully');
+        }
+
+        return redirect()->route('dashboards.create')->withErrors(['message'=>'Failed to create dashboard']);
     }
 
     /**

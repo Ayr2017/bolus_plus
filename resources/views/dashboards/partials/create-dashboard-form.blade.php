@@ -1,4 +1,4 @@
-<form action="{{route('dashboards.store')}}" method="POST" class="row">
+<form action="{{route('dashboards.store')}}" method="POST" class="row" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Name</label>
