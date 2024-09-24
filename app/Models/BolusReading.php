@@ -28,19 +28,4 @@ class BolusReading extends Model
         'ut',
     ];
 
-    protected $casts = [
-        'rssi' => 'float',
-        'vb' => 'float',
-        'amm' => 'float',
-        'cmm' => 'float',
-        'adx' => 'float',
-        'ady' => 'float',
-        'adz' => 'float',
-        'cdx' => 'float',
-        'cdy' => 'float',
-        'cdz' => 'float',
-        'ph' => 'float',
-        'pn' => 'float',
-        'ut' => 'float',
-    ];
 }

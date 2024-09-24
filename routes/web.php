@@ -46,8 +46,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::patch('users/{user}/update-roles', [UsersController::class, 'updateRoles'])->name('users.update-roles');
 
     Route::get('/test',function(){
-//        (new \App\Services\BolusReading\BolusReadingApiService())->auth();
-//        (new \App\Services\BolusReading\BolusReadingApiService())->getReadings();
+            return \App\Models\User::first()->toJson();
 //        (new \App\Services\BolusReading\BolusReadingApiService())->pullRecords('37a022f5-0dc9-4936-aac7-1da036eef6a1');
     });
 });

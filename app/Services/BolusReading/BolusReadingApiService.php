@@ -66,7 +66,6 @@ class BolusReadingApiService extends Service
             $this->auth();
             $this->getReadings($deviceNumber);
         }
-        Log::info('>>> ', $response->json());
         return $response->json();
     }
 
@@ -81,7 +80,7 @@ class BolusReadingApiService extends Service
         }
         $results = $readingsArray['result'];
         foreach ($results as $key => $result) {
-            $code = $result['code'];
+            $code = strtolower($result['code']);
             foreach ($result['records'] as $record) {
                 try {
                     preg_match('/^-?\d+(\.\d{1,2})?/', $record['value'], $matches);
