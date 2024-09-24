@@ -2,43 +2,45 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BolusReading extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
+
     protected $fillable = [
         'date',
         'device_number',
-        'RSSI',
-        'VB',
-        'AmM',
-        'CmM',
-        'AdX',
-        'AdY',
-        'AdZ',
-        'CdX',
-        'CdY',
-        'CdZ',
-        'PH',
-        'PN',
-        'UT',
+        'rssi',
+        'vb',
+        'amm',
+        'cmm',
+        'adx',
+        'ady',
+        'adz',
+        'cdx',
+        'cdy',
+        'cdz',
+        'ph',
+        'pn',
+        'ut',
     ];
 
     protected $casts = [
-        'RSSI' => 'float',
-        'VB' => 'float',
-        'AmM' => 'float',
-        'CmM' => 'float',
-        'AdX' => 'float',
-        'AdY' => 'float',
-        'AdZ' => 'float',
-        'CdX' => 'float',
-        'CdY' => 'float',
-        'CdZ' => 'float',
-        'PH' => 'float',
-        'PN' => 'float',
-        'UT' => 'float',
+        'rssi' => 'float',
+        'vb' => 'float',
+        'amm' => 'float',
+        'cmm' => 'float',
+        'adx' => 'float',
+        'ady' => 'float',
+        'adz' => 'float',
+        'cdx' => 'float',
+        'cdy' => 'float',
+        'cdz' => 'float',
+        'ph' => 'float',
+        'pn' => 'float',
+        'ut' => 'float',
     ];
 }

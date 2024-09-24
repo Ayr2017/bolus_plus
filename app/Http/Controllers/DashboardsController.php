@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\BolusReadingFilter;
+use App\Http\Requests\Dashboard\IndexDashboardRequest;
 use App\Http\Requests\Dashboard\StoreDashboardRequest;
 use App\Models\BolusReading;
 use App\Models\Dashboard;
@@ -14,9 +16,11 @@ class DashboardsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(IndexDashboardRequest $request, BolusReadingFilter $filter): View
     {
         $dashboards = Dashboard::with('media')->get();
+        $bolusReadings = BolusReading::filter($filter)->get();
+
         return view('dashboards.index',[
             'title'=>'Dashboards',
             'dashboards'=>$dashboards,
@@ -49,9 +53,9 @@ class DashboardsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dashboard $dashboard):View
+    public function show(Dashboard $dashboard, BolusReadingFilter $filter):View
     {
-        $bolusReadings = BolusReading::all();
+        $bolusReadings = BolusReading::filter($filter)->get();
         return view('dashboards.show',[
             'dashboard'=>$dashboard,
             'title'=>$dashboard->name,
