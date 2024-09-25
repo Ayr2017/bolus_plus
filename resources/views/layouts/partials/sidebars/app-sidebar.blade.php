@@ -117,5 +117,14 @@
                 Dashboards
             </a>
         </li>
+        <li class="nav-item">
+            <a
+                class="nav-link {{ request()->routeIs('bolus-readings.*') ? 'active' : 'link-body-emphasis'  }}"
+                href="{{route('bolus-readings.index')}}"
+            >
+                <i class="bi bi-bar-chart"></i>
+                Bolus readings
+            </a>
+        </li>
     </ul>
 </div>

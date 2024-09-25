@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimalsController;
 use App\Http\Controllers\BolusesController;
+use App\Http\Controllers\BolusReadingsController;
 use App\Http\Controllers\BreedsController;
 use App\Http\Controllers\DashboardsController;
 use App\Http\Controllers\EmployeesController;
@@ -26,9 +27,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth:web'], function () {
+    Route::patch('bolus-readings/pull', [BolusReadingsController::class, 'pull'])->name('bolus-readings.pull');
+
     Route::resource('users', UsersController::class);
     Route::resource('animals', AnimalsController::class);
     Route::resource('boluses', BolusesController::class);
+    Route::resource('bolus-readings', BolusReadingsController::class);
     Route::resource('dashboards', DashboardsController::class);
     Route::resource('employees', EmployeesController::class);
     Route::resource('events', EventsController::class);
