@@ -7,6 +7,9 @@ use \App\Services\Service;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
+
 
 class BolusReadingService extends Service
 {
@@ -18,9 +21,13 @@ class BolusReadingService extends Service
     public function getBolusReadings(array $validated): ?LengthAwarePaginator
     {
         try {
-            $perPage = $validated['perPage'] ?? 25;
-            $page = $validated['page'] ?? 1;
-            $bolusReadings = BolusReading::query()->paginate(perPage:$perPage,page: $page);
+            $cacheKey = 'bolus_readings_' . md5(json_encode($validated));
+            $bolusReadings = Cache::tags(['bolus_readings'])->remember($cacheKey, 600, function () use ($validated) {
+                $perPage = $validated['perPage'] ?? 25;
+                $page = $validated['page'] ?? 1;
+                return  BolusReading::query()->paginate(perPage: $perPage, page: $page);
+            });
+
             if($bolusReadings){
                 return $bolusReadings;
             }
