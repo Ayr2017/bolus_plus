@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\BolusReadingFilter;
 use App\Http\Requests\BolusReading\IndexBolusReadingRequest;
 use App\Http\Requests\BolusReading\PullBolusReadingRequest;
+use App\Models\Animal;
 use App\Models\BolusReading;
 use App\Services\BolusReading\BolusReadingService;
 use Illuminate\Contracts\View\View;
@@ -19,12 +21,15 @@ class BolusReadingsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexBolusReadingRequest $request):View
+    public function index(IndexBolusReadingRequest $request, BolusReadingFilter $filter):View
     {
-        $bolus_readings = $this->bolusReadingService->getBolusReadings($request->validated());
+        $bolus_readings = $this->bolusReadingService->getBolusReadings($request->validated(), $filter);
+        $animals = Animal::with(['bolus'])->whereHas('bolus')->get();
+        session()->flashInput($request->input());
         return view('bolus-readings.index', [
             'bolus_readings' => $bolus_readings,
             'title' => 'Bolus Readings',
+            'animals' => $animals,
         ]);
     }
 

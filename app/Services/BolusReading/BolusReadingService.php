@@ -2,6 +2,7 @@
 
 namespace App\Services\BolusReading;
 
+use App\Filters\BolusReadingFilter;
 use App\Models\BolusReading;
 use \App\Services\Service;
 use Illuminate\Support\Facades\Artisan;
@@ -18,14 +19,15 @@ class BolusReadingService extends Service
         parent::__construct();
     }
 
-    public function getBolusReadings(array $validated): ?LengthAwarePaginator
+    public function getBolusReadings(array $validated, BolusReadingFilter $filter): ?LengthAwarePaginator
     {
         try {
+
             $cacheKey = 'bolus_readings_' . md5(json_encode($validated));
-            $bolusReadings = Cache::tags(['bolus_readings'])->remember($cacheKey, 600, function () use ($validated) {
+            $bolusReadings = Cache::tags(['bolus_readings'])->remember($cacheKey, 5, function () use ($validated,$filter) {
                 $perPage = $validated['perPage'] ?? 25;
                 $page = $validated['page'] ?? 1;
-                return  BolusReading::query()->paginate(perPage: $perPage, page: $page);
+                return  BolusReading::query()->filter($filter)->paginate(perPage: $perPage, page: $page);
             });
 
             if($bolusReadings){

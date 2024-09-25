@@ -16,14 +16,16 @@
             </div>
         </div>
         <div class="card-header bg-secondary-subtle">
-            filters
+            @include('bolus-readings.partials.bolus-readings-filter')
         </div>
         <div class="card-body">
+            @isset($bolus_readings)
             @include('bolus-readings.partials.bolus-readings-table')
+            @endisset
         </div>
         <div class="card-footer">
             <div class="d-flex">
-                {!! $bolus_readings->links() !!}
+                {!! $bolus_readings->withQueryString()->links() !!}
             </div>
         </div>
     </div>

@@ -22,6 +22,14 @@ class BolusReadingFilter extends Filter
 
         return $this->builder->whereDate('date', '<', $date);
     }
+    public function dateLte($date = null)
+    {
+        if($date == null){
+            return $this->builder;
+        }
+
+        return $this->builder->whereDate('date', '<=', $date);
+    }
     public function units($units = [])
     {
         $units = collect($units)->map(function ($value, $key) {
@@ -33,6 +41,17 @@ class BolusReadingFilter extends Filter
         );
 
         return $this->builder->select($units);
+    }
 
+    public function animalIds($animalIds = [])
+    {
+        $animalIds = array_filter($animalIds);
+        if($animalIds == []){
+            return $this->builder;
+        }
+
+        return $this->builder->whereHas('animal', function ($query) use ($animalIds) {
+            $query->whereIn('animals.id', $animalIds);
+        });
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Vue;
 
+use App\Filters\BolusReadingFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BolusReading\IndexBolusReadingsRequest;
 use App\Http\Resources\BolusReading\IndexBolusReadingResource;
@@ -15,13 +16,13 @@ class BolusReadingsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexBolusReadingsRequest $request, BolusReadingService $bolusReadingService): Response|AnonymousResourceCollection
+    public function index(IndexBolusReadingsRequest $request, BolusReadingFilter $filter, BolusReadingService $bolusReadingService): Response|AnonymousResourceCollection
     {
-        $result = $bolusReadingService->getBolusReadings($request->validated());
-        if($result){
+        $result = $bolusReadingService->getBolusReadings($request->validated(), $filter);
+        if ($result) {
             return IndexBolusReadingResource::collection($result);
         }
-            return response()->noContent();
+        return response()->noContent();
     }
 
     /**
