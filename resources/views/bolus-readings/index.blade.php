@@ -15,6 +15,9 @@
                 </form>
             </div>
         </div>
+        <div class="card-header bg-secondary-subtle">
+            filters
+        </div>
         <div class="card-body">
             @include('bolus-readings.partials.bolus-readings-table')
         </div>
