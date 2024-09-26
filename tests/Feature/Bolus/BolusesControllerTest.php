@@ -4,10 +4,7 @@ namespace Tests\Feature\Bolus;
 
 use AllowDynamicProperties;
 use App\Models\Bolus;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Log;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 #[AllowDynamicProperties] class BolusesControllerTest extends TestCase
@@ -16,11 +13,7 @@ use Tests\TestCase;
     protected function setUp(): void
     {
         parent::setUp();
-
-        Role::create(['name' => 'admin', 'guard_name' => 'web']);
         $this->boluses = Bolus::factory()->count(10)->create();
-        $this->user = User::factory()->create();
-        $this->admin = User::factory()->create()->assignRole('admin');
     }
 
     /**

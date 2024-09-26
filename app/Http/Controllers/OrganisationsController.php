@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Organisation\EditOrganisationRequest;
+use App\Http\Requests\Organisation\IndexOrganisationRequest;
 use App\Http\Requests\Organisation\ShowOrganisationRequest;
 use App\Http\Requests\Organisation\StoreOrganisationRequest;
 use App\Http\Requests\Organisation\UpdateOrganisationRequest;
@@ -19,7 +20,7 @@ class OrganisationsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexOrganisationRequest $request): View
     {
         $organisations = Organisation::orderBy('name')->get();
         $title = "Organisations";
