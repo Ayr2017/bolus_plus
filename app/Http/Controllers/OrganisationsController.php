@@ -56,7 +56,7 @@ class OrganisationsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowOrganisationRequest $organisationRequest,Organisation $organisation)
+    public function show(ShowOrganisationRequest $organisationRequest,Organisation $organisation): View
     {
         return view('organisations.show', [
             'organisation' => $organisation,

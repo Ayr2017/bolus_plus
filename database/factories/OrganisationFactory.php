@@ -2,14 +2,23 @@
 
 namespace Database\Factories;
 
+use AllowDynamicProperties;
+use App\Models\StructuralUnit;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Organisation>
  */
-class OrganisationFactory extends Factory
+#[AllowDynamicProperties] class OrganisationFactory extends Factory
 {
+    public function __construct($count = null, ?Collection $states = null, ?Collection $has = null, ?Collection $for = null, ?Collection $afterMaking = null, ?Collection $afterCreating = null, $connection = null, ?Collection $recycle = null)
+    {
+        parent::__construct($count, $states, $has, $for, $afterMaking, $afterCreating, $connection, $recycle);
+        $this->structuralUnit = StructuralUnit::factory()->make();
+    }
+
     /**
      * Define the model's default state.
      *
@@ -18,9 +27,8 @@ class OrganisationFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => Str::uuid()->toString(),
             'name' => fake()->company(),
-            'structural_unit_id' => 1,
+            'structural_unit_id' => $this->structuralUnit->id,
             'parent_id' => null,
         ];
     }

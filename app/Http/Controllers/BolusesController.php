@@ -40,14 +40,14 @@ class BolusesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBolusRequest $request, BolusService $bolusService)
+    public function store(StoreBolusRequest $request, BolusService $bolusService): RedirectResponse
     {
         $result = $bolusService->storeBolus($request->validated());
         if($result){
             return redirect()->route('boluses.index')->with('message', 'Bolus created Successfully');
         }
 
-        return redirect()->back()->withErrors(['message'=> 'Bolus not created']);
+        return back()->withErrors(['message'=> 'Bolus not created']);
     }
 
     /**
