@@ -1,4 +1,13 @@
 services:
+    data_collector:
+        build:
+            context: ./datacollector
+        volumes:
+            - ./:/app
+        ports:
+            - "8080:8080"
+        networks:
+            - sail
     laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.3

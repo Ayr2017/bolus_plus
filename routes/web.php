@@ -5,6 +5,7 @@ use App\Http\Controllers\BolusesController;
 use App\Http\Controllers\BolusReadingsController;
 use App\Http\Controllers\BreedsController;
 use App\Http\Controllers\DashboardsController;
+use App\Http\Controllers\DataCollector\DataCollectorController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeesController as AdminEmployeesController;
 use App\Http\Controllers\EventsController;
@@ -15,7 +16,9 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\StatusesController;
 use App\Http\Controllers\UsersController;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,8 +52,9 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::patch('employees/{employee}/permissions', [EmployeesController::class, 'updatePermissions'])->name('employees.permissions.update');
     Route::patch('users/{user}/update-roles', [UsersController::class, 'updateRoles'])->name('users.update-roles');
 
-    Route::get('/test',function(){
-            return \App\Models\BolusReading::first();
-//        (new \App\Services\BolusReading\BolusReadingApiService())->pullRecords('37a022f5-0dc9-4936-aac7-1da036eef6a1');
+    Route::group([
+        'prefix'=> 'data-collector',
+        ], function(){
+        Route::get('/test', [DataCollectorController::class, 'test'])->name('test');
     });
 });
