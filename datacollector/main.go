@@ -13,12 +13,5 @@ func main() {
     repo := repository.NewInMemoryRepository() // Например, в памяти
     uc := usecase.NewUseCase(repo)
     delivery.NewHandler(e, uc)
-// 	e.GET("/", func(c echo.Context) error {
-// 		return c.String(http.StatusOK, "Hello, World!")
-// 	})
-//     e.GET("/bolus-readings", func(c echo.Context) error {
-//         return c.String(http.StatusOK, "Hello, World!")
-//     })
-// 	e.File("/stat", "public/index.html")
 	e.Logger.Fatal(e.Start(":8080"))
 }
