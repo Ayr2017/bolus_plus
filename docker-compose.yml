@@ -1,5 +1,5 @@
 services:
-    data_collector:
+    datacollector:
         build:
             context: ./datacollector
         volumes:

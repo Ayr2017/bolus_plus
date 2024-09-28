@@ -17,7 +17,7 @@ class DataCollectorController extends Controller
     public function test()
     {
         // Сделаем GET-запрос к микросервису
-        $response = $this->client->get('http://data_collector:8080/');
+        $response = $this->client->get('http://datacollector:8080/endpoint');
 
         // Получим тело ответа
         return $response->getBody()->getContents();
