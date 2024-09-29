@@ -6,15 +6,19 @@ import (
 )
 
 type Handler struct {
-    uc *usecase.UseCase
+    uc *usecase.UserUseCase
 }
 
-func NewHandler(e *echo.Echo, uc *usecase.UseCase) {
+func NewHandler(e *echo.Echo, uc *usecase.UserUseCase) {
     h := &Handler{uc: uc}
     e.GET("/endpoint", h.GetData)
 }
 
 func (h *Handler) GetData(c echo.Context) error {
+    users, err := h.uc.GetAllUsers()
+    if err != nil {
+        return err
+    }
     // Используйте h.uc для получения данных
-    return c.JSON(200, map[string]string{"message": "Hello from the Go microservice!"})
+    return c.JSON(200, users)
 }

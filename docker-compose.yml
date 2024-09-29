@@ -4,6 +4,13 @@ services:
             context: ./datacollector
         volumes:
             - ./:/app
+        environment:
+            DB_CONNECTION: ${DB_CONNECTION}
+            DB_HOST: ${DB_HOST}
+            DB_PORT: ${DB_PORT}
+            DB_DATABASE: ${DB_DATABASE}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
         ports:
             - "8080:8080"
         networks:
