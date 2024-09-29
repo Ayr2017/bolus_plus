@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Traits\Filterable;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +31,13 @@ class BolusReading extends Model
         'pn',
         'ut',
     ];
+
+    public function date():Attribute
+    {
+        return Attribute::make(
+            get: fn($value)=>Carbon::make($value)->format('Y-m-d'),
+        );
+    }
 
     public function bolus(): BelongsTo
     {

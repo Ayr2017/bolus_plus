@@ -12,10 +12,10 @@ func main() {
 //     repo := repository.NewInMemoryRepository() // Например, в памяти
 //     uc := usecase.NewUseCase(repo)
 
-    userRepo := repository.NewUserRepository()
-    userUseCase := usecase.NewUserUseCase(userRepo)
+    brRepo := repository.NewBolusReadingRepository()
+    brUseCase := usecase.NewBolusReadingUseCase(brRepo)
 
 //     delivery.NewHandler(e, uc)
-    delivery.NewHandler(e, userUseCase)
+    delivery.NewHandler(e, brUseCase)
 	e.Logger.Fatal(e.Start(":8080"))
 }

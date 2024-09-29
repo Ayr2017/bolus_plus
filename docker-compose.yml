@@ -1,20 +1,4 @@
 services:
-    datacollector:
-        build:
-            context: ./datacollector
-        volumes:
-            - ./:/app
-        environment:
-            DB_CONNECTION: ${DB_CONNECTION}
-            DB_HOST: ${DB_HOST}
-            DB_PORT: ${DB_PORT}
-            DB_DATABASE: ${DB_DATABASE}
-            DB_USERNAME: ${DB_USERNAME}
-            DB_PASSWORD: ${DB_PASSWORD}
-        ports:
-            - "8080:8080"
-        networks:
-            - sail
     laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.3
@@ -89,6 +73,25 @@ services:
         networks:
             - sail
         depends_on:
+            - laravel.test
+    datacollector:
+        build:
+            context: ./datacollector
+        volumes:
+            - ./:/app
+        environment:
+            DB_CONNECTION: ${DB_CONNECTION}
+            DB_HOST: ${DB_HOST}
+            DB_PORT: ${DB_PORT}
+            DB_DATABASE: ${DB_DATABASE}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "8080:8080"
+        networks:
+            - sail
+        depends_on:
+            - mysql
             - laravel.test
 networks:
     sail:
