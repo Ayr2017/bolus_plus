@@ -11,7 +11,7 @@ class IndexBolusReadingsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->hasRole('admin');
     }
 
     /**

@@ -10,19 +10,20 @@ use App\Services\BolusReading\BolusReadingService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class BolusReadingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexBolusReadingsRequest $request, BolusReadingFilter $filter, BolusReadingService $bolusReadingService): Response|AnonymousResourceCollection
+    public function index(IndexBolusReadingsRequest $request, BolusReadingFilter $filter, BolusReadingService $bolusReadingService): IndexBolusReadingResource | Response
     {
         $result = $bolusReadingService->getBolusReadings($request->validated(), $filter);
         if ($result) {
-            return IndexBolusReadingResource::collection($result);
+            return new IndexBolusReadingResource($result);
         }
-        return response()->noContent();
+        return response([], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
