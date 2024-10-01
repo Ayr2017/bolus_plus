@@ -40,6 +40,7 @@ services:
             - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
+            - my_shared_network
         healthcheck:
             test:
                 - CMD
@@ -74,28 +75,12 @@ services:
             - sail
         depends_on:
             - laravel.test
-    datacollector:
-        build:
-            context: ./datacollector
-        volumes:
-            - ./:/app
-        environment:
-            DB_CONNECTION: ${DB_CONNECTION}
-            DB_HOST: ${DB_HOST}
-            DB_PORT: ${DB_PORT}
-            DB_DATABASE: ${DB_DATABASE}
-            DB_USERNAME: ${DB_USERNAME}
-            DB_PASSWORD: ${DB_PASSWORD}
-        ports:
-            - "8080:8080"
-        networks:
-            - sail
-        depends_on:
-            - mysql
-            - laravel.test
 networks:
     sail:
         driver: bridge
+    my_shared_network:
+        driver: bridge
+        external: true
 volumes:
     sail-mysql:
         driver: local
