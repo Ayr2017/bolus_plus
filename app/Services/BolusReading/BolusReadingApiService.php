@@ -83,14 +83,13 @@ class BolusReadingApiService extends Service
             $code = strtolower($result['code']);
             foreach ($result['records'] as $record) {
                 try {
-                    preg_match('/^-?\d+(\.\d{1,2})?/', $record['value'], $matches);
                     $date = Carbon::make($record['date'])?->format('Y-m-d\TH:i:s.uP');
 
                     $reading = BolusReading::updateOrCreate([
                         'device_number' => $deviceNumber,
                         'date' => $date,
                     ], [
-                        $code => floatval($matches[0]),
+                        $code => floatval($record['value']),
                     ]);
                 } catch (\Exception $exception) {
                     Log::error( __METHOD__." ". $exception->getMessage());
