@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Factories\Event\EventFactory;
+use App\Factories\EventDecorator\EventDecoratorFactory;
 use App\Http\Requests\Event\EventCreateRequest;
 use App\Http\Requests\Event\ShowEventRequest;
 use App\Http\Requests\Event\StoreEventRequest;
@@ -10,18 +11,17 @@ use App\Models\Event;
 use App\Models\EventType;
 use App\Models\Restriction;
 use App\Services\EventService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Str;
-use Illuminate\View\View;
 
 class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index():View
     {
         $events = Event::query()->get();
         $eventTypes = EventType::orderBy('name')->get();
@@ -63,17 +63,15 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowEventRequest $request, Event $event, EventService $eventService):View
+    public function show(ShowEventRequest $request, Event $event, EventService $eventService, EventDecoratorFactory $factory):View
     {
-        $eventType = $event->eventType;
-        $fields = $eventType->fields;
-        $event = EventFactory::create($event);
+       $event = App::make(EventFactory::class, ['event' => $event])->create($event);
+       $eventDecorator = $factory->build($event);
 
         return view('events.show', [
             'title' => 'Event',
+            'data' => collect($eventDecorator->getFieldsArray()),
             'event' => $event,
-            'event_type' => $eventType,
-            'fields' => $fields,
         ]);
     }
 

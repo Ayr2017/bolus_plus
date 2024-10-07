@@ -27,30 +27,13 @@
                 </tr>
             </thead>
             <tbody>
+            @foreach($data as $key =>$value )
                 <tr>
-                    <th>Id</th>
-                    <td>{{$event->id}}</td>
-                </tr>
-                <tr>
-                    <th>Category</th>
-                    <td>{{$event->event_category}}</td>
-                </tr>
-                <tr>
-                    <th>Type</th>
-                    <td>{{$event->eventType->name}}</td>
-                </tr>
-                <tr>
-                    <th>Creator</th>
-                    <td>{{$event->creator->name}}</td>
-                </tr>
-            @foreach($fields as $field)
-                <tr>
-                    <th>
-                        {{$field->title}}
-                    </th>
-                    <td>{{$event->{strtolower($field->slug)} }}</td>
+                    <th>{{$key}}</th>
+                    <td>{{$value}}</td>
                 </tr>
             @endforeach
+
             </tbody>
         </table>
 

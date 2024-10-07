@@ -3,15 +3,23 @@
 namespace App\Models;
 
 use AllowDynamicProperties;
-use App\Models\Event\EventInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
-#[AllowDynamicProperties] class Event extends Model implements EventInterface
+#[AllowDynamicProperties] class Event extends Model
 {
+    public mixed $eventData;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
+
     use HasFactory;
     protected $fillable = [
         'event_type_id',
@@ -64,5 +72,6 @@ use Illuminate\Support\Carbon;
             get: fn ($value) => Carbon::make($this->data->get('end_at'))?->format('Y-m-d H:i:s') ?? null,
         );
     }
+
 
 }

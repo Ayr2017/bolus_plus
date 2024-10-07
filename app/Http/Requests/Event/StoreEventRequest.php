@@ -3,16 +3,10 @@
 namespace App\Http\Requests\Event;
 
 use AllowDynamicProperties;
-use App\Entity\EventData\EventDataInterface;
-use App\Enums\EventCategoriesEnum;
-use App\Enums\EventTypesEnum;
 use App\Models\EventType;
-use App\Models\Field;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\NoReturn;
-use ReflectionEnum;
 
 #[AllowDynamicProperties] class StoreEventRequest extends FormRequest
 {
@@ -47,8 +41,9 @@ use ReflectionEnum;
 
     public function getRules(): array
     {
-        $rules = EventType::with('fields')->find($this->event_type_id)->fields->pluck('rule_store','name')->toArray();
-        return array_filter($rules);
+        $eventTypeSlug = EventType::find($this->event_type_id)->slug;
+        $event = App::make('App\Models\Event\\'.Str::studly(Str::lower($eventTypeSlug)));
+        return array_filter($event::STORE_RULES);
     }
 
 }
