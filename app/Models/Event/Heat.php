@@ -24,62 +24,37 @@ class Heat extends Event
     const STORE_RULES = [
         'data.start_at' => 'required|date',
         'data.end_at' => 'required|date',
-        'data.restriction_start_at' => 'required|date',
-        'data.restriction_end_at' => 'required|date',
-        'data.status_id' => 'required|integer',
-        'data.restriction_id' => 'required|exists:restrictions,id',
-        'data.restricted_by' => 'required|string',
-        'data.description' => 'nullable|string',
+        'data.insemination_start_at' => 'required|date',
+        'data.insemination_end_at' => 'required|date|after:data.insemination_start_at',
+        'data.status_id' => 'nullable|integer',
+        'data.is_inseminated' => 'nullable|boolean',
     ];
     const UPDATE_RULES = [
         'data.start_at' => 'nullable|date',
         'data.end_at' => 'nullable|date',
-        'data.restriction_start_at' => 'nullable|date',
-        'data.restriction_end_at' => 'nullable|date',
+        'data.insemination_start_at' => 'nullable|date',
+        'data.insemination_end_at' => 'nullable|date|after:data.insemination_start_at',
         'data.status_id' => 'nullable|integer',
-        'data.restriction_id' => 'nullable|exists:restrictions,id',
-        'data.restricted_by' => 'nullable|string',
-        'data.description' => 'nullable|string',
+        'data.is_inseminated' => 'nullable|boolean',
     ];
 
-    public function restrictedBy(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->data->get('restricted_by'),
-        );
-    }
-    public function restrictionId(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->data->get('restriction_id'),
-        );
-    }
     public function statusId(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->data->get('status_id'),
         );
     }
-    public function restrictionStartAt(): Attribute
+    public function inseminationStartAt(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::make($this->data->get('restriction_start_at'))?->format('Y-m-d H:i:s'),
+            get: fn() => Carbon::make($this->data->get('insemination_start_at'))?->format('Y-m-d H:i:s'),
         );
     }
-    public function restrictionEndAt(): Attribute
+    public function inseminationEndAt(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::make($this->data->get('restriction_end_at'))?->format('Y-m-d H:i:s'),
+            get: fn() => Carbon::make($this->data->get('insemination_end_at'))?->format('Y-m-d H:i:s'),
         );
-    }
-
-    public function restrictor():BelongsTo
-    {
-        return $this->belongsTo(User::class, 'restricted_by', 'id');
-    }
-    public function restriction():BelongsTo
-    {
-        return $this->belongsTo(Restriction::class, 'restriction_id', 'id');
     }
 
     public function status():BelongsTo
