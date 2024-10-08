@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('uuid')->unique();
             $table->string('name')->unique();
             $table->string('number')->unique();
-            $table->unsignedBigInteger('organisation_id')->unique();
+            $table->unsignedBigInteger('organisation_id');
             $table->dateTime('birthday')->nullable();
             $table->unsignedBigInteger('breed_id')->nullable();
             $table->string('number_rshn')->nullable();
