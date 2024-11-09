@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -13,7 +15,24 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        return User::query()->paginate($request->per_page ?? 50);
+        try {
+            $currentUser = auth()->user();
+            return response()->json(
+                [
+                    'message' => 'OK',
+                    'data' => User::query()->paginate($request->per_page ?? 50),
+                    'error' => null,
+                ], 200);
+        }catch (\Throwable $throwable){
+            Log::error(__METHOD__.", line:".__LINE__." ".$throwable->getMessage());
+        }
+
+        return response()->json(
+            [
+                'message' => 'Error',
+                'data' =>null,
+                'error' => 'Server Error',
+            ], 500);
     }
 
     /**
@@ -62,5 +81,30 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getCurrentUser(): JsonResponse
+    {
+        try {
+            $currentUser = auth()->user();
+            return response()->json(
+                [
+                    'message' => 'OK',
+                    'data' =>[
+                        'current_user' => $currentUser,
+                        ],
+                    'error' => null,
+                ], 200);
+        }catch (\Throwable $throwable){
+            Log::error(__METHOD__.", line:".__LINE__." ".$throwable->getMessage());
+        }
+
+        return response()->json(
+            [
+                'message' => 'Error',
+                'data' =>null,
+                'error' => 'Server Error',
+            ], 500);
+
     }
 }

@@ -38,6 +38,7 @@ Route::group(
         'prefix' => 'v1',
         'group' => 'v1'
     ], function () {
+    Route::get('users/get-current-user', [UsersController::class, 'getCurrentUser']);
     Route::resource('users', UsersController::class);
 });
 
