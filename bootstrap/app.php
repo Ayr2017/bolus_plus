@@ -16,7 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->middleware('web')
                 ->name('vue.')
                 ->group(base_path('routes/vue.php'));
-        }
+            Route::prefix('api')
+                ->middleware('api')
+                ->name('api.')
+                ->group(base_path('routes/api.php'));
+        },
     )
     ->withMiddleware(function (Middleware $middleware) {
 
