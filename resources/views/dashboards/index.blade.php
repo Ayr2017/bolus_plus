@@ -12,6 +12,22 @@
             Create
         </a>
     </div>
-    @dump($dashboards)
+
+    <div class="row">
+        @foreach($dashboards as $dashboard)
+            <div class="col-4">
+                <a
+                    href="{{route('dashboards.show', $dashboard)}}"
+                    class="card text-decoration-none"
+                >
+                    <div class="card-body">
+                        <h5 class="card-title mb-0">
+                            {{ $dashboard->name }}
+                        </h5>
+                    </div>
+                </a>
+            </div>
+        @endforeach
+    </div>
 
 @endsection
