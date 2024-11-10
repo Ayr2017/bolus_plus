@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * @property int $id
+ * TODO: дописать
+ */
 class AnimalResource extends JsonResource
 {
     /**
