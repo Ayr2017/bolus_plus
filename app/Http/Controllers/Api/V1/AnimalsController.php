@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Animal\GetAnimalsRequest;
+use App\Http\Requests\Animal\ShowAnimalRequest;
 use App\Http\Resources\Animal\AnimalResource;
 use App\Http\Responses\ApiResponse;
+use App\Models\Animal;
 use App\Services\Animal\AnimalService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,12 +22,12 @@ class AnimalsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(GetAnimalsRequest $request)
+    public function index(GetAnimalsRequest $request): JsonResponse
     {
         try {
             $animals = $this->animalService->getAnimals($request->validated());
             return ApiResponse::success(AnimalResource::paginatedCollection($animals));
-        }catch (\Throwable $throwable){
+        } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
 
@@ -51,9 +53,15 @@ class AnimalsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ShowAnimalRequest $request, Animal $animal): JsonResponse
     {
-        //
+        try {
+            return ApiResponse::success(['animal' => AnimalResource::make($animal)]);
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong!');
     }
 
     /**
