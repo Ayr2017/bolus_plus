@@ -3,12 +3,15 @@
 namespace App\Services\Animal;
 
 use App\Models\Animal;
+use App\Repositories\Animal\AnimalRepository;
 use \App\Services\Service;
 
 class AnimalService extends Service
 {
+    private AnimalRepository $animalRepository;
     public function __construct()
     {
+        $this->animalRepository = new AnimalRepository();
         parent::__construct();
     }
 
@@ -27,5 +30,10 @@ class AnimalService extends Service
             return $animal;
         }
         return null;
+    }
+
+    public function getAnimals(mixed $validated)
+    {
+        return $this->animalRepository->getAnimals($validated);
     }
 }
