@@ -2,37 +2,36 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\SearchUsersRequest;
+use App\Http\Resources\User\UserResource;
+use App\Http\Responses\ApiResponse;
 use App\Models\User;
+use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
+    public function __construct(readonly UserService $userService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(SearchUsersRequest $request): JsonResponse
     {
         try {
-            $currentUser = auth()->user();
-            return response()->json(
-                [
-                    'message' => 'OK',
-                    'data' => User::query()->paginate($request->per_page ?? 50),
-                    'error' => null,
-                ], 200);
-        }catch (\Throwable $throwable){
-            Log::error(__METHOD__.", line:".__LINE__." ".$throwable->getMessage());
+            $data = $this->userService->search($request->validated());
+            return ApiResponse::success($data);
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
 
-        return response()->json(
-            [
-                'message' => 'Error',
-                'data' =>null,
-                'error' => 'Server Error',
-            ], 500);
+        return ApiResponse::error('Something went wrong');
     }
 
     /**
@@ -87,24 +86,11 @@ class UsersController extends Controller
     {
         try {
             $currentUser = auth()->user();
-            return response()->json(
-                [
-                    'message' => 'OK',
-                    'data' =>[
-                        'current_user' => $currentUser,
-                        ],
-                    'error' => null,
-                ], 200);
-        }catch (\Throwable $throwable){
-            Log::error(__METHOD__.", line:".__LINE__." ".$throwable->getMessage());
+            return ApiResponse::success(UserResource::make($currentUser));
+        } catch (\Throwable $throwable) {
+            Log::error(__METHOD__ . ", line:" . __LINE__ . " " . $throwable->getMessage());
         }
 
-        return response()->json(
-            [
-                'message' => 'Error',
-                'data' =>null,
-                'error' => 'Server Error',
-            ], 500);
-
+        return ApiResponse::error('Something went wrong');
     }
 }

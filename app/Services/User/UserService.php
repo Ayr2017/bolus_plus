@@ -2,13 +2,15 @@
 
 namespace App\Services\User;
 
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
+use App\Repositories\User\UserRepository;
 use \App\Services\Service;
 use Illuminate\Support\Facades\Log;
 
 class UserService extends Service
 {
-    public function __construct()
+    public function __construct(readonly UserRepository $userRepository)
     {
         parent::__construct();
     }
@@ -25,5 +27,11 @@ class UserService extends Service
         }
 
         return null;
+    }
+
+    public function search(array $data): array
+    {
+        $userData = $this->userRepository->search($data);
+        return UserResource::paginatedCollection($userData);
     }
 }
