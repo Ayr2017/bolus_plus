@@ -15,7 +15,7 @@ class SanctumController extends Controller
     {
         try {
             $token = $sanctumService->createToken($request->validated());
-            return ApiResponse::success([$token]);
+            return ApiResponse::success(['token' => $token]);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
