@@ -22,7 +22,14 @@ class ShowAnimalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'animal' => ['required', 'integer' ,'exists:animals,id'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'animal' => $this->route('animal'),
+        ]);
     }
 }

@@ -53,10 +53,10 @@ class AnimalsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowAnimalRequest $request, Animal $animal): JsonResponse
+    public function show(ShowAnimalRequest $request, int $animal): JsonResponse
     {
         try {
-            return ApiResponse::success(['animal' => AnimalResource::make($animal)]);
+            return ApiResponse::success(['animal' => AnimalResource::make(Animal::query()->find($animal))]);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
