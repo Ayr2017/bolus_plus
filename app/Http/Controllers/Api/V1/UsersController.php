@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GetCurrentUserRequest;
 use App\Http\Requests\User\SearchUsersRequest;
 use App\Http\Resources\User\UserResource;
 use App\Http\Responses\ApiResponse;
@@ -82,13 +83,13 @@ class UsersController extends Controller
         //
     }
 
-    public function getCurrentUser(): JsonResponse
+    public function getCurrentUser(GetCurrentUserRequest $request): JsonResponse
     {
         try {
             $currentUser = auth()->user();
             return ApiResponse::success(UserResource::make($currentUser));
         } catch (\Throwable $throwable) {
-            Log::error(__METHOD__ . ", line:" . __LINE__ . " " . $throwable->getMessage());
+            ErrorLog::write(method: __METHOD__, line:  __LINE__ , errorMessage: $throwable->getMessage());
         }
 
         return ApiResponse::error('Something went wrong');
