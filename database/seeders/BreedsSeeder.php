@@ -123,7 +123,7 @@ class BreedsSeeder extends Seeder
         foreach ($this->breeds as $breed) {
             Breed::updateOrCreate([
                 'id' => $breed['id'],
-            ],$breed);
+            ], $breed);
         }
     }
 }

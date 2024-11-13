@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bolus;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,6 +21,5 @@ class DatabaseSeeder extends Seeder
             StatusesSeeder::class,
             BreedsSeeder::class,
         ]);
-
     }
 }
