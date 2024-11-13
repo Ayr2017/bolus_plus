@@ -6,6 +6,7 @@ use App\Models\Bolus;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Artisan;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -16,5 +17,7 @@ abstract class TestCase extends BaseTestCase
         Role::create(['name' => 'admin', 'guard_name' => 'web']);
         $this->user = User::factory()->create();
         $this->admin = User::factory()->create()->assignRole('admin');
+
+        Artisan::call('db:seed', ['--class' => 'DatabaseSeeder']);
     }
 }
