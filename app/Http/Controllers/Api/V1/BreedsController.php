@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 class BreedsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @param IndexBreedRequest $request
+     * @param BreedService $breedService
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(IndexBreedRequest $request, BreedService $breedService)
     {

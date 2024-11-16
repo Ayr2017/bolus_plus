@@ -75,7 +75,9 @@ class StatusesSeeder extends Seeder
     public function run(): void
     {
         foreach (self::STATUSES as $status) {
-            Status::query()->firstOrCreate($status);
+            Status::query()->firstOrCreate([
+                'name'=>$status['name'],
+            ],$status);
         }
     }
 }
