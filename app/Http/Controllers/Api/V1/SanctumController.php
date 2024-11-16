@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SanctumController extends Controller
 {
+    /**
+     * @param CreateTokenRequest $request
+     * @param SanctumService $sanctumService
+     * @return JsonResponse
+     */
     public function createToken(CreateTokenRequest $request, SanctumService $sanctumService): JsonResponse
     {
         try {
@@ -25,6 +30,11 @@ class SanctumController extends Controller
         return ApiResponse::error('Something went wrong');
     }
 
+    /**
+     * @param CreateTokenRequest $request
+     * @param SanctumService $sanctumService
+     * @return JsonResponse
+     */
     public function auth(CreateTokenRequest $request, SanctumService $sanctumService): JsonResponse
     {
         try {

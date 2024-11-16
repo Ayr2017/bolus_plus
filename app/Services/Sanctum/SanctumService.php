@@ -15,6 +15,11 @@ class SanctumService extends Service
         parent::__construct();
     }
 
+    /**
+     * @param mixed $validated
+     * @return mixed
+     * @throws ValidationException
+     */
     public function createToken(mixed $validated)
     {
         $user = User::where('email', $validated['email'])->first();
