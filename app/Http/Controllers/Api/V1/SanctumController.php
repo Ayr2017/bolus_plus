@@ -8,6 +8,8 @@ use App\Http\Requests\Sanctum\CreateTokenRequest;
 use App\Http\Responses\ApiResponse;
 use App\Services\Sanctum\SanctumService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class SanctumController extends Controller
 {
@@ -16,6 +18,26 @@ class SanctumController extends Controller
         try {
             $token = $sanctumService->createToken($request->validated());
             return ApiResponse::success(['token' => $token]);
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong');
+    }
+
+    public function auth(CreateTokenRequest $request, SanctumService $sanctumService): JsonResponse
+    {
+        try {
+            $token = $sanctumService->createToken($request->validated());
+
+            if (!Auth::attempt(Arr::only($request->validated(), ['email', 'password']))) {
+                throw new \Exception('Invalid credentials');
+            }
+
+            return ApiResponse::success([
+                'token' => $token,
+                'user' => auth('sanctum')->user()
+                ]);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

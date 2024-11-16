@@ -22,3 +22,9 @@ Route::prefix('v1')
         Route::apiResource('users', UsersController::class);
     });
 
+Route::prefix('v1')
+    ->middleware(['api'])
+    ->group(function () {
+        Route::post('/auth', [SanctumController::class,'auth'])->name('auth');
+    });
+
