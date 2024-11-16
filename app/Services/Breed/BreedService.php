@@ -4,6 +4,8 @@ namespace App\Services\Breed;
 
 use App\Models\Breed;
 use \App\Services\Service;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
 class BreedService extends Service
@@ -51,5 +53,17 @@ class BreedService extends Service
         }
         return null;
 
+    }
+
+    /**
+     * @param array $data
+     * @return LengthAwarePaginator
+     */
+    public function getBreeds(array $data): LengthAwarePaginator
+    {
+        $perPage = Arr::get($data, 'per_page', 50);
+        $page = Arr::get($data, 'page', 1);
+
+        return  Breed::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
     }
 }
