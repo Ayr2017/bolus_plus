@@ -17,6 +17,8 @@ class BreedResource extends PaginatedJsonResponse
         return [
                 'id' => $this->id,
                 'name'=>$this->name,
+                'type'=>$this->type,
+                'is_active' => $this->is_active,
             ];
     }
 
