@@ -8,6 +8,7 @@ use App\Http\Requests\Breed\IndexBreedRequest;
 use App\Http\Resources\Breed\BreedResource;
 use App\Http\Responses\ApiResponse;
 use App\Services\Breed\BreedService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BreedsController extends Controller
@@ -15,9 +16,9 @@ class BreedsController extends Controller
     /**
      * @param IndexBreedRequest $request
      * @param BreedService $breedService
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function index(IndexBreedRequest $request, BreedService $breedService)
+    public function index(IndexBreedRequest $request, BreedService $breedService): JsonResponse
     {
         try {
             $breeds = $breedService->getBreeds($request->validated());
