@@ -15,7 +15,7 @@ class BreedService extends Service
         parent::__construct();
     }
 
-    public function deleteBreed(array $validated, Breed $breed):bool
+    public function deleteBreed(Breed $breed):bool
     {
         try {
             $result  = $breed->delete();

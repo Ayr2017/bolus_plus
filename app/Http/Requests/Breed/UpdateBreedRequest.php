@@ -22,7 +22,15 @@ class UpdateBreedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string|max:255|unique:breeds,name,'.$this->breed->id,
+            'name'=>'required|string|max:255|unique:breeds,name,'.$this->breed,
+            'breed' => ['required', 'integer' ,'exists:breeds,id'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'breed' => $this->route('breed'),
+        ]);
     }
 }
