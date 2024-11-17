@@ -12,7 +12,8 @@ class Breed extends Model
     use HasFactory;
     protected $fillable = [
         'uuid',
-        'name'
+        'name',
+        'type',
     ];
 
     public static function boot()

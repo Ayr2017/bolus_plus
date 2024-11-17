@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Status;
+namespace App\Http\Requests\Breed;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditStatusRequest extends FormRequest
+class ShowBreadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,14 @@ class EditStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'breed' => ['required', 'integer' ,'exists:breeds,id'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'breed' => $this->route('breed'),
+        ]);
     }
 }

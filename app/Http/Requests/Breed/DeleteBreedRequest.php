@@ -22,7 +22,14 @@ class DeleteBreedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'breed' => ['required', 'integer' ,'exists:breeds,id'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'breed' => $this->route('breed'),
+        ]);
     }
 }
