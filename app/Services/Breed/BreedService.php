@@ -15,9 +15,10 @@ class BreedService extends Service
         parent::__construct();
     }
 
-    public function deleteBreed(Breed $breed):bool
+    public function deleteBreed(int $breedId):bool
     {
         try {
+            $breed = Breed::query()->findOrFail($breedId);
             $result  = $breed->delete();
             if($result){
                 return true;
@@ -28,9 +29,10 @@ class BreedService extends Service
         return false;
     }
 
-    public function updateBreed(array $validated, Breed $breed): ?Breed
+    public function updateBreed(array $validated, int $breedID): ?Breed
     {
         try {
+            $breed = Breed::query()->findOrFail($breedID);
             $result = $breed->update($validated);
             if($result){
                 return $breed;
@@ -53,6 +55,18 @@ class BreedService extends Service
         }
         return null;
 
+    }
+
+    public function show(int $id)
+    {
+        try {
+            $breed = Breed::query()->findOrFail($id);
+            if($breed){
+                return $breed;
+            }
+        }catch (\Exception $e){
+            Log::error(__METHOD__." ".$e->getMessage());
+        }
     }
 
     /**

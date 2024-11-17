@@ -22,8 +22,9 @@ class UpdateBreedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string|max:255|unique:breeds,name,'.$this->breed,
-            'breed' => ['required', 'integer' ,'exists:breeds,id'],
+            'name' => ['required', 'string', 'max:255', 'unique:breeds,name,' . $this->breed],
+            'type' => ['nullable', 'string'],
+            'breed' => ['required', 'integer', 'exists:breeds,id'],
         ];
     }
 

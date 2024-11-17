@@ -59,12 +59,14 @@ class BreedsController extends Controller
      * Display the specified resource.
      * @param int $breed
      * @param ShowBreadRequest $request
+     * @param BreedService $service
      * @return JsonResponse
      */
-    public function show(int $breed, ShowBreadRequest $request): JsonResponse
+    public function show(ShowBreadRequest $request, BreedService $service, int $breed): JsonResponse
     {
         try {
-            return ApiResponse::success(['breed' => BreedResource::make(Breed::query()->find($breed))]);
+            $breed = $service->show($breed);
+            return ApiResponse::success(['breed' => BreedResource::make($breed)]);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
@@ -80,10 +82,9 @@ class BreedsController extends Controller
      * @param BreedService $breedService
      * @return JsonResponse
      */
-    public function update(UpdateBreedRequest $request, int $breed, BreedService $breedService): JsonResponse
+    public function update(UpdateBreedRequest $request, BreedService $breedService, int $breed): JsonResponse
     {
         try {
-            $breed = Breed::query()->find($breed);
             $breed = $breedService->updateBreed($request->validated(), $breed);
 
             return ApiResponse::success(['breed' => BreedResource::make($breed)]);
@@ -101,10 +102,9 @@ class BreedsController extends Controller
      * @param BreedService $service
      * @return JsonResponse
      */
-    public function destroy(DeleteBreedRequest $request, int $breed, BreedService $breedService): JsonResponse
+    public function destroy(DeleteBreedRequest $request, BreedService $breedService,  int $breed): JsonResponse
     {
         try {
-            $breed = Breed::query()->find($breed);
             return ApiResponse::success($breedService->deleteBreed($breed));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
