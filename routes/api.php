@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AnimalGroupsController;
 use App\Http\Controllers\Api\V1\AnimalsController;
 use App\Http\Controllers\Api\V1\BreedsController;
 use App\Http\Controllers\Api\V1\SanctumController;
@@ -12,6 +13,7 @@ Route::prefix('v1')
     ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::apiResource('animals', AnimalsController::class);
+        Route::apiResource('animal-groups', AnimalGroupsController::class);
         Route::apiResource('breeds', BreedsController::class);
 
         Route::get('users/get-current-user', [UsersController::class, 'getCurrentUser']);

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             DefaultUsersSeeder::class,
             StatusesSeeder::class,
             BreedsSeeder::class,
+            AnimalGroupsSeeder::class,
         ]);
 
     }
