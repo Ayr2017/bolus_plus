@@ -11,7 +11,7 @@ class UpdateRestrictionReasonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,32 @@ class UpdateRestrictionReasonRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('restriction_reason')->id; // Получаем ID из маршрута
+
         return [
-            //
+            'restriction_reason' => [
+                'required',
+                'integer',
+                'exists:restriction_reasons,id',
+            ],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                "unique:restriction_reasons,name,{$id},id",
+            ],
+            'description' => [
+                'nullable',
+                'string',
+                'max:500',
+            ],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'restriction_reason' => $this->route('restriction_reason')->id,
+        ]);
     }
 }

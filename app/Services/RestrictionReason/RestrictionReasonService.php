@@ -16,10 +16,10 @@ class RestrictionReasonService extends Service
         parent::__construct();
     }
 
-    public function deleteRestrictionReason(RestrictionReason $restriction):bool
+    public function deleteRestrictionReason(RestrictionReason $restrictionReason):bool
     {
         try {
-            $result  = $restriction->delete();
+            $result  = $restrictionReason->delete();
             if($result){
                 return true;
             }
@@ -29,12 +29,12 @@ class RestrictionReasonService extends Service
         return false;
     }
 
-    public function updateRestrictionReason(array $validated, RestrictionReason $restriction): ?RestrictionReason
+    public function updateRestrictionReason(array $validated, RestrictionReason $restrictionReason): ?RestrictionReason
     {
         try {
-            $result = $restriction->update($validated);
+            $result = $restrictionReason->update($validated);
             if($result){
-                return $restriction;
+                return $restrictionReason;
             }
         } catch (\Exception $e) {
             Log::error(__METHOD__." ".$e->getMessage());
@@ -42,12 +42,16 @@ class RestrictionReasonService extends Service
         return null;
     }
 
+    /**
+     * @param mixed $data
+     * @return RestrictionReason|null
+     */
     public function storeRestrictionReason(mixed $data) :?RestrictionReason
     {
         try {
-            $restriction = RestrictionReason::query()->create($data);
-            if($restriction){
-                return $restriction;
+            $restrictionReason = RestrictionReason::query()->create($data);
+            if($restrictionReason){
+                return $restrictionReason;
             }
         } catch (\Exception $e) {
             Log::error(__METHOD__." ".$e->getMessage());
@@ -60,18 +64,9 @@ class RestrictionReasonService extends Service
      * @param int $id
      * @return RestrictionReason|null
      */
-    public function show(int $id) : ?RestrictionReason
+    public function show(RestrictionReason $restrictionReason) : RestrictionReason
     {
-        try {
-            $restriction = RestrictionReason::query()->findOrFail($id);
-            if($restriction){
-                return $restriction;
-            }
-        }catch (\Exception $e){
-            ErrorLog::write(__METHOD__, __LINE__, $e->getMessage());
-        }
-
-        return null;
+        return $restrictionReason;
     }
 
     /**

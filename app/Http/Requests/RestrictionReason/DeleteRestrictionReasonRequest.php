@@ -11,18 +11,26 @@ class DeleteRestrictionReasonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array[]
      */
     public function rules(): array
     {
         return [
-            //
+            'restriction_reason' => ['required', 'integer' ,'exists:restriction_reasons,id']
         ];
+    }
+
+    /**
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'restriction_reason' => $this->route('restriction_reason')->id,
+        ]);
     }
 }

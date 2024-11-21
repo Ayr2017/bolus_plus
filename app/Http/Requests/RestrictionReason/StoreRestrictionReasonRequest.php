@@ -11,7 +11,7 @@ class StoreRestrictionReasonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreRestrictionReasonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|unique:restriction_reasons,name',
+            'description' => 'nullable|string',
         ];
     }
+
 }

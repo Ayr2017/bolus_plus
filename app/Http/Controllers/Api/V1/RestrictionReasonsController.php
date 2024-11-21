@@ -14,7 +14,6 @@ use App\Http\Responses\ApiResponse;
 use App\Models\RestrictionReason;
 use App\Services\RestrictionReason\RestrictionReasonService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class RestrictionReasonsController extends Controller
 {
@@ -61,7 +60,7 @@ class RestrictionReasonsController extends Controller
      * @param int $restrictionReason
      * @return JsonResponse
      */
-    public function show(ShowRestrictionReasonRequest $request, RestrictionReasonService $service, int $restrictionReason): JsonResponse
+    public function show(ShowRestrictionReasonRequest $request, RestrictionReasonService $service, RestrictionReason $restrictionReason): JsonResponse
     {
         try {
             $restrictionReason = $service->show($restrictionReason);

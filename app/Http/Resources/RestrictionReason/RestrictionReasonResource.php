@@ -4,6 +4,7 @@ namespace App\Http\Resources\RestrictionReason;
 
 use App\Http\Resources\PaginatedJsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class RestrictionReasonResource extends PaginatedJsonResponse
 {
@@ -18,7 +19,7 @@ class RestrictionReasonResource extends PaginatedJsonResponse
             'id' => $this->id,
             'name'=>$this->name,
             'description'=>$this->description,
-            'updated_at'=>$this->updated_at
+            'updated_at'=>Carbon::make($this->updated_at)?->format('Y-m-d H:i:s')
         ];
     }
 }
