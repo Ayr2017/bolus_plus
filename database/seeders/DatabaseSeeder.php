@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             StatusesSeeder::class,
             BreedsSeeder::class,
             AnimalGroupsSeeder::class,
+            RestrictionReasonsSeeder::class,
         ]);
 
     }
