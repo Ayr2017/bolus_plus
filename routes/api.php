@@ -29,3 +29,4 @@ Route::prefix('v1')
     ->group(function () {
         Route::post('/auth', [SanctumController::class,'auth'])->name('auth');
     });
+

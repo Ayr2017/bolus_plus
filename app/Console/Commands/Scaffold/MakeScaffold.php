@@ -2,17 +2,15 @@
 
 namespace App\Console\Commands\Scaffold;
 
+use AllowDynamicProperties;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class MakeScaffold extends Command
+#[AllowDynamicProperties] class MakeScaffold extends Command
 {
-    private Filesystem $files;
-
-    private string $nameSpace;
     protected $name;
     /**
      * The name and signature of the console command.
@@ -28,11 +26,9 @@ class MakeScaffold extends Command
      */
     protected $description = 'Create a new scaffold classes';
 
-    public function __construct(Filesystem $files)
+    public function __construct()
     {
         parent::__construct();
-
-        $this->files = $files;
 
     }
 
