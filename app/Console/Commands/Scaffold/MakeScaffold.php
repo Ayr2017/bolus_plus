@@ -50,6 +50,7 @@ class MakeScaffold extends Command
         $requestResult = $this->makeRequests();
         $resourceResult = $this->makeResource();
         $controllerResult = $this->makeControllerFromStub();
+        $routeResult = $this->makeRouteResource();
     }
 
     /**
@@ -210,6 +211,44 @@ class MakeScaffold extends Command
 
         $this->info("Controller '{$controllerName}' created successfully.");
         return true;
+    }
+
+    private function makeRouteResource(): bool
+    {
+        // Преобразование в camelCase для имени сущности
+        $entityNameSingular = Str::camel($this->name); // Например, "myCow"
+        $entityNamePlural = Str::plural($entityNameSingular); // Например, "myCows"
+
+        // Преобразуем camelCase в kebab-case (с дефисами)
+        $entityNamePluralKebab = Str::kebab($entityNamePlural); // Например, "my-cows"
+
+        // Контроллер теперь во множественном числе, с заглавной первой буквой
+        $controllerName = Str::studly($entityNamePlural) . 'Controller'; // Имя контроллера во множественном числе, например "MyCowsController"
+
+        $routeFile = base_path('routes/api.php'); // Путь к файлу маршрутов
+
+        // Формируем строку маршрута
+        $routeString = "\nRoute::apiResource('{$entityNamePluralKebab}', {$controllerName}::class);";
+
+        // Проверяем, есть ли уже такой маршрут в файле
+        if (file_exists($routeFile)) {
+            $routeContent = file_get_contents($routeFile);
+
+            // Если маршрут уже существует, не добавляем его снова
+            if (strpos($routeContent, $routeString) !== false) {
+                $this->info("Route for '{$entityNamePluralKebab}' already exists.");
+                return false;
+            }
+
+            // Добавляем маршрут в конец файла
+            file_put_contents($routeFile, $routeString, FILE_APPEND);
+
+            $this->info("Route for '{$entityNamePluralKebab}' created successfully.");
+            return true;
+        }
+
+        $this->error("Routes file not found.");
+        return false;
     }
 
 
