@@ -4,6 +4,7 @@ namespace App\Services\Sanctum;
 
 use App\Models\User;
 use \App\Services\Service;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -26,7 +27,7 @@ class SanctumService extends Service
 
         if (!$user || !Hash::check($validated['password'], $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'email' => [__('auth.failed')],
             ]);
         }
 

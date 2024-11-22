@@ -8,12 +8,12 @@ use App\Http\Controllers\Api\V1\RestrictionsController;
 use App\Http\Controllers\Api\V1\SanctumController;
 use App\Http\Controllers\Api\V1\SemenPortionsController;
 use App\Http\Controllers\Api\V1\UsersController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/sanctum/token', [SanctumController::class, 'createToken']);
-
 Route::prefix('v1')
-    ->middleware(['auth:sanctum'])
+    ->middleware(['auth:sanctum', 'locale'])
     ->group(function () {
         Route::apiResource('animals', AnimalsController::class);
         Route::apiResource('animal-groups', AnimalGroupsController::class);
