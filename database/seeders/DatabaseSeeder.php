@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             BreedsSeeder::class,
             AnimalGroupsSeeder::class,
             RestrictionReasonsSeeder::class,
+            InseminationMethodsSeeder::class,
         ]);
 
     }

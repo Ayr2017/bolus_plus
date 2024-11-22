@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources\InseminationMethod;
 
+use App\Http\Resources\PaginatedJsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class InseminationMethodResource extends JsonResource
+class InseminationMethodResource extends PaginatedJsonResponse
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,9 @@ class InseminationMethodResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'slug' => $this->slug,
-            'value'=>$this->value,
+            'name' => $this->name,
+            'description'=>$this->description,
+            'updated_at'=>$this->updated_at,
         ];
     }
 }
