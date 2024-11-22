@@ -46,6 +46,10 @@ class MakeScaffold extends Command
 
         $migrationResult = $this->makeMigration();
         $modelResult = $this->makeModel();
+        $seederResult = $this->makeSeeder();
+        $requestResult = $this->makeRequests();
+        $resourceResult = $this->makeResource();
+        $controllerResult = $this->makeControllerFromStub();
     }
 
     /**
@@ -82,6 +86,131 @@ class MakeScaffold extends Command
 
     private function makeModel(): bool
     {
+        $modelName = Str::studly(Str::singular($this->name)); // Генерируем имя модели (e.g., "Cow" для "cows")
 
+        $this->info("Creating model: {$modelName}");
+
+        // Выполняем Artisan команду make:model
+        $exitCode = Artisan::call('make:model', [
+            'name' => $modelName,
+        ]);
+
+        $output = Artisan::output(); // Получаем вывод Artisan
+
+        if ($exitCode === 0) {
+            $this->info("Model '{$modelName}' created successfully:\n" . $output);
+            return true;
+        } else {
+            $this->error("Failed to create model '{$modelName}'. Output:\n" . $output);
+            return false;
+        }
     }
+
+    private function makeSeeder(): bool
+    {
+        $seederName = Str::studly(Str::singular($this->name)) . 'Seeder'; // Имя сидера, например "CowSeeder"
+
+        $this->info("Creating seeder: {$seederName}");
+
+        // Выполняем Artisan команду make:seeder
+        $exitCode = Artisan::call('make:seeder', [
+            'name' => $seederName,
+        ]);
+
+        $output = Artisan::output(); // Получаем вывод Artisan
+
+        if ($exitCode === 0) {
+            $this->info("Seeder '{$seederName}' created successfully:\n" . $output);
+            return true;
+        } else {
+            $this->error("Failed to create seeder '{$seederName}'. Output:\n" . $output);
+            return false;
+        }
+    }
+
+    private function makeRequests(): bool
+    {
+        $entityName = Str::studly(Str::singular($this->name)); // Имя сущности, например "Cow"
+        $requests = ['Index', 'Show', 'Store', 'Update', 'Delete']; // Список запросов
+
+        $this->info("Creating requests for entity: {$entityName}");
+
+        foreach ($requests as $request) {
+            $requestName = "{$entityName}/{$request}{$entityName}Request";
+
+            $exitCode = Artisan::call('make:request', [
+                'name' => $requestName,
+            ]);
+
+            $output = Artisan::output(); // Получаем вывод Artisan
+
+            if ($exitCode !== 0) {
+                $this->error("Failed to create request '{$requestName}'. Output:\n" . $output);
+                return false;
+            }
+
+            $this->info("Request '{$requestName}' created successfully.");
+        }
+
+    return true;
+    }
+
+    private function makeResource(): bool
+    {
+        $entityName = Str::studly(Str::singular($this->name)); // Имя сущности, например "Cow"
+        $resourceName = "{$entityName}/{$entityName}Resource"; // Имя ресурса, например "CowResource"
+
+        $this->info("Creating resource: {$resourceName}");
+
+        // Выполняем Artisan команду make:resource
+        $exitCode = Artisan::call('make:resource', [
+            'name' => $resourceName,
+        ]);
+
+        $output = Artisan::output(); // Получаем вывод Artisan
+
+        if ($exitCode === 0) {
+            $this->info("Resource '{$resourceName}' created successfully:\n" . $output);
+            return true;
+        } else {
+            $this->error("Failed to create resource '{$resourceName}'. Output:\n" . $output);
+            return false;
+        }
+    }
+
+    private function makeControllerFromStub(): bool
+    {
+        // Преобразуем имя сущности в единственное число для запросов и ресурсов
+        $entityNameSingular = Str::studly($this->name); // Например, "MyCow"
+        $entityNamePlural = Str::plural($entityNameSingular); // Например, "MyCows"
+        $controllerName = "{$entityNamePlural}Controller"; // Имя контроллера во множественном числе, например "MyCowsController"
+        $namespace = "App\\Http\\Controllers\\Api\\V1"; // Пространство имен контроллера
+        $controllerPath = app_path("Http/Controllers/Api/V1/{$controllerName}.php");
+
+        $this->info("Creating controller from stub: {$controllerName}");
+
+        // Проверяем, существует ли контроллер
+        if (file_exists($controllerPath)) {
+            $this->error("Controller '{$controllerName}' already exists.");
+            return false;
+        }
+
+        // Загрузка шаблона из stub файла
+        $stub = file_get_contents(base_path('stubs/api-controller.stub'));
+
+        // Заменяем переменные в шаблоне
+        $controllerContent = str_replace(
+            ['{{EntityName}}','{{EntityNamePlural}}', '{{entityName}}'],
+            [$entityNameSingular, $entityNamePlural, Str::camel($entityNameSingular)], // Используем единственное число для запросов и ресурсов
+            $stub
+        );
+
+        // Создаём контроллер
+        file_put_contents($controllerPath, $controllerContent);
+
+        $this->info("Controller '{$controllerName}' created successfully.");
+        return true;
+    }
+
+
 }
