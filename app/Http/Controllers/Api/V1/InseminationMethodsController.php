@@ -8,6 +8,7 @@ use App\Http\Requests\InseminationMethod\IndexInseminationMethodRequest;
 use App\Http\Resources\Breed\BreedResource;
 use App\Http\Responses\ApiResponse;
 use App\Services\InseminationMethods\InseminationMethodService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class InseminationMethodsController extends Controller
@@ -15,7 +16,7 @@ class InseminationMethodsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexInseminationMethodRequest $request, InseminationMethodService $service)
+    public function index(IndexInseminationMethodRequest $request, InseminationMethodService $service): JsonResponse
     {
         try {
             $im =  $service->getInseminationMethods();
