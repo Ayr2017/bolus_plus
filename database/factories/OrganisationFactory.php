@@ -3,12 +3,13 @@
 namespace Database\Factories;
 
 use AllowDynamicProperties;
+use App\Models\Organisation;
 use App\Models\StructuralUnit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Collection;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Organisation>
+ * @extends Factory<Organisation>
  */
 #[AllowDynamicProperties] class OrganisationFactory extends Factory
 {

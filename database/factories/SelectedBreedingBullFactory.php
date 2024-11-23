@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\SelectedBreedingBull;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Api\V1\SelectedBreedingBull>
+ * @extends Factory<SelectedBreedingBull>
  */
 class SelectedBreedingBullFactory extends Factory
 {
