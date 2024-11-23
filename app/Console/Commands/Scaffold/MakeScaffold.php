@@ -42,6 +42,7 @@ use Illuminate\Support\Str;
 
         $migrationResult = $this->makeMigration();
         $modelResult = $this->makeModel();
+        $modelResult = $this->makeFactory();
         $seederResult = $this->makeSeeder();
         $requestResult = $this->makeRequests();
         $resourceResult = $this->makeResource();
@@ -245,6 +246,39 @@ use Illuminate\Support\Str;
 
         $this->error("Routes file not found.");
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function makeFactory(): bool
+    {
+        $factoryName = $this->name . 'Factory';
+        $factoryPath = base_path('database/factories/'.$factoryName.'/' . $factoryName . '.php');
+
+        // Проверяем, существует ли уже фабрика
+        if (file_exists($factoryPath)) {
+            $this->warn("Factory $factoryName already exists.");
+            return false;
+        }
+
+        // Создаем фабрику через команду Artisan
+        $this->callSilent('make:factory', [
+            'name' => $factoryName,
+            '--model' => $this->getQualifiedModelName(),
+        ]);
+
+        $this->info("Factory $factoryName created successfully.");
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getQualifiedModelName(): string
+    {
+        $namespace = $this->nameSpace ?? 'App\\Models';
+        return $namespace . '\\' . $this->name;
     }
 
 
