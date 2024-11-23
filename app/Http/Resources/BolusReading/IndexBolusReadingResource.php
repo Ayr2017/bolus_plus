@@ -18,6 +18,8 @@ class IndexBolusReadingResource extends ResourceCollection
             'error' => null, // или замените на соответствующее значение ошибки
             'message' => 'Success', // или любое сообщение
             'data' => $this->collection, // данные из модели
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 }

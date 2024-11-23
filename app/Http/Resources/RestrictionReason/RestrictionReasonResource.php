@@ -17,9 +17,10 @@ class RestrictionReasonResource extends PaginatedJsonResponse
     {
         return [
             'id' => $this->id,
-            'name'=>$this->name,
-            'description'=>$this->description,
-            'updated_at'=>Carbon::make($this->updated_at)?->format('Y-m-d H:i:s')
+            'name' => $this->name,
+            'description' => $this->description,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 }

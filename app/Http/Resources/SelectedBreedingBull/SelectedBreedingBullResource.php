@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources\SelectedBreedingBull;
 
+use App\Http\Resources\PaginatedJsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SelectedBreedingBullResource extends JsonResource
+class SelectedBreedingBullResource extends PaginatedJsonResponse
 {
     /**
      * Transform the resource into an array.
@@ -14,6 +15,8 @@ class SelectedBreedingBullResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            ''
+        ];
     }
 }

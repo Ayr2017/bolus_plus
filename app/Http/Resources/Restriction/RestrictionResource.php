@@ -11,9 +11,11 @@ class RestrictionResource extends PaginatedJsonResponse
     {
         return [
             'id' => $this->id,
-            'name'=>$this->name,
-            'title'=>$this->title,
+            'name' => $this->name,
+            'title' => $this->title,
             'icon' => $this->icon,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 }
