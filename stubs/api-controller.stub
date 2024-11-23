@@ -25,7 +25,7 @@ class {{EntityNamePlural}}Controller extends Controller
     public function index(Index{{EntityName}}Request $request, {{EntityName}}Service ${{entityName}}Service): JsonResponse
     {
         try {
-            ${{entityName}}s = ${{entityName}}Service->getItems($request->validated());
+            ${{entityName}}s = ${{entityName}}Service->index($request->validated());
             return ApiResponse::success({{EntityName}}Resource::collection(${{entityName}}s));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
@@ -100,7 +100,7 @@ class {{EntityNamePlural}}Controller extends Controller
     {
         try {
             ${{entityName}} = ${{entityName}}Service->delete(${{entityName}});
-            return ApiResponse::success();
+            return ApiResponse::success(${{entityName}});
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

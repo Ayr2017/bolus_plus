@@ -46,6 +46,7 @@ use Illuminate\Support\Str;
         $seederResult = $this->makeSeeder();
         $requestResult = $this->makeRequests();
         $resourceResult = $this->makeResource();
+        $resourceResult = $this->makeService();
         $controllerResult = $this->makeControllerFromStub();
         $routeResult = $this->makeRouteResource();
     }
@@ -279,6 +280,12 @@ use Illuminate\Support\Str;
     {
         $namespace = $this->nameSpace ?? 'App\\Models';
         return $namespace . '\\' . $this->name;
+    }
+
+    private function makeService(): bool
+    {
+        Artisan::call('make:service', [$this->name."/".$this->name]);
+        return true;
     }
 
 
