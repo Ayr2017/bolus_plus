@@ -1,14 +1,14 @@
 <?php
 
-namespace $NAMESPACE$;
+namespace App\Services\SelectedBreedingBull;
 
-use App\Models\$MODEL_NAME$;
+use App\Models\SelectedBreedingBull;
 use \App\Services\Service;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
-class $CLASS_NAME$ extends Service
+class SelectedBreedingBullService extends Service
 {
     public function __construct()
     {
@@ -24,15 +24,17 @@ class $CLASS_NAME$ extends Service
         $perPage = Arr::get($data, 'per_page', 50);
         $page = Arr::get($data, 'page', 1);
 
-        return $MODEL_NAME$::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
+        return SelectedBreedingBull::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
     }
 
-    public function update(array $validated, $MODEL_NAME$ $$modelVariable$): ?$MODEL_NAME$
+
+    public function update(array $validated, SelectedBreedingBull $selectedBreedingBull): ?SelectedBreedingBull
     {
         try {
-            $result = $$modelVariable$->update($validated);
+            $selectedSelectedBreedingBullingBull = SelectedBreedingBull::query()->findOrFail($selectedBreedingBull);
+            $result = $selectedSelectedBreedingBullingBull->update($validated);
             if ($result) {
-                return $$modelVariable$;
+                return $selectedSelectedBreedingBullingBull;
             }
         } catch (\Exception $e) {
             Log::error(__METHOD__ . " " . $e->getMessage());
@@ -43,30 +45,32 @@ class $CLASS_NAME$ extends Service
     public function store(mixed $data)
     {
         try {
-            $$modelVariable$ = $MODEL_NAME$::query()->create($data);
-            if ($$modelVariable$) {
-                return $$modelVariable$;
+            $selectedSelectedBreedingBullingBull = SelectedBreedingBull::query()->create($data);
+            if ($selectedSelectedBreedingBullingBull) {
+                return $selectedSelectedBreedingBullingBull;
             }
         } catch (\Exception $e) {
             Log::error(__METHOD__ . " " . $e->getMessage());
         }
         return null;
+
     }
 
-    public function show($MODEL_NAME$ $$modelVariable$): ?$MODEL_NAME$
+    public function show(SelectedBreedingBull $selectedBreedingBull): ?SelectedBreedingBull
     {
         try {
-            return $$modelVariable$;
+            return $selectedBreedingBull;
         } catch (\Exception $e) {
             Log::error(__METHOD__ . " " . $e->getMessage());
         }
+
         return null;
     }
 
-    public function delete($MODEL_NAME$ $$modelVariable$): bool
+    public function delete(SelectedBreedingBull $selectedSelectedBreedingBullingBull): bool
     {
         try {
-            $result = $$modelVariable$->delete();
+            $result = $selectedSelectedBreedingBullingBull->delete();
             if ($result) {
                 return true;
             }
@@ -75,4 +79,5 @@ class $CLASS_NAME$ extends Service
         }
         return false;
     }
+
 }

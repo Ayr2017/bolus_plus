@@ -46,6 +46,7 @@ use Illuminate\Support\Str;
         $seederResult = $this->makeSeeder();
         $requestResult = $this->makeRequests();
         $resourceResult = $this->makeResource();
+        $resourceResult = $this->makeService();
         $controllerResult = $this->makeControllerFromStub();
         $routeResult = $this->makeRouteResource();
     }
@@ -181,6 +182,10 @@ use Illuminate\Support\Str;
         // Преобразуем имя сущности в единственное число для запросов и ресурсов
         $entityNameSingular = Str::studly($this->name); // Например, "MyCow"
         $entityNamePlural = Str::plural($entityNameSingular); // Например, "MyCows"
+        $entityNamePlural = Str::plural($entityNameSingular); // Например, "MyCows"
+        $entityNameSnake = Str::snake($entityNameSingular); // Например, "my_cow"
+        $entityNameCamel = Str::camel($entityNameSingular); // Например, "my_cow"
+
         $controllerName = "{$entityNamePlural}Controller"; // Имя контроллера во множественном числе, например "MyCowsController"
         $namespace = "App\\Http\\Controllers\\Api\\V1"; // Пространство имен контроллера
         $controllerPath = app_path("Http/Controllers/Api/V1/{$controllerName}.php");
@@ -190,16 +195,15 @@ use Illuminate\Support\Str;
         // Проверяем, существует ли контроллер
         if (file_exists($controllerPath)) {
             $this->error("Controller '{$controllerName}' already exists.");
-            return false;
-        }
+            return false;        }
 
         // Загрузка шаблона из stub файла
         $stub = file_get_contents(base_path('stubs/api-controller.stub'));
 
         // Заменяем переменные в шаблоне
         $controllerContent = str_replace(
-            ['{{EntityName}}','{{EntityNamePlural}}', '{{entityName}}'],
-            [$entityNameSingular, $entityNamePlural, Str::camel($entityNameSingular)], // Используем единственное число для запросов и ресурсов
+            ['{{EntityName}}','{{EntityNamePlural}}', '{{entityName}}','{{entityNameSnake}}'],
+            [$entityNameSingular, $entityNamePlural, $entityNameCamel, $entityNameSnake], // Используем единственное число для запросов и ресурсов
             $stub
         );
 
@@ -279,6 +283,15 @@ use Illuminate\Support\Str;
     {
         $namespace = $this->nameSpace ?? 'App\\Models';
         return $namespace . '\\' . $this->name;
+    }
+
+    /**
+     * @return bool
+     */
+    private function makeService(): bool
+    {
+        Artisan::call('make:service', ['service_name' => $this->name."/".$this->name]);
+        return true;
     }
 
 
