@@ -16,7 +16,7 @@ class {{ class }} extends TestCase
      */
     public function test_database_has_expected_columns()
     {
-        \$this->assertTrue(
+        $this->assertTrue(
             Schema::hasColumns('{{ table }}', [
                 'id',
                 'name',
@@ -32,11 +32,11 @@ class {{ class }} extends TestCase
      */
     public function test_model_fillable_properties()
     {
-        ${{modelCamel}} = new {{ model }}();
+        ${{ modelCamel }} = new {{ model }}();
 
         $this->assertEquals(
             ['name', 'description'],
-            \$model->getFillable()
+            ${{ modelCamel }}->getFillable()
         );
     }
 
@@ -50,7 +50,7 @@ class {{ class }} extends TestCase
             'description' => 'Test Description',
         ]);
 
-        \$this->expectException(\Illuminate\Database\QueryException::class);
+        $this->expectException(\Illuminate\Database\QueryException::class);
 
         {{ model }}::create([
             'name' => 'Test Name', // Duplicate
