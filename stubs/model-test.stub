@@ -32,9 +32,9 @@ class {{ class }} extends TestCase
      */
     public function test_model_fillable_properties()
     {
-        \$model = new {{ model }}();
+        ${{modelCamel}} = new {{ model }}();
 
-        \$this->assertEquals(
+        $this->assertEquals(
             ['name', 'description'],
             \$model->getFillable()
         );

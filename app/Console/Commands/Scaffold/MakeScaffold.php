@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 #[AllowDynamicProperties] class MakeScaffold extends Command
 {
     protected $name;
+    private string $entityNameCamel;
     /**
      * The name and signature of the console command.
      *
@@ -39,6 +40,12 @@ use Illuminate\Support\Str;
     {
         $this->nameSpace = $this->option('namespace');
         $this->name = $this->argument('name');
+
+        // Генерация различных форм имени
+        $this->entityNameSingular = Str::studly($this->name); // Например, "MyCow"
+        $this->entityNamePlural = Str::plural($this->entityNameSingular); // Например, "MyCows"
+        $this->entityNameSnake = Str::snake($this->entityNameSingular); // Например, "my_cow"
+        $this->entityNameCamel = Str::camel($this->entityNameSingular); // Например, "myCow"
 
         $migrationResult = $this->makeMigration();
         $modelResult = $this->makeModel();
@@ -185,7 +192,7 @@ use Illuminate\Support\Str;
         $entityNamePlural = Str::plural($entityNameSingular); // Например, "MyCows"
         $entityNamePlural = Str::plural($entityNameSingular); // Например, "MyCows"
         $entityNameSnake = Str::snake($entityNameSingular); // Например, "my_cow"
-        $entityNameCamel = Str::camel($entityNameSingular); // Например, "my_cow"
+        $entityNameCamel = Str::camel($entityNameSingular); // Например, "myCow"
 
         $controllerName = "{$entityNamePlural}Controller"; // Имя контроллера во множественном числе, например "MyCowsController"
         $namespace = "App\\Http\\Controllers\\Api\\V1"; // Пространство имен контроллера
@@ -318,8 +325,8 @@ use Illuminate\Support\Str;
 
         $stub = file_get_contents($stubPath);
         $content = str_replace(
-            ['{{ namespace }}', '{{ model }}', '{{ class }}', '{{ table }}'],
-            [$namespace, $name, $className, $tableName],
+            ['{{ namespace }}', '{{ model }}','{{ modelCamel }}', '{{ class }}', '{{ table }}'],
+            [$namespace, $name, $this->entityNameCamel, $className, $tableName],
             $stub
         );
 
