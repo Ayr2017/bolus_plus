@@ -346,11 +346,48 @@ use Illuminate\Support\Str;
 
     protected function makeControllerTest(): void
     {
-        $testPath = base_path("tests/Unit/Models/{$this->entityNameSingular}/{$this->entityNamePlural}ControllerTest.php");
-        $stubPath = base_path("stubs/model-test.stub");
-        $stub = file_get_contents($stubPath);
+//        $filePath = base_path('tests/Unit/Controllers/Api/V1/' . $this->entityNamePlural . 'ControllerTest.php');
+//        $stubPath = base_path("stubs/model-test.stub");
+//        $stub = file_get_contents($stubPath);
+//
+//        $stub = str_replace([
+//            '{{entityNameSingular}}',
+//            '{{entityNameSnake}}',
+//            '{{entityNameCamel}}',
+//            '{{entityNamePlural}}',
+//        ], [
+//            $this->entityNameSingular,
+//            $this->entityNameSnake,
+//            $this->entityNameCamel,
+//            $this->entityNamePlural,
+//        ], $stub);
+//
+//
+//        file_put_contents($filePath, $stub);
+//
+//        $this->info("Controller test generated successfully at: {$filePath}");
 
-        $stub = str_replace([
+
+        $name = $this->name;
+
+        $namespace = "Tests\\Unit\\Controllers\\V1\\{$name}";
+        $className = "{$this->entityNamePlural}ControllerTest";
+
+        $testPath = base_path("tests/Unit/Controllers/Api/V1/{$name}/{$className}.php");
+        $stubPath = base_path("stubs/controller-test.stub");
+
+        if (!file_exists($stubPath)) {
+            $this->error("Stub file not found: {$stubPath}");
+            return;
+        }
+
+        if (file_exists($testPath)) {
+            $this->error("Test class already exists: {$testPath}");
+            return;
+        }
+
+        $stub = file_get_contents($stubPath);
+        $content = str_replace([
             '{{entityNameSingular}}',
             '{{entityNameSnake}}',
             '{{entityNameCamel}}',
@@ -362,11 +399,13 @@ use Illuminate\Support\Str;
             $this->entityNamePlural,
         ], $stub);
 
-        $filePath = base_path('tests/Unit/Controllers/Api/V1/' . $this->entityNameSingular . 'ControllerTest.php');
+        if (!is_dir(dirname($testPath))) {
+            mkdir(dirname($testPath), 0755, true);
+        }
 
-        file_put_contents($filePath, $stub);
+        file_put_contents($testPath, $content);
 
-        $this->info("Controller test generated successfully at: {$filePath}");
+        $this->info("Controller test class created successfully at: {$testPath}");
     }
 
 }
