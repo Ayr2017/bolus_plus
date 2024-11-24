@@ -1,0 +1,119 @@
+<?php
+
+namespace Tests\Unit\Controllers\Api\V1;
+
+use App\Models\{{entityNameSingular}};
+use App\Services\{{entityNameSingular}}\{{entityNameSingular}}Service;
+use App\Http\Resources\{{entityNameSingular}}\{{entityNameSingular}}Resource;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use Illuminate\Support\Facades\Http;
+
+class {{entityNameSingular}}ControllerTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * @test
+     */
+    public function it_can_create_a_new_{{entityNameSnake}}()
+    {
+        $data = [
+            'name' => 'Test {{entityNameSingular}}',
+            'description' => 'Test Description',
+        ];
+
+        $response = $this->postJson(route('{{entityNameSnake}}.store'), $data);
+
+        $response->assertStatus(201)
+                 ->assertJsonStructure([
+                     'data' => [
+                         'id',
+                         'name',
+                         'description',
+                         'created_at',
+                         'updated_at',
+                     ]
+                 ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_fetch_all_{{entityNameSnake}}s()
+    {
+        $response = $this->getJson(route('{{entityNameSnake}}.index'));
+
+        $response->assertStatus(200)
+                 ->assertJsonStructure([
+                     'data' => [
+                         '*' => [
+                             'id',
+                             'name',
+                             'description',
+                             'created_at',
+                             'updated_at',
+                         ]
+                     ]
+                 ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_show_a_single_{{entityNameSnake}}()
+    {
+        ${{entityNameCamel}} = {{entityNameSingular}}::factory()->create();
+
+        $response = $this->getJson(route('{{entityNameSnake}}.show', ${{entityNameCamel}}));
+
+        $response->assertStatus(200)
+                 ->assertJsonStructure([
+                     'data' => [
+                         'id',
+                         'name',
+                         'description',
+                         'created_at',
+                         'updated_at',
+                     ]
+                 ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_update_a_{{entityNameSnake}}()
+    {
+        ${{entityNameCamel}} = {{entityNameSingular}}::factory()->create();
+
+        $data = [
+            'name' => 'Updated {{entityNameSingular}}',
+            'description' => 'Updated Description',
+        ];
+
+        $response = $this->putJson(route('{{entityNameSnake}}.update', ${{entityNameCamel}}), $data);
+
+        $response->assertStatus(200)
+                 ->assertJsonStructure([
+                     'data' => [
+                         'id',
+                         'name',
+                         'description',
+                         'created_at',
+                         'updated_at',
+                     ]
+                 ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_delete_a_{{entityNameSnake}}()
+    {
+        ${{entityNameCamel}} = {{entityNameSingular}}::factory()->create();
+
+        $response = $this->deleteJson(route('{{entityNameSnake}}.destroy', ${{entityNameCamel}}));
+
+        $response->assertStatus(204);
+    }
+}

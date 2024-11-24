@@ -13,6 +13,10 @@ use Illuminate\Support\Str;
 {
     protected $name;
     private string $entityNameCamel;
+    private string $entityNameSnake;
+    private string $entityNamePlural;
+    private string $entityNameSingular;
+
     /**
      * The name and signature of the console command.
      *
@@ -57,6 +61,7 @@ use Illuminate\Support\Str;
         $controllerResult = $this->makeControllerFromStub();
         $routeResult = $this->makeRouteResource();
         $this->makeModelTest();
+        $this->makeControllerTest();
     }
 
     /**
@@ -339,5 +344,27 @@ use Illuminate\Support\Str;
         $this->info("Test class created successfully at: {$testPath}");
     }
 
+    protected function makeControllerTest(): void
+    {
+        $stub = file_get_contents(__DIR__ . '/../stubs/controller-test.stub');
+
+        $stub = str_replace([
+            '{{entityNameSingular}}',
+            '{{entityNameSnake}}',
+            '{{entityNameCamel}}',
+            '{{entityNamePlural}}',
+        ], [
+            $this->entityNameSingular,
+            $this->entityNameSnake,
+            $this->entityNameCamel,
+            $this->entityNamePlural,
+        ], $stub);
+
+        $filePath = base_path('tests/Unit/Controllers/Api/V1/' . $this->entityNameSingular . 'ControllerTest.php');
+
+        file_put_contents($filePath, $stub);
+
+        $this->info("Controller test generated successfully at: {$filePath}");
+    }
 
 }
