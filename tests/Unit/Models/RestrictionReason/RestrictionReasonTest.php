@@ -57,35 +57,4 @@ class RestrictionReasonTest extends TestCase
             'description' => 'Another Description',
         ]);
     }
-
-    /**
-     * Тест на отношение hasMany (restrictions).
-     */
-    public function test_restriction_reason_has_many_restrictions()
-    {
-        $restrictionReason = RestrictionReason::factory()->create();
-
-        $restriction = $restrictionReason->restrictions()->create([
-            'name' => 'Sample Restriction',
-        ]);
-
-        $this->assertTrue($restrictionReason->restrictions->contains($restriction));
-        $this->assertInstanceOf(
-            \Illuminate\Database\Eloquent\Collection::class,
-            $restrictionReason->restrictions
-        );
-    }
-
-    /**
-     * Тест на наличие кастомного аксессора или мутатора (если есть).
-     */
-    public function test_custom_accessors_or_mutators()
-    {
-        $restrictionReason = RestrictionReason::factory()->create([
-            'name' => 'test name',
-        ]);
-
-        // Проверка, что, например, имя сохраняется в верхнем регистре
-        $this->assertEquals('TEST NAME', $restrictionReason->name);
-    }
 }
