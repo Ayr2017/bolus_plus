@@ -346,7 +346,9 @@ use Illuminate\Support\Str;
 
     protected function makeControllerTest(): void
     {
-        $stub = file_get_contents(__DIR__ . '/../stubs/controller-test.stub');
+        $testPath = base_path("tests/Unit/Models/{$this->entityNameSingular}/{$this->entityNamePlural}ControllerTest.php");
+        $stubPath = base_path("stubs/model-test.stub");
+        $stub = file_get_contents($stubPath);
 
         $stub = str_replace([
             '{{entityNameSingular}}',
