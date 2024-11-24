@@ -1,0 +1,60 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Models\{{ model }};
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Schema;
+use Tests\TestCase;
+
+class {{ class }} extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * Test that the database has the expected columns.
+     */
+    public function test_database_has_expected_columns()
+    {
+        \$this->assertTrue(
+            Schema::hasColumns('{{ table }}', [
+                'id',
+                'name',
+                'description',
+                'created_at',
+                'updated_at',
+            ])
+        );
+    }
+
+    /**
+     * Test the model's fillable properties.
+     */
+    public function test_model_fillable_properties()
+    {
+        \$model = new {{ model }}();
+
+        \$this->assertEquals(
+            ['name', 'description'],
+            \$model->getFillable()
+        );
+    }
+
+    /**
+     * Test that the `name` column must be unique.
+     */
+    public function test_name_must_be_unique()
+    {
+        {{ model }}::create([
+            'name' => 'Test Name',
+            'description' => 'Test Description',
+        ]);
+
+        \$this->expectException(\Illuminate\Database\QueryException::class);
+
+        {{ model }}::create([
+            'name' => 'Test Name', // Duplicate
+            'description' => 'Another Description',
+        ]);
+    }
+}

@@ -195,7 +195,8 @@ use Illuminate\Support\Str;
         // Проверяем, существует ли контроллер
         if (file_exists($controllerPath)) {
             $this->error("Controller '{$controllerName}' already exists.");
-            return false;        }
+            return false;
+        }
 
         // Загрузка шаблона из stub файла
         $stub = file_get_contents(base_path('stubs/api-controller.stub'));
@@ -292,6 +293,42 @@ use Illuminate\Support\Str;
     {
         Artisan::call('make:service', ['service_name' => $this->name."/".$this->name]);
         return true;
+    }
+
+    public function makeModelTest(): void
+    {
+        $name = $this->name;
+
+        $namespace = "Tests\\Unit\\Models\\{$name}";
+        $className = "{$name}Test";
+        $tableName = Str::snake(Str::pluralStudly($name));
+        $testPath = base_path("tests/Unit/Models/{$name}/{$className}.php");
+        $stubPath = base_path("stubs/model-test.stub");
+
+        if (!file_exists($stubPath)) {
+            $this->error("Stub file not found: {$stubPath}");
+            return;
+        }
+
+        if (file_exists($testPath)) {
+            $this->error("Test class already exists: {$testPath}");
+            return;
+        }
+
+        $stub = file_get_contents($stubPath);
+        $content = str_replace(
+            ['{{ namespace }}', '{{ model }}', '{{ class }}', '{{ table }}'],
+            [$namespace, $name, $className, $tableName],
+            $stub
+        );
+
+        if (!is_dir(dirname($testPath))) {
+            mkdir(dirname($testPath), 0755, true);
+        }
+
+        file_put_contents($testPath, $content);
+
+        $this->info("Test class created successfully at: {$testPath}");
     }
 
 
