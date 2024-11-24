@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('restrictions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('title');
+            $table->string('name')->unique();
+            $table->string('description')->nullable();
+            $table->string('title')->nullable();
             $table->string('icon')->nullable();
             $table->timestamps();
         });

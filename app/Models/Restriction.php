@@ -9,8 +9,8 @@ class Restriction extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
         'name',
+        'description',
         'title',
         'icon'
     ];

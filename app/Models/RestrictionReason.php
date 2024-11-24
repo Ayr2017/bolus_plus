@@ -13,4 +13,6 @@ class RestrictionReason extends Model
         'name',
         'description'
     ];
+
+
 }
