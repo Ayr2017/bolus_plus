@@ -49,6 +49,7 @@ use Illuminate\Support\Str;
         $resourceResult = $this->makeService();
         $controllerResult = $this->makeControllerFromStub();
         $routeResult = $this->makeRouteResource();
+        $this->makeModelTest();
     }
 
     /**
