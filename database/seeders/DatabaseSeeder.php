@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             RestrictionReasonsSeeder::class,
             SemenPortionSeeder::class,
             ZootechnicalExitReasonSeeder::class,
+            CoatColorSeeder::class,
         ]);
 
     }

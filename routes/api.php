@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AnimalGroupsController;
 use App\Http\Controllers\Api\V1\AnimalsController;
 use App\Http\Controllers\Api\V1\BreedsController;
+use App\Http\Controllers\Api\V1\CoatColorsController;
 use App\Http\Controllers\Api\V1\RestrictionReasonsController;
 use App\Http\Controllers\Api\V1\RestrictionsController;
 use App\Http\Controllers\Api\V1\SanctumController;
@@ -19,6 +20,7 @@ Route::prefix('v1')
         Route::apiResource('animals', AnimalsController::class);
         Route::apiResource('animal-groups', AnimalGroupsController::class);
         Route::apiResource('breeds', BreedsController::class);
+        Route::apiResource('coat-colors', CoatColorsController::class);
         Route::apiResource('restrictions', RestrictionsController::class);
         Route::apiResource('restriction-reasons', RestrictionReasonsController::class);
         Route::apiResource('selected-breeding-bulls', SelectedBreedingBullsController::class);
@@ -33,4 +35,5 @@ Route::prefix('v1')
     ->group(function () {
         Route::post('/auth', [SanctumController::class,'auth'])->name('auth');
     });
+
 
