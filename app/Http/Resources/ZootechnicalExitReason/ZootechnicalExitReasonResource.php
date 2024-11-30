@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Resources\SelectedBreedingBull;
+namespace App\Http\Resources\ZootechnicalExitReason;
 
 use App\Http\Resources\PaginatedJsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class SelectedBreedingBullResource extends PaginatedJsonResponse
+class ZootechnicalExitReasonResource extends PaginatedJsonResponse
 {
     /**
      * Transform the resource into an array.

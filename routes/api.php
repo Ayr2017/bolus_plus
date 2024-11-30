@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\SanctumController;
 use App\Http\Controllers\Api\V1\SelectedBreedingBullsController;
 use App\Http\Controllers\Api\V1\SemenPortionsController;
 use App\Http\Controllers\Api\V1\UsersController;
+use App\Http\Controllers\Api\V1\ZootechnicalExitReasonsController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/sanctum/token', [SanctumController::class, 'createToken']);
@@ -24,6 +25,7 @@ Route::prefix('v1')
         Route::apiResource('semen-portions', SemenPortionsController::class);
         Route::get('users/get-current-user', [UsersController::class, 'getCurrentUser']);
         Route::apiResource('users', UsersController::class);
+        Route::apiResource('zootechnical-exit-reasons', ZootechnicalExitReasonsController::class);
     });
 
 Route::prefix('v1')
@@ -31,3 +33,4 @@ Route::prefix('v1')
     ->group(function () {
         Route::post('/auth', [SanctumController::class,'auth'])->name('auth');
     });
+
