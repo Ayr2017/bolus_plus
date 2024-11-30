@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 
 #[AllowDynamicProperties] class Event extends Model
 {
+    use HasFactory;
     public mixed $eventData;
     private string $type;
     private string $event_category;
@@ -26,7 +27,6 @@ use Illuminate\Support\Str;
         parent::__construct($attributes);
     }
 
-    use HasFactory;
     protected $fillable = [
         'type',
         'data',
