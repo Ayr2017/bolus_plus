@@ -23,12 +23,7 @@ class CurrentRestrictionDataObject extends EventDataObject
      */
     public function fields(): Collection
     {
-        $fields = [
-//            'label' => 'Текущие ограничения',
-            'rules' => $this->validationRules, // Используем сохраненные правила
-        ];
-
-        return collect($fields)->keys();
+        return collect($this->validationRules)->keys();
     }
 
     /**
@@ -37,5 +32,10 @@ class CurrentRestrictionDataObject extends EventDataObject
     public function rules(): array
     {
         return $this->validationRules; // Просто возвращаем сохраненные правила
+    }
+
+    public function dataArray(): array
+    {
+        return $this->data;
     }
 }

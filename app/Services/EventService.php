@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Event;
 use App\Models\SemenPortion;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -16,13 +17,24 @@ class EventService extends Service
         parent::__construct();
     }
 
-    public function index(mixed $data)
+    /*
+     *
+     */
+    public function index(mixed $data): ?LengthAwarePaginator
     {
-        $perPage = Arr::get($data, 'per_page', 50);
-        $page = Arr::get($data, 'page', 1);
+        try {
+            $perPage = Arr::get($data, 'per_page', 50);
+            $page = Arr::get($data, 'page', 1);
 
-        return  Event::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
+            return  Event::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
+        }catch (\Throwable $throwable){
+            Log::error($throwable->getMessage());
+        }
+
+        return null;
+
     }
+
 
     public function storeEvent(array $data): ?Event
     {

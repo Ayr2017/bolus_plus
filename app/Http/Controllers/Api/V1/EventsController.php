@@ -8,6 +8,7 @@ use App\Http\Requests\Event\IndexEventRequest;
 use App\Http\Resources\Event\EventResource;
 use App\Http\Resources\Restriction\RestrictionResource;
 use App\Http\Responses\ApiResponse;
+use App\Models\Event;
 use App\Services\EventService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,9 +43,18 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
-        //
+        try {
+            $event = Event::findOrFail($id);
+            if($event){
+                return ApiResponse::success(EventResource::make($event));
+            }
+        }catch(\Throwable $throwable){
+            ErrorLog::write(__METHOD__,__LINE__,$throwable->getMessage());
+        }
+
+        return ApiResponse::error('Event not found!');
     }
 
     /**

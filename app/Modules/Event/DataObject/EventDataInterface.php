@@ -45,4 +45,5 @@ interface EventDataInterface
      * @return mixed
      */
     public function fields(): Collection;
+    public function dataArray(): array;
 }

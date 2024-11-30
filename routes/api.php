@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/sanctum/token', [SanctumController::class, 'createToken']);
 Route::prefix('v1')
-    ->middleware(['auth:sanctum', 'locale'])
+    ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::apiResource('animals', AnimalsController::class);
         Route::apiResource('animal-groups', AnimalGroupsController::class);
