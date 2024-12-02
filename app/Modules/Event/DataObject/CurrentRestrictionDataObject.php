@@ -2,7 +2,10 @@
 
 namespace App\Modules\Event\DataObject;
 
+use App\Models\Restriction;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CurrentRestrictionDataObject extends EventDataObject
 {
@@ -14,7 +17,7 @@ class CurrentRestrictionDataObject extends EventDataObject
         'start_date' => 'required|date',
         'end_date' => 'nullable|date|after:start_date',
         'reason' => 'required|string|in:Age,Launch,Diagnosis',
-        'restriction' => 'required|string',
+        'restriction_id' => 'required|integer|exists:restrictions,id',
         'note' => 'nullable|string|max:255',
     ];
 
@@ -38,4 +41,5 @@ class CurrentRestrictionDataObject extends EventDataObject
     {
         return $this->data;
     }
+
 }

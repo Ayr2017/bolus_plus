@@ -18,7 +18,7 @@ class EventResource extends PaginatedJsonResponse
     public function toArray(Request $request): array
     {
         // Общие поля
-        $general =  [
+        $general = [
             'id' => $this->id,
             'type' => $this->type,
             'event_category' => $this->event_category,

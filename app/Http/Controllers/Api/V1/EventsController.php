@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use AllowDynamicProperties;
 use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\IndexEventRequest;
@@ -13,7 +14,7 @@ use App\Services\EventService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class EventsController extends Controller
+#[AllowDynamicProperties] class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,18 +44,20 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): JsonResponse
+    public function show(string $id, EventService $eventService): JsonResponse
     {
         try {
-            $event = Event::findOrFail($id);
+            $event = $eventService->show($id);
+            dd($event);
             if($event){
                 return ApiResponse::success(EventResource::make($event));
             }
         }catch(\Throwable $throwable){
+            $this->error = $throwable->getMessage();
             ErrorLog::write(__METHOD__,__LINE__,$throwable->getMessage());
         }
 
-        return ApiResponse::error('Event not found!');
+        return ApiResponse::error($this->error);
     }
 
     /**

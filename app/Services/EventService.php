@@ -7,6 +7,7 @@ use App\Models\SemenPortion;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -34,6 +35,11 @@ class EventService extends Service
         return null;
 
     }
+    public function show(string $id)
+    {
+        return Event::query()
+            ->findOrFail($id);
+    }
 
 
     public function storeEvent(array $data): ?Event
@@ -55,6 +61,8 @@ class EventService extends Service
         return  App::make('\App\Entity\EventData\\'.Str::replace('_','',Str::title($eventType->slug)));
 
     }
+
+
 
 
 }
