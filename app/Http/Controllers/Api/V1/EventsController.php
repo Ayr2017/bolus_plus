@@ -48,7 +48,6 @@ use Illuminate\Http\Request;
     {
         try {
             $event = $eventService->show($id);
-            dd($event);
             if($event){
                 return ApiResponse::success(EventResource::make($event));
             }

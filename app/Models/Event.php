@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use AllowDynamicProperties;
-use App\Modules\Event\DataObject\EventDataObject;
-use App\Modules\Event\DataObject\EventDataObjectFactory;
 use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,15 +41,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         self::creating(function ($model) {
             $model->creator_id = auth()->id();
         });
-    }
-
-    /**
-     * @return EventDataObject
-     * @throws Exception
-     */
-    public function getDataObject(): EventDataObject
-    {
-        return EventDataObjectFactory::create($this->type, $this->data ?? []);
     }
 
     public function creator(): BelongsTo

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Event;
+use App\Models\Event\CurrentRestrictionEvent;
 use App\Models\SemenPortion;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
@@ -37,7 +38,8 @@ class EventService extends Service
     }
     public function show(string $id)
     {
-        return Event::query()
+        return CurrentRestrictionEvent::query()
+            ->with('restriction')
             ->findOrFail($id);
     }
 
