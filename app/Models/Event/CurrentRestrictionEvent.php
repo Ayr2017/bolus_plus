@@ -39,6 +39,8 @@ class CurrentRestrictionEvent extends Event
         'data.note' => 'nullable|string|max:255',
     ];
 
+
+
     public function fields(): array
     {
         return array_keys($this->validationRules);

@@ -7,6 +7,7 @@ use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\IndexEventRequest;
 use App\Http\Requests\Event\StoreEventRequest;
+use App\Http\Requests\Event\UpdateEventRequest;
 use App\Http\Resources\Event\IndexEventResource;
 use App\Http\Resources\Event\ShowEventResource;
 use App\Http\Resources\Restriction\RestrictionResource;
@@ -70,9 +71,14 @@ use Illuminate\Http\Request;
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateEventRequest $request, string $id, EventService $eventService): JsonResponse
     {
-        //
+        $event = $eventService->update($id, $request->validated());
+        if($event){
+            return ApiResponse::success(ShowEventResource::make($event));
+        }
+
+        return ApiResponse::error('Something went wrong!');
     }
 
     /**

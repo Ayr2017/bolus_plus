@@ -45,15 +45,19 @@ class EventService extends Service
     }
 
 
-    public function store(array $data)
+    public function update(int $id, array $data)
     {
         try {
             $eventModel = EventModelFactory::create(Str::upper($data['type']));
-            $event = $eventModel::query()->create($data);
+            $event = $eventModel::query()->find($id);
+
             if ($event) {
-                return $event;
+                $event->update($data);
+                return $event; // Возвращаем обновлённую запись
             }
+            Log::warning(__METHOD__ . " Event with ID {$id} not found.");
         } catch (\Exception $exception) {
+            // Логируем ошибку, если что-то пошло не так
             Log::error(__METHOD__ . " " . $exception->getMessage());
         }
 
