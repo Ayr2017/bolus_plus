@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AnimalGroupsController;
 use App\Http\Controllers\Api\V1\AnimalsController;
 use App\Http\Controllers\Api\V1\BreedsController;
+use App\Http\Controllers\Api\V1\EventsController;
 use App\Http\Controllers\Api\V1\RestrictionReasonsController;
 use App\Http\Controllers\Api\V1\RestrictionsController;
 use App\Http\Controllers\Api\V1\SanctumController;
@@ -14,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/sanctum/token', [SanctumController::class, 'createToken']);
 Route::prefix('v1')
-    ->middleware(['auth:sanctum', 'locale'])
+    ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::apiResource('animals', AnimalsController::class);
         Route::apiResource('animal-groups', AnimalGroupsController::class);
         Route::apiResource('breeds', BreedsController::class);
+        Route::apiResource('events', EventsController::class);
         Route::apiResource('restrictions', RestrictionsController::class);
         Route::apiResource('restriction-reasons', RestrictionReasonsController::class);
         Route::apiResource('selected-breeding-bulls', SelectedBreedingBullsController::class);

@@ -13,14 +13,9 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('type')
-                ->index()
-                ->unique();
+            $table->string('type')->index();
             $table->jsonb('data');
-            $table->foreignId('creator_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
+            $table->foreignId('creator_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('event_category');
             $table->timestamps();
         });
