@@ -64,4 +64,19 @@ class EventService extends Service
         return null;
     }
 
+    public function store(array $data)
+    {
+        try {
+            $eventModel = EventModelFactory::create(Str::upper($data['type']));
+            $event = $eventModel::query()->create($data);
+            if ($event) {
+                return $event;
+            }
+        } catch (\Exception $exception) {
+            Log::error(__METHOD__ . " " . $exception->getMessage());
+        }
+
+        return null;
+    }
+
 }
