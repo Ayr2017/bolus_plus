@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use AllowDynamicProperties;
+use App\Models\Interfaces\HasDataFieldsInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
 
 
-#[AllowDynamicProperties] class Event extends Model
+#[AllowDynamicProperties] class Event extends Model implements HasDataFieldsInterface
 {
     use HasFactory;
     public mixed $eventData;
@@ -48,9 +50,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 
-    public function eventType(): BelongsTo
+    public function getDataFields(): array
     {
-        return $this->belongsTo(EventType::class, 'event_type_id', 'id');
+        return [];
     }
+
 
 }

@@ -31,14 +31,6 @@ class CurrentRestrictionEvent extends Event
         'restriction'
     ];
 
-    protected array $validationRules = [
-        'start_date' => 'required|date',
-        'end_date' => 'nullable|date|after:start_date',
-        'reason' => 'required|string|in:Age,Launch,Diagnosis',
-        'restriction_id' => 'required|integer|exists:restrictions,id',
-        'note' => 'nullable|string|max:255',
-    ];
-
     protected array $dataValidationRules = [
         'data.start_date' => 'required|date',
         'data.end_date' => 'nullable|date|after:start_date',
