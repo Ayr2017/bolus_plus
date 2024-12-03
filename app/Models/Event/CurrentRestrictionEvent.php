@@ -13,6 +13,10 @@ class CurrentRestrictionEvent extends Event
 {
     use HasFactory;
 
+    protected $appends = [
+        'restriction'
+    ];
+
     protected array $validationRules = [
         'start_date' => 'required|date',
         'end_date' => 'nullable|date|after:start_date',
@@ -21,9 +25,31 @@ class CurrentRestrictionEvent extends Event
         'note' => 'nullable|string|max:255',
     ];
 
+    protected array $dataValidationRules = [
+        'data.start_date' => 'required|date',
+        'data.end_date' => 'nullable|date|after:start_date',
+        'data.reason' => 'required|string|in:Age,Launch,Diagnosis',
+        'data.restriction_id' => 'required|integer|exists:restrictions,id',
+        'data.note' => 'nullable|string|max:255',
+    ];
+
     public function fields(): array
     {
         return array_keys($this->validationRules);
+    }
+
+    public function getDataFields(): array
+    {
+        return array_keys($this->dataValidationRules);
+    }
+    public function getDataValidationRules(): array
+    {
+        return $this->dataValidationRules;
+    }
+
+    public function getAppends(): array
+    {
+        return $this->appends;
     }
 
     public function restrictionId(): Attribute

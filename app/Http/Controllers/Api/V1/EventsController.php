@@ -6,7 +6,9 @@ use AllowDynamicProperties;
 use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Event\IndexEventRequest;
-use App\Http\Resources\Event\EventResource;
+use App\Http\Requests\Event\StoreEventRequest;
+use App\Http\Resources\Event\IndexEventResource;
+use App\Http\Resources\Event\ShowEventResource;
 use App\Http\Resources\Restriction\RestrictionResource;
 use App\Http\Responses\ApiResponse;
 use App\Models\Event;
@@ -24,7 +26,7 @@ use Illuminate\Http\Request;
         try {
             $result = $eventService->index($request->validated());
             if($result){
-                return ApiResponse::success(EventResource::paginatedCollection($result));
+                return ApiResponse::success(IndexEventResource::paginatedCollection($result));
             }
         }catch(\Throwable $throwable){
             ErrorLog::write(__METHOD__,__LINE__,$throwable->getMessage());
@@ -36,9 +38,15 @@ use Illuminate\Http\Request;
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request, EventService $eventService): JsonResponse
     {
-        //
+
+        $result = $eventService->store($request->validated());
+        if($result){
+            return ApiResponse::success(ShowEventResource::make($result), 'Created successfully.');
+        }
+
+        return ApiResponse::error('Something went wrong!');
     }
 
     /**
@@ -49,7 +57,7 @@ use Illuminate\Http\Request;
         try {
             $event = $eventService->show($id);
             if($event){
-                return ApiResponse::success(EventResource::make($event));
+                return ApiResponse::success(ShowEventResource::make($event));
             }
         }catch(\Throwable $throwable){
             $this->error = $throwable->getMessage();

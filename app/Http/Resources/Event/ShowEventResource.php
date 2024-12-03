@@ -7,7 +7,7 @@ use App\Models\Event\EventModelFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
-class EventResource extends PaginatedJsonResponse
+class ShowEventResource extends PaginatedJsonResponse
 {
 
     /**
@@ -27,11 +27,12 @@ class EventResource extends PaginatedJsonResponse
         ];
 
         $eventModel = EventModelFactory::create($this->type);
-        $fields = $eventModel->fields();
+        $fields = $eventModel->getDataFields();
         $appends = $eventModel->getAppends();
 
         foreach ($fields as $field) {
-            $general[$field] = Arr::get($this->data, $field);
+            $key = str_replace('data.', '', $field);
+            $general['data'][$key] = Arr::get($this, $field);
         }
 
         foreach ($appends as $append) {
