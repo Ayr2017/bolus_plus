@@ -9,9 +9,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 
+/*
+ *
+ */
 class CurrentRestrictionEvent extends Event
 {
     use HasFactory;
+
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
+    }
 
     protected $appends = [
         'restriction'

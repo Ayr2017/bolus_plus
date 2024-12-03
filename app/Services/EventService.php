@@ -39,30 +39,11 @@ class EventService extends Service
     }
     public function show(string $id)
     {
-        return CurrentRestrictionEvent::query()
+        $event =  Event::query()
             ->findOrFail($id);
+        return  EventModelFactory::create($event->type, $event->toArray());
     }
 
-
-    public function storeEvent(array $data): ?Event
-    {
-        try {
-            $event = Event::query()->create($data);
-            if ($event) {
-                return $event;
-            }
-        } catch (\Exception $exception) {
-            Log::error(__METHOD__ . " " . $exception->getMessage());
-        }
-
-        return null;
-    }
-
-    public function getEventDataClass($eventType)
-    {
-        return  App::make('\App\Entity\EventData\\'.Str::replace('_','',Str::title($eventType->slug)));
-
-    }
 
     public function store(array $data)
     {
@@ -78,6 +59,5 @@ class EventService extends Service
 
         return null;
     }
-
 
 }
