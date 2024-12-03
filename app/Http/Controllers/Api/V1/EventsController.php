@@ -80,6 +80,16 @@ use Illuminate\Http\Request;
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $result =  Event::destroy($id);
+            if($result){
+                return ApiResponse::success(data:null, message: 'Deleted successfully.');
+            }
+        }catch(\Throwable $throwable){
+            $this->error = $throwable->getMessage();
+            ErrorLog::write(__METHOD__,__LINE__,$throwable->getMessage());
+        }
+
+        return ApiResponse::error($this->error);
     }
 }
