@@ -26,7 +26,7 @@ class SemenPortionsController extends Controller
     {
         try {
             $semenPortions = $semenPortionService->getSemenPortions($request->validated());
-            return ApiResponse::success(SemenPortionResource::collection($semenPortions));
+            return ApiResponse::success(SemenPortionResource::paginatedCollection($semenPortions));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
