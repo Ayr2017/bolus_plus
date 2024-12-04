@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             InseminationMethodsSeeder::class,
             SemenPortionSeeder::class,
             ZootechnicalExitReasonSeeder::class,
+            CoatColorSeeder::class,
         ]);
     }
 }
