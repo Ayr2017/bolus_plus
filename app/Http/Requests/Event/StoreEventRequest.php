@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Event;
 
 use AllowDynamicProperties;
+use App\Models\Event\EventModelFactory;
 use App\Models\EventType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\App;
@@ -26,7 +27,7 @@ use Illuminate\Support\Str;
     public function rules(): array
     {
         return array_merge([
-            'event_type_id' => 'required|exists:event_types,id',
+            'type' => 'required',
             'event_category' => 'required|string',
         ], $this->getRules());
     }
@@ -41,9 +42,8 @@ use Illuminate\Support\Str;
 
     public function getRules(): array
     {
-        $eventTypeSlug = EventType::find($this->event_type_id)->slug;
-        $event = App::make('App\Models\Event\\'.Str::studly(Str::lower($eventTypeSlug)));
-        return array_filter($event::STORE_RULES);
+        $eventModel = EventModelFactory::create($this->type);
+        return $eventModel->getDataValidationRules();
     }
 
 }

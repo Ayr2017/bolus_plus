@@ -76,9 +76,9 @@ class BreedsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBreedRequest $request, Breed $breed, BreedService $breedService)
+    public function update(UpdateBreedRequest $request, int $id, BreedService $breedService)
     {
-        $breed = $breedService->updateBreed($request->validated(), $breed);
+        $breed = $breedService->updateBreed($request->validated(), $id);
         if($breed){
             return redirect()->route('breeds.show', [
                 'breed' => $breed

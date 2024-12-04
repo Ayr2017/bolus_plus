@@ -42,6 +42,7 @@ use Illuminate\Support\Str;
     {
         $servicePathAndName = $this->argument('service_name');
         $servicePathAndNameCollection = Str::of($servicePathAndName)->explode('/');
+
         $this->serviceName = $this->hasServicePostfix($servicePathAndNameCollection->last());
         $this->path = 'app/Services/'.$servicePathAndNameCollection->slice(0,-1)->push($this->serviceName)->join('/').'.php';
         $this->nameSpace = rtrim('App\\Services\\'.$servicePathAndNameCollection->slice(0,-1)->implode('\\'),'\\');
@@ -133,18 +134,17 @@ use Illuminate\Support\Str;
         return __DIR__ . '/../../../stubs/service.stub';
     }
 
-    /**
-     **
-     * Map the stub variables present in stub to its value
-     *
-     * @return array
-     *
-     */
     public function getStubVariables(): array
     {
+        $serviceName = $this->getSingularClassName($this->serviceName);
+        $modelName = Str::replaceLast('Service', '', $serviceName); // Убираем "Service" из имени класса для модели
+        $modelVariable = lcfirst($modelName);
+
         return [
-            'NAMESPACE'         => $this->nameSpace,
-            'CLASS_NAME'        => $this->getSingularClassName($this->serviceName),
+            'NAMESPACE' => $this->nameSpace,
+            'CLASS_NAME' => $serviceName,
+            'MODEL_NAME' => $modelName,
+            'modelVariable' => $modelVariable,
         ];
     }
 

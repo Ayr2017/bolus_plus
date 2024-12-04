@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Http\Controllers\Api\V1;
+
+use App\Helpers\ErrorLog;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{{EntityName}}\Index{{EntityName}}Request;
+use App\Http\Requests\{{EntityName}}\Show{{EntityName}}Request;
+use App\Http\Requests\{{EntityName}}\Store{{EntityName}}Request;
+use App\Http\Requests\{{EntityName}}\Update{{EntityName}}Request;
+use App\Http\Requests\{{EntityName}}\Delete{{EntityName}}Request;
+use App\Http\Resources\{{EntityName}}\{{EntityName}}Resource;
+use App\Http\Responses\ApiResponse;
+use App\Models\{{EntityName}};
+use App\Services\{{EntityName}}\{{EntityName}}Service;
+use Illuminate\Http\JsonResponse;
+
+class {{EntityNamePlural}}Controller extends Controller
+{
+    /**
+     * @param Index{{EntityName}}Request $request
+     * @param {{EntityName}}Service ${{entityName}}Service
+     * @return JsonResponse
+     */
+    public function index(Index{{EntityName}}Request $request, {{EntityName}}Service ${{entityName}}Service): JsonResponse
+    {
+        try {
+            ${{entityName}}s = ${{entityName}}Service->index($request->validated());
+            return ApiResponse::success({{EntityName}}Resource::collection(${{entityName}}s));
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong!');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @param Store{{EntityName}}Request $request
+     * @param {{EntityName}}Service ${{entityName}}Service
+     * @return JsonResponse
+     */
+    public function store(Store{{EntityName}}Request $request, {{EntityName}}Service ${{entityName}}Service): JsonResponse
+    {
+        try {
+            ${{entityName}} = ${{entityName}}Service->store($request->validated());
+            return ApiResponse::success(new {{EntityName}}Resource(${{entityName}}));
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong!');
+    }
+
+    /**
+     * @param Show{{EntityName}}Request $request
+     * @param {{EntityName}}Service $service
+     * @param {{EntityName}} ${{entityName}}
+     * @return JsonResponse
+     */
+    public function show(Show{{EntityName}}Request $request, {{EntityName}}Service $service, {{EntityName}} ${{entityName}}): JsonResponse
+    {
+        try {
+            ${{entityName}} = $service->show(${{entityName}});
+            return ApiResponse::success(['{{entityName}}' => new {{EntityName}}Resource(${{entityName}})]);
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong!');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @param Update{{EntityName}}Request $request
+     * @param {{EntityName}}Service ${{entityName}}Service
+     * @param {{EntityName}} ${{entityName}}
+     * @return JsonResponse
+     */
+    public function update(Update{{EntityName}}Request $request, {{EntityName}}Service ${{entityName}}Service, {{EntityName}} ${{entityName}}): JsonResponse
+    {
+        try {
+            ${{entityName}} = ${{entityName}}Service->update($request->validated(), ${{entityName}});
+            return ApiResponse::success(['{{entityName}}' => new {{EntityName}}Resource(${{entityName}})]);
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param Delete{{EntityName}}Request $request
+     * @param {{EntityName}}Service $service
+     * @param {{EntityName}} ${{entityName}}
+     * @return JsonResponse
+     */
+    public function destroy(Delete{{EntityName}}Request $request, {{EntityName}}Service ${{entityName}}Service, {{EntityName}} ${{entityName}}): JsonResponse
+    {
+        try {
+            ${{entityName}} = ${{entityName}}Service->delete(${{entityName}});
+            return ApiResponse::success(${{entityName}});
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong!');
+    }
+}

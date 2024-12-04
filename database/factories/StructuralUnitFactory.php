@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\StructuralUnit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StructuralUnit>
+ * @extends Factory<StructuralUnit>
  */
 class StructuralUnitFactory extends Factory
 {

@@ -53,7 +53,7 @@ class EventsController extends Controller
      */
     public function store(StoreEventRequest $request, EventService $eventService):RedirectResponse|View
     {
-        $event = $eventService->storeEvent($request->validated());
+        $event = $eventService->store($request->validated());
         if($event){
             return redirect(route('events.show', ['event' => $event]))->with('message', 'Event created.');
         }

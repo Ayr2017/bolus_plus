@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Entity\CurrentEmployee;
-use App\Entity\CurrentEmployeeInterface;
 use App\Models\Employee;
 use App\Models\Organisation;
 use App\Models\User;
 use App\Services\Employee\EmployeeService;
 use Illuminate\Http\Request;
+use JetBrains\PhpStorm\NoReturn;
 use Spatie\Permission\Models\Permission;
 
 class EmployeesController extends Controller
@@ -92,7 +91,7 @@ class EmployeesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    #[NoReturn] public function update(Request $request, string $id): void
     {
         dd($request->all());
     }

@@ -113,6 +113,7 @@ class BreedsSeeder extends Seeder
         ["id" => 102, "name" => "Черно-пестрая литовская", "type" => "молочная"],
         ["id" => 103, "name" => "Черно-пестрая немецкая", "type" => "молочная"],
         ["id" => 104, "name" => "Без породы", "type" => ""],
+        ["id" => 105, "name" => "Черно-пестрая голштинская", "type" => "молочная"],
     ];
 
     /**
@@ -123,7 +124,7 @@ class BreedsSeeder extends Seeder
         foreach ($this->breeds as $breed) {
             Breed::updateOrCreate([
                 'id' => $breed['id'],
-            ],$breed);
+            ], $breed);
         }
     }
 }

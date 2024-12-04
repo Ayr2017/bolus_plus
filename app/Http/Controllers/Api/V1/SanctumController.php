@@ -39,7 +39,6 @@ class SanctumController extends Controller
     {
         try {
             $token = $sanctumService->createToken($request->validated());
-
             if (!Auth::attempt(Arr::only($request->validated(), ['email', 'password']))) {
                 throw new \Exception('Invalid credentials');
             }
@@ -48,10 +47,11 @@ class SanctumController extends Controller
                 'token' => $token,
                 'user' => auth('sanctum')->user()
                 ]);
+
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+            return ApiResponse::error([$throwable->getMessage()],$throwable->getMessage(),);
         }
 
-        return ApiResponse::error('Something went wrong');
     }
 }

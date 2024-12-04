@@ -57,7 +57,7 @@ class RestrictionReasonsController extends Controller
     /**
      * @param ShowRestrictionReasonRequest $request
      * @param RestrictionReasonService $service
-     * @param int $restrictionReason
+     * @param RestrictionReason $restrictionReason
      * @return JsonResponse
      */
     public function show(ShowRestrictionReasonRequest $request, RestrictionReasonService $service, RestrictionReason $restrictionReason): JsonResponse
@@ -76,8 +76,8 @@ class RestrictionReasonsController extends Controller
     /**
      * Update the specified resource in storage.
      * @param UpdateRestrictionReasonRequest $request
-     * @param int $restrictionReason
      * @param RestrictionReasonService $restrictionReasonService
+     * @param RestrictionReason $restrictionReason
      * @return JsonResponse
      */
     public function update(UpdateRestrictionReasonRequest $request, RestrictionReasonService $restrictionReasonService, RestrictionReason $restrictionReason): JsonResponse
@@ -95,8 +95,8 @@ class RestrictionReasonsController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param DeleteRestrictionReasonRequest $request
-     * @param int $restrictionReason
-     * @param RestrictionReasonService $service
+     * @param RestrictionReasonService $restrictionReasonService
+     * @param RestrictionReason $restrictionReason
      * @return JsonResponse
      */
     public function destroy(DeleteRestrictionReasonRequest $request, RestrictionReasonService $restrictionReasonService,  RestrictionReason $restrictionReason): JsonResponse

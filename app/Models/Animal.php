@@ -39,6 +39,7 @@ class Animal extends Model
     protected $casts = [
         'birthday' => 'datetime',
     ];
+    public mixed $birthday;
 
     public static function boot(): void
     {
@@ -67,6 +68,9 @@ class Animal extends Model
         return $this->belongsTo(Status::class);
     }
 
+    /**
+     * @return Attribute
+     */
     public function birthdayYmd():Attribute
     {
         return Attribute::make(

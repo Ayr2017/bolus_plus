@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_rules', function (Blueprint $table) {
+        Schema::create('zootechnical_exit_reasons', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('title')->nullable();
-            $table->integer('number');
-            $table->integer('event_type_id');
-            $table->json('rules')->nullable();
-            $table->enum('rule_method',['store','update'])->nullable();
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event_rules');
+        Schema::dropIfExists('zootechnical_exit_reasons');
     }
 };
