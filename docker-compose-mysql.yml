@@ -1,5 +1,5 @@
 services:
-    laravel.bolus:
+    laravel.test:
         build:
             context: ./vendor/laravel/sail/runtimes/8.3
             dockerfile: Dockerfile
@@ -22,27 +22,30 @@ services:
         networks:
             - sail
         depends_on:
-            - postgres
+            - mysql
             - redis
-    postgres:
-        image: 'postgres:14'
+    mysql:
+        image: 'mysql/mysql-server:8.0'
         ports:
-            - '${FORWARD_DB_PORT:-5434}:5432'
+            - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
-            POSTGRES_DB: '${DB_DATABASE:-bolus}'
-            POSTGRES_USER: '${DB_USERNAME}'
-            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - 'sail-postgres:/var/lib/postgresql/data'
-            - './vendor/laravel/sail/database/postgres/init.sql:/docker-entrypoint-initdb.d/10-init.sql'
+            - 'sail-mysql:/var/lib/mysql'
+            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
         healthcheck:
             test:
                 - CMD
-                - pg_isready
-                - '-U'
-                - '${DB_USERNAME}'
+                - mysqladmin
+                - ping
+                - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
     redis:
@@ -60,22 +63,22 @@ services:
                 - ping
             retries: 3
             timeout: 5s
-#    ngrok:
-#        image: 'ngrok/ngrok:alpine'
-#        environment:
-#            NGROK_AUTHTOKEN: '${NGROK_AUTHTOKEN}'
-#        command: 'http laravel.bolus:80'
-#        ports:
-#            - '4040:4040'
-#        networks:
-#            - sail
-#        depends_on:
-#            - laravel.bolus
+    ngrok:
+        image: 'ngrok/ngrok:alpine'
+        environment:
+            NGROK_AUTHTOKEN: '${NGROK_AUTHTOKEN}'
+        command: 'http laravel.test:80'
+        ports:
+            - '4040:4040'
+        networks:
+            - sail
+        depends_on:
+            - laravel.test
 networks:
     sail:
         driver: bridge
 volumes:
-    sail-postgres:
+    sail-mysql:
         driver: local
     sail-redis:
         driver: local

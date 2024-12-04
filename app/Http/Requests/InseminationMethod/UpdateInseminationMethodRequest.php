@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Breed;
+namespace App\Http\Requests\InseminationMethod;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexBreedRequest extends FormRequest
+class UpdateInseminationMethodRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class IndexBreedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'per_page' => ['nullable', 'integer', 'min:1', 'max:1000'],
-            'page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            //
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bolus;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,10 +22,10 @@ class DatabaseSeeder extends Seeder
             BreedsSeeder::class,
             AnimalGroupsSeeder::class,
             RestrictionReasonsSeeder::class,
+            InseminationMethodsSeeder::class,
             SemenPortionSeeder::class,
             ZootechnicalExitReasonSeeder::class,
             CoatColorSeeder::class,
         ]);
-
     }
 }

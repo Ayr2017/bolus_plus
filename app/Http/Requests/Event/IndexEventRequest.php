@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Breed;
+namespace App\Http\Requests\Event;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexBreedRequest extends FormRequest
+class IndexEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class IndexBreedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'per_page' => ['nullable', 'integer', 'min:1', 'max:1000'],
-            'page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'page' => 'nullable|integer|min:1',
+            'per_page' => 'nullable|integer|min:1',
         ];
     }
 }
