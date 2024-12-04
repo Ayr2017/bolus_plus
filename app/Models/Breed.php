@@ -11,7 +11,6 @@ class Breed extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'uuid',
         'name',
         'type',
     ];
