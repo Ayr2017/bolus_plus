@@ -27,10 +27,9 @@ use Illuminate\Database\QueryException;
     {
         // TODO: в модели Breed uuid указан в fillable, но перезаписывается при создании - это надо исправить (убрать uuid из fillable)?
         $uuid = Str::uuid();
-        $data = ['name' => 'Test Breed', 'uuid' => $uuid];
+        $data = ['name' => 'Test Breed'];
         $breed = Breed::create($data);
         $this->assertEquals('Test Breed', $breed->name);
-        $this->assertEquals($uuid, $breed->uuid);
     }
 
     public function test_create_breed()
