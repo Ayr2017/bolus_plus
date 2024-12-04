@@ -22,7 +22,7 @@ class IndexBreedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'per_page' => ['nullable', 'integer'. 'min:1', 'max:1000'],
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:1000'],
             'page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ];
     }
