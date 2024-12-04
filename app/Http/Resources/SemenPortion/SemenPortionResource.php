@@ -15,8 +15,8 @@ class SemenPortionResource extends PaginatedJsonResponse
     public function toArray(Request $request): array
     {
         return [
-            'name',
-            'description',
+            'name'=>$this->name,
+            'description' => $this->description,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
         ];
