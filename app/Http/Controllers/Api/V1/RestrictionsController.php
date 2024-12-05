@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Restriction\DeleteRestrictionRequest;
-use App\Http\Requests\Restriction\IndexRestrictionRequest;
+use App\Http\Requests\Restriction\IndexTagColorRequest;
 use App\Http\Requests\Restriction\ShowBreadRequest;
 use App\Http\Requests\Restriction\ShowRestrictionRequest;
 use App\Http\Requests\Restriction\StoreRestrictionRequest;
@@ -20,11 +20,11 @@ use Illuminate\Http\Request;
 class RestrictionsController extends Controller
 {
     /**
-     * @param IndexRestrictionRequest $request
+     * @param IndexTagColorRequest $request
      * @param RestrictionService $restrictionService
      * @return JsonResponse
      */
-    public function index(IndexRestrictionRequest $request, RestrictionService $restrictionService): JsonResponse
+    public function index(IndexTagColorRequest $request, RestrictionService $restrictionService): JsonResponse
     {
         try {
             $restrictions = $restrictionService->getRestrictions($request->validated());

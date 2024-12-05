@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UpdateRolesRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
-use App\Services\User\UserService;
+use App\Services\User\TagColorService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -85,7 +85,7 @@ class UsersController extends Controller
         //
     }
 
-    public function updateRoles(UpdateRolesRequest $request, User $user, UserService $userService): RedirectResponse
+    public function updateRoles(UpdateRolesRequest $request, User $user, TagColorService $userService): RedirectResponse
     {
         $result = $userService->updateRoles($request->validated(), $user);
         if($result){
