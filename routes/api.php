@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\AnimalGroupsController;
 use App\Http\Controllers\Api\V1\AnimalsController;
 use App\Http\Controllers\Api\V1\BreedsController;
 use App\Http\Controllers\Api\V1\CoatColorsController;
+use App\Http\Controllers\Api\V1\HerdEntryReasonsController;
 use App\Http\Controllers\Api\V1\InseminationMethodsController;
 use App\Http\Controllers\Api\V1\EventsController;
 use App\Http\Controllers\Api\V1\RestrictionReasonsController;
@@ -32,6 +33,7 @@ Route::prefix('v1')
         Route::get('users/get-current-user', [UsersController::class, 'getCurrentUser']);
         Route::apiResource('users', UsersController::class);
         Route::apiResource('zootechnical-exit-reasons', ZootechnicalExitReasonsController::class);
+        Route::apiResource('herd-entry-reasons', HerdEntryReasonsController::class);
     });
 
 Route::prefix('v1')
@@ -39,5 +41,4 @@ Route::prefix('v1')
     ->group(function () {
         Route::post('/auth', [SanctumController::class,'auth'])->name('auth');
     });
-
 
