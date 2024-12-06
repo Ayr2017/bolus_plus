@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AnimalGroupsController;
 use App\Http\Controllers\Api\V1\AnimalsController;
+use App\Http\Controllers\Api\V1\BreedingBullsController;
 use App\Http\Controllers\Api\V1\BreedsController;
 use App\Http\Controllers\Api\V1\CoatColorsController;
 use App\Http\Controllers\Api\V1\InseminationMethodsController;
@@ -22,6 +23,7 @@ Route::prefix('v1')
         Route::apiResource('animals', AnimalsController::class);
         Route::apiResource('animal-groups', AnimalGroupsController::class);
         Route::apiResource('breeds', BreedsController::class);
+        Route::apiResource('breeding-bulls', BreedingBullsController::class);
         Route::apiResource('coat-colors', CoatColorsController::class);
         Route::apiResource('insemination-methods', InseminationMethodsController::class);
         Route::apiResource('events', EventsController::class);
@@ -39,5 +41,6 @@ Route::prefix('v1')
     ->group(function () {
         Route::post('/auth', [SanctumController::class,'auth'])->name('auth');
     });
+
 
 
