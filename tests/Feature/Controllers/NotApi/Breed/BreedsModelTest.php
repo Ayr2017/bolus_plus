@@ -1,16 +1,13 @@
 <?php
 
-namespace Tests\Feature\Breed;
+namespace Feature\Controllers\NotApi\Breed;
 
 use AllowDynamicProperties;
 use App\Models\Breed;
-use App\Models\Bolus;
 use App\Models\Organisation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
-use Illuminate\Database\QueryException;
-
 
 
 #[AllowDynamicProperties] class BreedsModelTest extends TestCase

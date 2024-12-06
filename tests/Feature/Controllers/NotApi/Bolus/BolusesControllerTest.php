@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Bolus;
+namespace Feature\Controllers\NotApi\Bolus;
 
 use AllowDynamicProperties;
 use App\Models\Bolus;

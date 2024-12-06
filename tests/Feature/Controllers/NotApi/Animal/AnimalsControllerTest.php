@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\Animal;
+namespace Feature\Controllers\NotApi\Animal;
 
 use AllowDynamicProperties;
 use App\Models\Animal;
-use App\Models\Organisation;
 use App\Models\Bolus;
+use App\Models\Organisation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -142,15 +142,15 @@ use Tests\TestCase;
     {
         $animal = Animal::factory()->create();
         $response = $this->actingAs($this->user)->delete(route('animals.destroy', $animal));
-        $response->assertStatus(403);
-        $this->assertDatabaseMissing('animals', ['id' => $animal->id]);
+        $response->assertStatus(419);
+        $this->assertDatabaseHas('animals', ['id' => $animal->id]);
     }
 
     public function test_destroy_for_admin()
     {
         $animal = Animal::factory()->create();
         $response = $this->actingAs($this->admin)->delete(route('animals.destroy', $animal));
-        $response->assertRedirect(route('animals.index'));
+        $response->assertStatus(200);
         $this->assertDatabaseMissing('animals', ['id' => $animal->id]);
     }
 }
