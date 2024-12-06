@@ -16,9 +16,9 @@ class BreedingBull extends Model
         'date_of_birth',
         'country_of_birth',
         'tag_number',
-        'seed_code',
+        'semen_code',
         'rshn_id',
-        'color',
+        'coat_color_id',
         'breed_id',
         'is_selected',
     ];

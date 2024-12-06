@@ -28,7 +28,7 @@ class StoreBreedingBullRequest extends FormRequest
             'date_of_birth' => 'nullable|date', // Дата рождения (необязательное поле, должно быть в формате даты)
             'country_of_birth' => 'nullable|string|max:255', // Страна рождения (необязательное строковое поле)
             'tag_number' => 'nullable|string|max:255', // Номер бирки (необязательное строковое поле)
-            'seed_code' => 'nullable|string|max:255', // Код семени (необязательное строковое поле)
+            'semen_code' => 'nullable|string|max:255', // Код семени (необязательное строковое поле)
             'rshn_id' => 'required|string|unique:breeding_bulls,rshn_id|max:255', // Идентификационный номер РСХН (обязательное уникальное строковое поле)
             'color' => 'nullable|string|max:255', // Масть (необязательное строковое поле)
             'breed_id' => 'nullable|exists:breeds,id', // Порода (необязательное поле, ссылается на таблицу пород)
