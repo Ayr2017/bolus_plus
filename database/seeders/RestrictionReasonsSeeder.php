@@ -36,5 +36,7 @@ class RestrictionReasonsSeeder extends Seeder
 
         // Вставка данных с временными метками
         DB::table('restriction_reasons')->insertOrIgnore($dataWithTimestamps);
+        DB::statement("SELECT SETVAL(pg_get_serial_sequence('restriction_reasons', 'id'), (SELECT MAX(id) FROM breeds))");
+
     }
 }

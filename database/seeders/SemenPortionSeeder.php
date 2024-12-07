@@ -33,5 +33,7 @@ class SemenPortionSeeder extends Seeder
 
         // Вставка данных с временными метками
         DB::table('semen_portions')->insertOrIgnore($dataWithTimestamps);
+        DB::statement("SELECT SETVAL(pg_get_serial_sequence('semen_portions', 'id'), (SELECT MAX(id) FROM breeds))");
+
     }
 }

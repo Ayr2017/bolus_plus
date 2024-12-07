@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Breed;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BreedsSeeder extends Seeder
 {
@@ -137,5 +138,8 @@ class BreedsSeeder extends Seeder
                 'id' => $breed['id'],
             ], $breed);
         }
+
+        DB::statement("SELECT SETVAL(pg_get_serial_sequence('breeds', 'id'), (SELECT MAX(id) FROM breeds))");
+
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Status;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class StatusesSeeder extends Seeder
 {
@@ -79,5 +80,7 @@ class StatusesSeeder extends Seeder
                 'name'=>$status['name'],
             ],$status);
         }
+        DB::statement("SELECT SETVAL(pg_get_serial_sequence('statuses', 'id'), (SELECT MAX(id) FROM breeds))");
+
     }
 }

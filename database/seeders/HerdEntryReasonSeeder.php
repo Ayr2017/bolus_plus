@@ -13,5 +13,7 @@ class HerdEntryReasonSeeder extends Seeder
     public function run(): void
     {
         //
+
+
     }
 }

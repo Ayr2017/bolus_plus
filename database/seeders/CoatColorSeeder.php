@@ -44,5 +44,8 @@ class CoatColorSeeder extends Seeder
 
         // Вставка данных с временными метками
         DB::table('coat_colors')->insertOrIgnore($dataWithTimestamps);
+
+        DB::statement("SELECT SETVAL(pg_get_serial_sequence('coat_colors', 'id'), (SELECT MAX(id) FROM breeds))");
+
     }
 }
