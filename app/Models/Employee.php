@@ -17,8 +17,13 @@ class Employee extends Model
         'position',
         'organisation_id',
         'user_id',
+        'is_active'
     ];
     protected string $guard_name = 'web';
+
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
 
 
     public static function boot()

@@ -27,6 +27,7 @@ class BreedingBullResource extends JsonResource
             'color' => $this->color,
             'breed_id' => $this->breed_id,
             'is_selected' => $this->is_selected,
+            'is_active' => $this->is_active,
         ];
     }
 }

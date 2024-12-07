@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('status_id')->nullable();
             $table->enum('sex',['female', 'male'])->nullable();
             $table->dateTime('withdrawn_at')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

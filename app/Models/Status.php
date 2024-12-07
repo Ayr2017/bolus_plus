@@ -13,6 +13,11 @@ class Status extends Model
         'name',
         'slug',
         'description',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
 
     static function boot()

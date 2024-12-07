@@ -38,6 +38,7 @@ class AnimalResource extends PaginatedJsonResponse
             'status_id' => $this->status_id,
             'sex' => $this->sex,
             'withdrawn_at' => $this->withdrawn_at,
+            'is_active' => $this->is_active,
             'created_at' => $this->created_at?->toDateTimeString(),
             'updated_at' => $this->updated_at?->toDateTimeString(),
         ];

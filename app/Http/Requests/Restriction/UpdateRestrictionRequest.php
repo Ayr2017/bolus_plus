@@ -25,6 +25,7 @@ class UpdateRestrictionRequest extends FormRequest
             'name' => 'required|string',
             'title' => 'nullable|string',
             'icon' => 'nullable|string',
+            'is_active'=>['nullable','boolean'],
         ];
     }
 

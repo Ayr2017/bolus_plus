@@ -40,6 +40,7 @@ class UpdateRestrictionReasonRequest extends FormRequest
                 'string',
                 'max:500',
             ],
+            'is_active'=>['nullable','boolean'],
         ];
     }
 

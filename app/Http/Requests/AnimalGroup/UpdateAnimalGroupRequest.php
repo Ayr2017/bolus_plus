@@ -25,6 +25,7 @@ class UpdateAnimalGroupRequest extends FormRequest
             'name' => ['required', 'string', 'max:255', 'unique:animal_groups,name,' . $this->animal_group],
             'description' => ['nullable', 'string'],
             'animal_group' => ['required', 'integer', 'exists:animal_groups,id'],
+            'is_active'=>['nullable','boolean'],
         ];
     }
 

@@ -13,6 +13,11 @@ class Bolus extends Model
         'version',
         'batch_number',
         'produced_at',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
 
     protected $table='boluses';

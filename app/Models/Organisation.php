@@ -16,6 +16,11 @@ class Organisation extends Model
         'name',
         'structural_unit_id',
         'parent_id',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
     public function employees():HasMany
     {

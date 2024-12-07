@@ -11,5 +11,10 @@ class StructuralUnit extends Model
     protected $fillable = [
         'uuid',
         'name',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
 }

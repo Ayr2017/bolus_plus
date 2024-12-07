@@ -21,6 +21,7 @@ class UserResource extends PaginatedJsonResponse
             'surname' => $this->surname?? null,
             'email' => $this->email ?? null,
             'phone' => $this->phone ?? null,
+            'is_active' => $this->is_active,
             'created_at' => $this->created_at->toDateTimeString() ?? null,
             'updated_at' => $this->updated_at->toDateTimeString() ?? null,
         ];

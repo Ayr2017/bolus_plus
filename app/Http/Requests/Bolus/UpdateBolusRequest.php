@@ -26,6 +26,7 @@ class UpdateBolusRequest extends FormRequest
             'version' => 'string|required',
             'batch_number' => 'string|required',
             'produced_at' => 'string|required|date',
+            'is_active'=>['nullable','boolean'],
         ];
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('version')->nullable();
             $table->string('batch_number')->nullable();
             $table->dateTime('produced_at')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

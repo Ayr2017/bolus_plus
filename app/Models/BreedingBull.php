@@ -21,5 +21,10 @@ class BreedingBull extends Model
         'coat_color_id',
         'breed_id',
         'is_selected',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
 }

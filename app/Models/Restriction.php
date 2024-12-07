@@ -12,6 +12,11 @@ class Restriction extends Model
         'id',
         'name',
         'title',
-        'icon'
+        'icon',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
 }

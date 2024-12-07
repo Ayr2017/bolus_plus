@@ -25,6 +25,7 @@ class UpdateBreedRequest extends FormRequest
             'name' => ['required', 'string', 'max:255', 'unique:breeds,name,' . $this->breed],
             'type' => ['nullable', 'string'],
             'breed' => ['required', 'integer', 'exists:breeds,id'],
+            'is_active'=>['nullable','boolean'],
         ];
     }
 

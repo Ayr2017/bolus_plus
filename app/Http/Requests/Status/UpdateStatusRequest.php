@@ -24,6 +24,7 @@ class UpdateStatusRequest extends FormRequest
         return [
             'name'=>'required|string|unique:statuses,name,'.$this->status->id,
             'description'=>'nullable|string',
+            'is_active'=>['nullable','boolean'],
         ];
     }
 }

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('coat_color_id')->nullable(); // Масть
             $table->unsignedBigInteger('breed_id')->nullable(); // Порода
             $table->boolean('is_selected')->default(false); // Порода
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

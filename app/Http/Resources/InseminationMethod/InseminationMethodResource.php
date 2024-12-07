@@ -17,6 +17,7 @@ class InseminationMethodResource extends PaginatedJsonResponse
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'is_active' => $this->is_active,
             'description'=>$this->description,
             'updated_at'=>$this->updated_at,
         ];

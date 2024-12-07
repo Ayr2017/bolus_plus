@@ -38,6 +38,7 @@ class UpdateAnimalRequest extends FormRequest
             'status_id' => 'nullable|exists:statuses,id',
             'sex'=>'nullable|in:male,female',
             'withdrawn_at'=>'nullable|date',
+            'is_active'=>'nullable|boolean',
         ];
     }
 }
