@@ -26,7 +26,7 @@ class CoatColorsController extends Controller
     {
         try {
             $coatColors = $coatColorService->index($request->validated());
-            return ApiResponse::success(CoatColorResource::collection($coatColors));
+            return ApiResponse::success(CoatColorResource::paginatedCollection($coatColors));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
