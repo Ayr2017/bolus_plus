@@ -62,7 +62,7 @@ class BreedingBullsController extends Controller
     {
         try {
             $breedingBull = $service->show($breedingBull);
-            return ApiResponse::success(['breedingBull' => new BreedingBullResource($breedingBull)]);
+            return ApiResponse::success(new BreedingBullResource($breedingBull));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
@@ -81,7 +81,7 @@ class BreedingBullsController extends Controller
     {
         try {
             $breedingBull = $breedingBullService->update($request->validated(), $breedingBull);
-            return ApiResponse::success(['breedingBull' => new BreedingBullResource($breedingBull)]);
+            return ApiResponse::success(new BreedingBullResource($breedingBull));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
