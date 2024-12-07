@@ -4,17 +4,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GetCurrentUserRequest;
-use App\Http\Requests\User\SearchUsersRequest;
-use App\Http\Resources\User\UserResource;
+use App\Http\Requests\TagColor\IndexTagColorRequest;
 use App\Http\Responses\ApiResponse;
-use App\Models\User;
-use App\Services\User\TagColorService;
+use App\Services\TagColor\TagColorService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
-class UsersController extends Controller
+class TagColorController extends Controller
 {
     public function __construct(readonly TagColorService $userService)
     {
@@ -23,10 +19,10 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SearchUsersRequest $request): JsonResponse
+    public function index(IndexTagColorRequest $request): JsonResponse
     {
         try {
-            $data = $this->userService->search($request->validated());
+            $data = $this->userService->getTagColors($request->validated());
             return ApiResponse::success($data);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
@@ -81,17 +77,5 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function getCurrentUser(GetCurrentUserRequest $request): JsonResponse
-    {
-        try {
-            $currentUser = auth()->user();
-            return ApiResponse::success(UserResource::make($currentUser));
-        } catch (\Throwable $throwable) {
-            ErrorLog::write(method: __METHOD__, line:  __LINE__ , errorMessage: $throwable->getMessage());
-        }
-
-        return ApiResponse::error('Something went wrong');
     }
 }
