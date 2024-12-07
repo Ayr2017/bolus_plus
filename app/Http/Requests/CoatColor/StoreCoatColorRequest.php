@@ -24,6 +24,7 @@ class StoreCoatColorRequest extends FormRequest
         return [
             'name' => 'required|string',
             'description' => 'nullable|string',
+            'is_active' => 'nullable|boolean',
         ];
     }
 }
