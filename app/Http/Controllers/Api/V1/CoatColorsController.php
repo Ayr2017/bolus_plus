@@ -81,7 +81,7 @@ class CoatColorsController extends Controller
     {
         try {
             $coatColor = $coatColorService->update($request->validated(), $coatColor);
-            return ApiResponse::success(['coatColor' => new CoatColorResource($coatColor)]);
+            return ApiResponse::success(new CoatColorResource($coatColor));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
