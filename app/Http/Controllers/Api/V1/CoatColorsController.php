@@ -92,7 +92,7 @@ class CoatColorsController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param DeleteCoatColorRequest $request
-     * @param CoatColorService $service
+     * @param CoatColorService $coatColorService
      * @param CoatColor $coatColor
      * @return JsonResponse
      */
