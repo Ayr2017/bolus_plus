@@ -22,9 +22,11 @@ class BreedingBull extends Model
         'breed_id',
         'is_selected',
         'is_active',
+        'is_own'
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
+        'is_own' => 'boolean'
     ];
 }

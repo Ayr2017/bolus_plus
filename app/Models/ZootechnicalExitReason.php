@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ZootechnicalExitReason extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'description', 'is_active'];
 }

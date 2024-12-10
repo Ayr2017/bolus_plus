@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class InseminationMethod extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
-        'is_active',
+        'is_active'
     ];
 
     protected $casts = [

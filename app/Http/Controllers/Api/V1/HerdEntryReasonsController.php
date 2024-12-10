@@ -26,7 +26,7 @@ class HerdEntryReasonsController extends Controller
     {
         try {
             $herdEntryReasons = $herdEntryReasonService->index($request->validated());
-            return ApiResponse::success(HerdEntryReasonResource::collection($herdEntryReasons));
+            return ApiResponse::success(HerdEntryReasonResource::paginatedCollection($herdEntryReasons));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

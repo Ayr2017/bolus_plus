@@ -13,21 +13,12 @@ class RestrictionResource extends PaginatedJsonResponse
      */
     public function toArray(Request $request): array
     {
-        $special = [];
-        $general =  [
+        return [
             'id' => $this->id,
-            'type' => $this->type,
-            'event_category' => $this->event_category,
-            'created_at' => $this->created_at->toDateTimeString(),
-            'updated_at' => $this->updated_at->toDateTimeString(),
+            'name' => $this->name,
+            'title' => $this->title,
+            'create_ad' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString()
         ];
-
-        $dataObject = EventDataObjectFactory::create($this->type, $this->data ?? []);
-
-        foreach ($dataObject->fields() as $field) {
-            $special[$field] = $this->{$field};
-        }
-
-        return array_merge($general, $special);
     }
 }

@@ -26,7 +26,7 @@ class SelectedBreedingBullsController extends Controller
     {
         try {
             $selectedBreedingBulls = $selectedBreedingBullService->index($request->validated());
-            return ApiResponse::success(SelectedBreedingBullResource::collection($selectedBreedingBulls));
+            return ApiResponse::success(SelectedBreedingBullResource::paginatedCollection($selectedBreedingBulls));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

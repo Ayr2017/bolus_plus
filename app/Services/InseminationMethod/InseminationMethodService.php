@@ -51,6 +51,7 @@ class InseminationMethodService extends Service
     {
         try {
             $inseminationMethod = InseminationMethod::query()->create($data);
+
             if($inseminationMethod){
                 return $inseminationMethod;
             }

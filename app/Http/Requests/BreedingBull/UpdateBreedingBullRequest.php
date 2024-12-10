@@ -35,6 +35,7 @@ class UpdateBreedingBullRequest extends FormRequest
             'color' => 'nullable|string|max:255', // Масть (необязательное строковое поле)
             'breed_id' => 'nullable|exists:breeds,id', // Порода (необязательное поле, ссылается на таблицу пород)
             'is_selected' => 'nullable|boolean', // Флаг выбора (необязательное булево поле)
+            'is_own' => 'nullable|boolean',
         ];
     }
 }

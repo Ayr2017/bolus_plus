@@ -26,7 +26,7 @@ class BreedingBullsController extends Controller
     {
         try {
             $breedingBulls = $breedingBullService->index($request->validated());
-            return ApiResponse::success(BreedingBullResource::collection($breedingBulls));
+            return ApiResponse::success(BreedingBullResource::paginatedCollection($breedingBulls));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
@@ -101,6 +101,24 @@ class BreedingBullsController extends Controller
         try {
             $breedingBull = $breedingBullService->delete($breedingBull);
             return ApiResponse::success($breedingBull);
+        } catch (\Throwable $throwable) {
+            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+        }
+
+        return ApiResponse::error('Something went wrong!');
+    }
+
+
+    /**
+     * @param IndexBreedingBullRequest $request
+     * @param BreedingBullService $breedingBullService
+     * @return JsonResponse
+     */
+    public function selectedBreedingBulls(IndexBreedingBullRequest $request, BreedingBullService $breedingBullService) :JsonResponse
+    {
+        try {
+            $breedingBulls = $breedingBullService->selectedBreedingBulls($request->validated());
+            return ApiResponse::success(BreedingBullResource::paginatedCollection($breedingBulls));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

@@ -26,7 +26,7 @@ class ZootechnicalExitReasonsController extends Controller
     {
         try {
             $zootechnicalExitReasons = $zootechnicalExitReasonService->index($request->validated());
-            return ApiResponse::success(ZootechnicalExitReasonResource::collection($zootechnicalExitReasons));
+            return ApiResponse::success(ZootechnicalExitReasonResource::paginatedCollection($zootechnicalExitReasons));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
@@ -81,7 +81,7 @@ class ZootechnicalExitReasonsController extends Controller
     {
         try {
             $zootechnicalExitReason = $zootechnicalExitReasonService->update($request->validated(), $zootechnicalExitReason);
-            return ApiResponse::success(['zootechnicalExitReason' => new ZootechnicalExitReasonResource($zootechnicalExitReason)]);
+            return ApiResponse::success([new ZootechnicalExitReasonResource($zootechnicalExitReason)]);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

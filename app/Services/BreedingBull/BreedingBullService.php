@@ -75,4 +75,12 @@ class BreedingBullService extends Service
         }
         return false;
     }
+
+    public function selectedBreedingBulls(array $data): LengthAwarePaginator
+    {
+        $perPage = Arr::get($data, 'per_page', 50);
+        $page = Arr::get($data, 'page', 1);
+
+        return BreedingBull::query()->where('is_selected', true)->orderBy('id')->paginate(perPage: $perPage, page: $page);
+    }
 }

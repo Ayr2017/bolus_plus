@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('breed_id')->nullable(); // Порода
             $table->boolean('is_selected')->default(false); // Порода
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_own')->default(false);
             $table->timestamps();
         });
     }

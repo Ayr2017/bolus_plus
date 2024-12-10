@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources\BreedingBull;
 
+use App\Http\Resources\PaginatedJsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BreedingBullResource extends JsonResource
+class BreedingBullResource extends PaginatedJsonResponse
 {
     /**
      * Transform the resource into an array.
@@ -28,6 +29,9 @@ class BreedingBullResource extends JsonResource
             'breed_id' => $this->breed_id,
             'is_selected' => $this->is_selected,
             'is_active' => $this->is_active,
+            'is_own' => $this->is_own,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString()
         ];
     }
 }

@@ -21,7 +21,6 @@ class UpdateZootechnicalExitReasonRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('restriction_reason')->id; // Получаем ID из маршрута
 
         return [
             'restriction_reason' => [
@@ -33,7 +32,7 @@ class UpdateZootechnicalExitReasonRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                "unique:restriction_reasons,name,{$id},id",
+                "unique:restriction_reasons,name,{$this->zootechnicalExitReason},id",
             ],
             'description' => [
                 'nullable',
@@ -47,7 +46,7 @@ class UpdateZootechnicalExitReasonRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'zootechnical_exit_reason' => $this->route('zootechnical_exit_reason')->id,
+            'zootechnicalExitReason' => $this->route('zootechnicalExitReason'),
         ]);
     }
 }

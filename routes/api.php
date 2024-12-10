@@ -23,7 +23,7 @@ Route::prefix('v1')
     ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::apiResource('animals', AnimalsController::class);
-        Route::apiResource('animal-groups', AnimalGroupsController::class);
+        Route::apiResource('animals-groups', AnimalGroupsController::class);
         Route::apiResource('breeds', BreedsController::class);
         Route::apiResource('breeding-bulls', BreedingBullsController::class);
         Route::apiResource('coat-colors', CoatColorsController::class);
@@ -31,13 +31,15 @@ Route::prefix('v1')
         Route::apiResource('events', EventsController::class);
         Route::apiResource('restrictions', RestrictionsController::class);
         Route::apiResource('restriction-reasons', RestrictionReasonsController::class);
-        Route::apiResource('selected-breeding-bulls', SelectedBreedingBullsController::class);
         Route::apiResource('semen-portions', SemenPortionsController::class);
         Route::get('users/get-current-user', [UsersController::class, 'getCurrentUser']);
         Route::apiResource('users', UsersController::class);
         Route::apiResource('zootechnical-exit-reasons', ZootechnicalExitReasonsController::class);
         Route::apiResource('herd-entry-reasons', HerdEntryReasonsController::class);
         Route::get('tag-color', [TagColorController::class, 'index']);
+        Route::get('selected-breeding-bulls', [BreedingBullsController::class, 'selectedBreedingBulls']);
+        Route::get('owned-breeding-bulls', [BreedingBullsController::class, 'selectedBreedingBulls']);
+
     });
 
 Route::prefix('v1')

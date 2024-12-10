@@ -18,8 +18,9 @@ class InseminationMethodResource extends PaginatedJsonResponse
             'id' => $this->id,
             'name' => $this->name,
             'is_active' => $this->is_active,
-            'description'=>$this->description,
-            'updated_at'=>$this->updated_at,
+            'description' => $this->description,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 }

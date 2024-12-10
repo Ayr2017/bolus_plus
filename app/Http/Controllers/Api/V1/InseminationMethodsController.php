@@ -62,7 +62,7 @@ class InseminationMethodsController extends Controller
     {
         try {
             $inseminationMethod = $service->show($inseminationMethod);
-            return ApiResponse::success(['inseminationMethod' => InseminationMethodResource::make($inseminationMethod)]);
+            return ApiResponse::success([InseminationMethodResource::make($inseminationMethod)]);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
@@ -82,7 +82,7 @@ class InseminationMethodsController extends Controller
     {
         try {
             $inseminationMethod = $inseminationMethodService->updateInseminationMethod($request->validated(), $inseminationMethod);
-            return ApiResponse::success(['inseminationMethod' => InseminationMethodResource::make($inseminationMethod)]);
+            return ApiResponse::success([InseminationMethodResource::make($inseminationMethod)]);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

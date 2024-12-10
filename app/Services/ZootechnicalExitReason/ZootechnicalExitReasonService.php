@@ -31,6 +31,7 @@ class ZootechnicalExitReasonService extends Service
     {
         try {
             $result = $zootechnicalExitReason->update($validated);
+
             if ($result) {
                 return $zootechnicalExitReason;
             }

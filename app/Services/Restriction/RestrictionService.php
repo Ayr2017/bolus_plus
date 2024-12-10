@@ -46,6 +46,7 @@ class RestrictionService extends Service
     {
         try {
             $restriction = Restriction::query()->create($data);
+
             if($restriction){
                 return $restriction;
             }
