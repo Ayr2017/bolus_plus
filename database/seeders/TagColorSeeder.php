@@ -14,16 +14,16 @@ class TagColorSeeder extends Seeder
     public function run(): void
     {
         TagColor::insert([
-            ['color' => '#000000'], // Black
-            ['color' => '#FFFFFF'], // White
-            ['color' => '#FF0000'], // Red
-            ['color' => '#0000FF'], // Blue
-            ['color' => '#FFFF00'], // Yellow
-            ['color' => '#800080'], // Purple
-            ['color' => '#FFC0CB'], // Pink
-            ['color' => '#808080'], // Gray
-            ['color' => '#008000'], // Green
-            ['color' => '#A52A2A'], // Brown
+            ['name' => 'Черный', 'slug' => 'black', 'hex' => '#000000'], // Black
+            ['name' => 'Белый', 'slug' => 'white', 'hex' => '#FFFFFF'], // White
+            ['name' => 'Красный', 'slug' => 'red', 'hex' => '#FF0000'], // Red
+            ['name' => 'Синий', 'slug' => 'blue', 'hex' => '#0000FF'], // Blue
+            ['name' => 'Желтый', 'slug' => 'yellow', 'hdex' => '#FFFF00'], // Yellow
+            ['name' => 'Фиолетовый', 'slug' => 'purple', 'hex' => '#800080'], // Purple
+            ['name' => 'Розовый', 'slug' => 'pink', 'hex' => '#FFC0CB'], // Pink
+            ['name' => 'Серый', 'slug' => 'gray', 'hex' => '#808080'], // Gray
+            ['name' => 'Зеленый', 'slug' => 'green', 'hex' => '#008000'], // Green
+            ['name' => 'Коричневый', 'slug' => 'brown', 'hex' => '#A52A2A'], // Brown
         ]);
     }
 }
