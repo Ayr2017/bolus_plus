@@ -23,7 +23,7 @@ Route::prefix('v1')
     ->middleware(['auth:sanctum'])
     ->group(function () {
         Route::apiResource('animals', AnimalsController::class);
-        Route::apiResource('animals-groups', AnimalGroupsController::class);
+        Route::apiResource('animal-groups', AnimalGroupsController::class);
         Route::apiResource('breeds', BreedsController::class);
         Route::apiResource('breeding-bulls', BreedingBullsController::class);
         Route::apiResource('coat-colors', CoatColorsController::class);

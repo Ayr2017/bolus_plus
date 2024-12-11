@@ -11,6 +11,7 @@ use App\Http\Requests\AnimalGroup\StoreAnimalGroupRequest;
 use App\Http\Requests\AnimalGroup\UpdateAnimalGroupRequest;
 use App\Http\Resources\AnimalGroup\AnimalGroupResource;
 use App\Http\Responses\ApiResponse;
+use App\Models\AnimalGroup;
 use App\Services\AnimalGroup\AnimalGroupService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -51,12 +52,12 @@ class AnimalGroupsController extends Controller
 
     /**
      * Display the specified resource.
-     * @param int $animalGroup
+     * @param AnimalGroup $animalGroup
      * @param ShowAnimalGroupRequest $request
      * @param AnimalGroupService $service
      * @return JsonResponse
      */
-    public function show(ShowAnimalGroupRequest $request, AnimalGroupService $service, int $animalGroup): JsonResponse
+    public function show(ShowAnimalGroupRequest $request, AnimalGroupService $service, AnimalGroup $animalGroup): JsonResponse
     {
         try {
             $animalGroup = $service->show($animalGroup);
