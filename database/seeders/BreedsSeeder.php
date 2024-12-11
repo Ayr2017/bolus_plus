@@ -139,7 +139,8 @@ class BreedsSeeder extends Seeder
             ], $breed);
         }
 
-        DB::statement("SELECT SETVAL(pg_get_serial_sequence('breeds', 'id'), (SELECT MAX(id) FROM breeds))");
-
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement("SELECT SETVAL(pg_get_serial_sequence('breeds', 'id'), (SELECT MAX(id) FROM breeds))");
+        }
     }
 }

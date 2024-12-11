@@ -77,10 +77,11 @@ class StatusesSeeder extends Seeder
     {
         foreach (self::STATUSES as $status) {
             Status::query()->firstOrCreate([
-                'name'=>$status['name'],
-            ],$status);
+                'name' => $status['name'],
+            ], $status);
         }
-        DB::statement("SELECT SETVAL(pg_get_serial_sequence('statuses', 'id'), (SELECT MAX(id) FROM breeds))");
-
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement("SELECT SETVAL(pg_get_serial_sequence('statuses', 'id'), (SELECT MAX(id) FROM breeds))");
+        }
     }
 }

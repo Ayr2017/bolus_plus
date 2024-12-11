@@ -37,7 +37,9 @@ class InseminationMethodsSeeder extends Seeder
 
         // Вставка данных с временными метками
         DB::table('insemination_methods')->insertOrIgnore($dataWithTimestamps);
-        DB::statement("SELECT SETVAL(pg_get_serial_sequence('insemination_methods', 'id'), (SELECT MAX(id) FROM breeds))");
 
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement("SELECT SETVAL(pg_get_serial_sequence('insemination_methods', 'id'), (SELECT MAX(id) FROM breeds))");
+        }
     }
 }
