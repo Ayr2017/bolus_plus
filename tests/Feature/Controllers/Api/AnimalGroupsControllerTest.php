@@ -127,7 +127,8 @@ use Laravel\Sanctum\Sanctum;
     public function test_show_for_admin()
     {
         $animalGroup = AnimalGroup::query()->first();
-        $response = $this->actingAs($this->admin)->getJson(route('api.animal-groups.show', $animalGroup->id));
+        // TODO: в AnimalGroupsController в методе show - обратить внимание на параметр ShowAnimalGroupRequest $request
+        $response = $this->actingAs($this->admin)->getJson(route('api.animal-groups.show', $animalGroup));
 
         $response->assertOk();
         $response->assertJsonStructure([
@@ -158,7 +159,8 @@ use Laravel\Sanctum\Sanctum;
     public function test_show_for_non_admin()
     {
         $animalGroup = AnimalGroup::query()->first();
-        $response = $this->actingAs($this->user)->getJson(route('api.animal-groups.show', $animalGroup->id));
+        // TODO: в AnimalGroupsController в методе show - обратить внимание на параметр ShowAnimalGroupRequest $request
+        $response = $this->actingAs($this->user)->getJson(route('api.animal-groups.show', $animalGroup));
 
         $response->assertOk();
         $response->assertJsonStructure([
