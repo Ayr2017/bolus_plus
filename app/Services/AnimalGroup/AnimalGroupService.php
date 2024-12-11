@@ -74,13 +74,10 @@ class AnimalGroupService extends Service
      * @param int $id
      * @return AnimalGroup|null
      */
-    public function show(int $id):?AnimalGroup
+    public function show(AnimalGroup $animalGroup):?AnimalGroup
     {
         try {
-            $animalGroup = AnimalGroup::query()->findOrFail($id);
-            if($animalGroup){
-                return $animalGroup;
-            }
+            return  $animalGroup;
         }catch (\Exception $e){
             Log::error(__METHOD__." ".$e->getMessage());
         }
