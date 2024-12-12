@@ -49,7 +49,9 @@ class ZootechnicalExitReasonSeeder extends Seeder
 
         // Вставка данных с временными метками
         DB::table('zootechnical_exit_reasons')->insertOrIgnore($dataWithTimestamps);
-        DB::statement("SELECT SETVAL(pg_get_serial_sequence('zootechnical_exit_reasons', 'id'), (SELECT MAX(id) FROM breeds))");
 
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement("SELECT SETVAL(pg_get_serial_sequence('zootechnical_exit_reasons', 'id'), (SELECT MAX(id) FROM breeds))");
+        }
     }
 }
