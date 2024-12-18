@@ -369,30 +369,15 @@ use Tests\TestCase;
         $this->assertDatabaseMissing('breeding_bulls', ['id' => $breedingBull->id]);
     }
 
-    public function test_destroy_for_non_admin()
+
+    public function test_destroy_forbidden_for_non_admin()
     {
         $breedingBull = BreedingBull::query()->first();
 
         $response = $this->actingAs($this->user)->deleteJson(route('api.breeding-bulls.destroy', $breedingBull), ['breeding_bull' => $breedingBull->id]);
 
-        $response->assertOk();
-        $response->assertJson([
-            'success' => true,
-            'error' => null,
-        ]);
+        $response->assertForbidden();
 
-        $this->assertDatabaseMissing('breeding_bulls', ['id' => $breedingBull->id]);
+        $this->assertDatabaseHas('breeding_bulls', ['id' => $breedingBull->id]);
     }
-
-    // TODO: пользователи могут удалять?
-    // public function test_destroy_forbidden_for_non_admin()
-    // {
-    //     $breedingBull = BreedingBull::query()->first();
-
-    //     $response = $this->actingAs($this->user)->deleteJson(route('api.breeding-bulls.destroy', $breedingBull), ['breeding_bull' => $breedingBull->id]);
-
-    //     $response->assertForbidden();
-
-    //     $this->assertDatabaseHas('breeding_bulls', ['id' => $breedingBull->id]);
-    // }
 }
