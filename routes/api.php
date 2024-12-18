@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\HerdEntryReasonsController;
 use App\Http\Controllers\Api\V1\InseminationMethodsController;
 use App\Http\Controllers\Api\V1\EventsController;
 use App\Http\Controllers\Api\V1\MilkingEquipmentsController;
+use App\Http\Controllers\Api\V1\MilkingsController;
 use App\Http\Controllers\Api\V1\RestrictionReasonsController;
 use App\Http\Controllers\Api\V1\RestrictionsController;
 use App\Http\Controllers\Api\V1\SanctumController;
@@ -46,6 +47,7 @@ Route::prefix('v1')
         Route::group(['prefix' => 'settings'], function () {
             Route::apiResource('milking-equipments', MilkingEquipmentsController::class);
             Route::apiResource('shifts', ShiftsController::class);
+            Route::apiResource('milkings', MilkingsController::class);
         });
 
 

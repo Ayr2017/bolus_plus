@@ -20,6 +20,7 @@ class MilkingEquipmentResource extends PaginatedJsonResponse
             'organization' => $this->whenLoaded('organization'),
             'department' => $this->whenLoaded('department'),
             'equipment_type' => $this->equipmentType,
+            'created_at' => $this->created_at->toDateTimeString(),
         ];
     }
 }
