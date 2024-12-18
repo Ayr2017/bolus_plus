@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\V1\RestrictionsController;
 use App\Http\Controllers\Api\V1\SanctumController;
 use App\Http\Controllers\Api\V1\SelectedBreedingBullsController;
 use App\Http\Controllers\Api\V1\SemenPortionsController;
+use App\Http\Controllers\Api\V1\ShiftsController;
 use App\Http\Controllers\Api\V1\TagColorController;
 use App\Http\Controllers\Api\V1\UsersController;
 use App\Http\Controllers\Api\V1\ZootechnicalExitReasonsController;
@@ -44,6 +45,7 @@ Route::prefix('v1')
 
         Route::group(['prefix' => 'settings'], function () {
             Route::apiResource('milking-equipments', MilkingEquipmentsController::class);
+            Route::apiResource('shifts', ShiftsController::class);
         });
 
 

@@ -26,7 +26,7 @@ class MilkingEquipmentsController extends Controller
     {
         try {
             $milkingEquipments = $milkingEquipmentService->index($request->validated());
-            return ApiResponse::success(MilkingEquipmentResource::collection($milkingEquipments));
+            return ApiResponse::success(MilkingEquipmentResource::paginatedCollection($milkingEquipments));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

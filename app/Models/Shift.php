@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MilkingEquipment extends Model
+class Shift extends Model
 {
-    protected $fillable = ['is_active', 'organization_id', 'department_id', 'equipment_type', 'milking_places_amount', 'milking_per_day_amount'];
-
-    protected $table = 'milking_equipments';
+    protected $fillable = ['is_active', 'organization_id', 'department_id', 'start_time', 'end_time', 'name'];
 
     protected $casts = [
         'is_active' => 'boolean'

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\MilkingEquipment;
+namespace App\Http\Resources\Shift;
 
 use App\Http\Resources\PaginatedJsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MilkingEquipmentResource extends PaginatedJsonResponse
+class ShiftResource extends PaginatedJsonResponse
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,13 @@ class MilkingEquipmentResource extends PaginatedJsonResponse
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'organization' => $this->whenLoaded('organization'),
             'department' => $this->whenLoaded('department'),
-            'equipment_type' => $this->equipmentType,
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
+            'is_active' => $this->is_active,
+            'created_at' => $this->created_at
         ];
     }
 }

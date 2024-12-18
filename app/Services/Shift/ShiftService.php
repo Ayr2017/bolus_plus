@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Services\MilkingEquipment;
+namespace App\Services\Shift;
 
-use App\Models\MilkingEquipment;
+use App\Models\Shift;
 use \App\Services\Service;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
-class MilkingEquipmentService extends Service
+class ShiftService extends Service
 {
     public function __construct()
     {
@@ -24,15 +24,15 @@ class MilkingEquipmentService extends Service
         $perPage = Arr::get($data, 'per_page', 50);
         $page = Arr::get($data, 'page', 1);
 
-        return MilkingEquipment::query()->orderBy('id')->with('organization', 'department')->paginate(perPage: $perPage, page: $page);
+        return Shift::query()->orderBy('id')->with(['organization', 'department'])->paginate(perPage: $perPage, page: $page);
     }
 
-    public function update(array $validated, MilkingEquipment $milkingEquipment): ?MilkingEquipment
+    public function update(array $validated, Shift $shift): ?Shift
     {
         try {
-            $result = $milkingEquipment->update($validated);
+            $result = $shift->update($validated);
             if ($result) {
-                return $milkingEquipment->load('organization', 'department');
+                return $shift->load(['organization', 'department']);
             }
         } catch (\Exception $e) {
             Log::error(__METHOD__ . " " . $e->getMessage());
@@ -43,30 +43,31 @@ class MilkingEquipmentService extends Service
     public function store(mixed $data)
     {
         try {
-            $milkingEquipment = MilkingEquipment::query()->create($data);
-            if ($milkingEquipment) {
-                return $milkingEquipment->load('organization', 'department');
+            $shift = Shift::query()->create($data);
+
+            if ($shift) {
+                return $shift->load(['organization', 'department']);
             }
         } catch (\Exception $e) {
-            Log::error(__METHOD__ . " " . $e->getMessage());
+            dd($e->getMessage());
         }
         return null;
     }
 
-    public function show(MilkingEquipment $milkingEquipment): ?MilkingEquipment
+    public function show(Shift $shift): ?Shift
     {
         try {
-            return $milkingEquipment->load('organization', 'department');
+            return $shift->load(['organization', 'department']);
         } catch (\Exception $e) {
             Log::error(__METHOD__ . " " . $e->getMessage());
         }
         return null;
     }
 
-    public function delete(MilkingEquipment $milkingEquipment): bool
+    public function delete(Shift $shift): bool
     {
         try {
-            $result = $milkingEquipment->delete();
+            $result = $shift->delete();
             if ($result) {
                 return true;
             }
