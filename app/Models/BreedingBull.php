@@ -31,4 +31,9 @@ class BreedingBull extends Model
         'is_selected' => 'boolean',
         'date_of_birth'=>'date',
     ];
+
+    public function breed()
+    {
+        return $this->belongsTo(Breed::class);
+    }
 }
