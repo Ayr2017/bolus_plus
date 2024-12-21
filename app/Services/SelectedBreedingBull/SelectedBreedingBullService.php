@@ -2,6 +2,7 @@
 
 namespace App\Services\SelectedBreedingBull;
 
+use App\Models\BreedingBull;
 use App\Models\SelectedBreedingBull;
 use \App\Services\Service;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -24,14 +25,14 @@ class SelectedBreedingBullService extends Service
         $perPage = Arr::get($data, 'per_page', 50);
         $page = Arr::get($data, 'page', 1);
 
-        return SelectedBreedingBull::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
+        return BreedingBull::query()->orderBy('id')->where('is_selected', true)->paginate(perPage: $perPage, page: $page);
     }
 
 
     public function update(array $validated, SelectedBreedingBull $selectedBreedingBull): ?SelectedBreedingBull
     {
         try {
-            $selectedSelectedBreedingBullingBull = SelectedBreedingBull::query()->findOrFail($selectedBreedingBull);
+            $selectedSelectedBreedingBullingBull = BreedingBull::query()->findOrFail($selectedBreedingBull);
             $result = $selectedSelectedBreedingBullingBull->update($validated);
             if ($result) {
                 return $selectedSelectedBreedingBullingBull;

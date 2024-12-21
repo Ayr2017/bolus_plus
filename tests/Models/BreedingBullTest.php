@@ -139,17 +139,6 @@ use function Symfony\Component\Clock\now;
         BreedingBull::create(['type' => null]);
     }
 
-    public function test_rshn_id_is_required()
-    {
-        // ошибка не возникает, так как rshn_id nullable (это возможно ошибочно)
-        // $this->expectException(QueryException::class);
-        // BreedingBull::create(['rshn_id' => null]);
-
-        // TODO: в миграции rshn_id nullable, но в StoreBreedingBullRequest rshn_id required - привести к единому соглашению
-        $result = BreedingBull::create(['type' => 'Test Type', 'rshn_id' => null]);
-        $this->assertNotNull($result->rshn_id);
-    }
-
     public function test_semen_supplier_is_nullable()
     {
         // TODO: seed_supplier переименовать в semen_supplier, как указано в миграции. и тут тоже

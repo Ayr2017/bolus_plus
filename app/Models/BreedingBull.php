@@ -36,4 +36,9 @@ class BreedingBull extends Model
     {
         return $this->belongsTo(Breed::class);
     }
+
+    public function selected()
+    {
+        return $this->where('is_selected', true);
+    }
 }
