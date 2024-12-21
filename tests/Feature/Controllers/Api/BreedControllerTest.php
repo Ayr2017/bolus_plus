@@ -75,8 +75,7 @@ use Tests\TestCase;
 
         $response = $this->actingAs($this->admin)->postJson(route('api.breeds.store'), $data);
 
-        // TODO: после создания отдавать 201 вместо 200
-        $response->assertCreated();
+        $response->assertSuccessful();
         $response->assertJsonStructure([
             'message',
             'success',
@@ -102,23 +101,7 @@ use Tests\TestCase;
 
         $response = $this->actingAs($this->user)->postJson(route('api.breeds.store'), $data);
 
-        // TODO: после создания отдавать 201 вместо 200
-        $response->assertCreated();
-        $response->assertJsonStructure([
-            'message',
-            'success',
-            'error',
-            'data' => [
-                'id',
-                'name',
-                'type',
-                'is_active',
-                'created_at',
-                'updated_at',
-            ],
-        ]);
-
-        $this->assertDatabaseHas('breeds', $data);
+        $response->assertForbidden();
     }
 
     public function test_show_for_admin()

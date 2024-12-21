@@ -131,7 +131,6 @@ use Illuminate\Database\QueryException;
 
     public function test_factory()
     {
-        // TODO: убрать HasFactory из модели или заполнить фабрику (файл уже есть)
         $result = ZootechnicalExitReason::factory()->create();
 
         $this->assertDatabaseHas('zootechnical_exit_reasons', [

@@ -11,7 +11,7 @@ class StoreBreedingBullRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasRole('admin');
     }
 
     /**

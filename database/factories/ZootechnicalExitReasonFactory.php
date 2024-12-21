@@ -17,7 +17,9 @@ class ZootechnicalExitReasonFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'description' => $this->faker->sentence(),
+            'is_active' => $this->faker->boolean()
         ];
     }
 }

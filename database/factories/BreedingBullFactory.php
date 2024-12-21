@@ -17,7 +17,19 @@ class BreedingBullFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'type' => $this->faker->word,
+            'semen_supplier' => $this->faker->company,
+            'nickname' => $this->faker->name,
+            'date_of_birth' => $this->faker->date(),
+            'country_of_birth' => $this->faker->country,
+            'tag_number' => $this->faker->randomNumber(),
+            'semen_code' => $this->faker->randomNumber(),
+            'rshn_id' => $this->faker->randomNumber(),
+            'coat_color_id' => rand(1, 5), // here you need to use the actual id range of coat colors
+            'breed_id' => rand(1, 5), // here you need to use the actual id range of breeds
+            'is_selected' => $this->faker->boolean,
+            'is_active' => $this->faker->boolean,
+            'is_own' => $this->faker->boolean,
         ];
     }
 }

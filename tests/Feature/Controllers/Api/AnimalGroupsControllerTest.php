@@ -107,21 +107,7 @@ use Laravel\Sanctum\Sanctum;
 
         $response = $this->actingAs($this->user)->postJson(route('api.animal-groups.store'), $data);
 
-        // TODO: после создания отдавать 201 вместо 200
-        $response->assertCreated();
-        $response->assertJsonStructure([
-            'message',
-            'success',
-            'error',
-            'data' => [
-                'id',
-                'name',
-                'description',
-                'is_active',
-            ],
-        ]);
-
-        $this->assertDatabaseHas('animal_groups', $data);
+        $response->assertForbidden();
     }
 
     public function test_show_for_admin()

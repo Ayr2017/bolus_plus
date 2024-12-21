@@ -62,7 +62,7 @@ class BreedingBullsController extends Controller
     {
         try {
             $breedingBull = $service->show($breedingBull);
-            return ApiResponse::success(new BreedingBullResource($breedingBull));
+            return ApiResponse::success(BreedingBullResource::make($breedingBull));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }

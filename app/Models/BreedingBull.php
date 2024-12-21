@@ -11,7 +11,7 @@ class BreedingBull extends Model
 
     protected $fillable = [
         'type',
-        'seed_supplier',
+        'semen_supplier',
         'nickname',
         'date_of_birth',
         'country_of_birth',
@@ -27,6 +27,8 @@ class BreedingBull extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'is_own' => 'boolean'
+        'is_own' => 'boolean',
+        'is_selected' => 'boolean',
+        'date_of_birth'=>'date',
     ];
 }
