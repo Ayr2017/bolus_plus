@@ -30,6 +30,7 @@ class BreedingBullResource extends PaginatedJsonResponse
             'is_selected' => $this->is_selected,
             'is_active' => $this->is_active,
             'is_own' => $this->is_own,
+            'coat_color_id' => $this->coat_color_id,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString()
         ];

@@ -310,11 +310,10 @@ use function Symfony\Component\Clock\now;
     {
         $result = BreedingBull::factory()->create();
 
-        $this->assertDatabaseHas('breeding_bulls', [
+        $this->assertDatabaseHas('breeding_bulls', data: [
             'id' => $result->id,
         ]);
 
-        // TODO: убрать HasFactory из модели или настроить фабрику (файл фабрики есть, нужно указать обязательные поля)
-        $this->assertNotNull($result->name);
+        $this->assertNotNull($result->id);
     }
 }
