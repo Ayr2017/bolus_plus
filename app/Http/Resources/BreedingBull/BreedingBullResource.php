@@ -25,7 +25,6 @@ class BreedingBullResource extends PaginatedJsonResponse
             'tag_number' => $this->tag_number,
             'semen_code' => $this->seed_code,
             'rshn_id' => $this->rshn_id,
-            'color' => $this->color,
             'breed_id' => $this->breed_id,
             'is_selected' => $this->is_selected,
             'is_active' => $this->is_active,
