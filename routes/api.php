@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\V1\SanctumController;
 use App\Http\Controllers\Api\V1\SelectedBreedingBullsController;
 use App\Http\Controllers\Api\V1\SemenPortionsController;
 use App\Http\Controllers\Api\V1\ShiftsController;
+use App\Http\Controllers\Api\V1\StructuralUnitsController;
 use App\Http\Controllers\Api\V1\TagColorController;
 use App\Http\Controllers\Api\V1\UsersController;
 use App\Http\Controllers\Api\V1\ZootechnicalExitReasonsController;
@@ -38,6 +39,7 @@ Route::prefix('v1')
         Route::apiResource('restrictions', RestrictionsController::class);
         Route::apiResource('restriction-reasons', RestrictionReasonsController::class);
         Route::apiResource('semen-portions', SemenPortionsController::class);
+        Route::apiResource('structural-units', StructuralUnitsController::class);
         Route::get('users/get-current-user', [UsersController::class, 'getCurrentUser']);
         Route::apiResource('users', UsersController::class);
         Route::apiResource('zootechnical-exit-reasons', ZootechnicalExitReasonsController::class);
@@ -61,4 +63,5 @@ Route::prefix('v1')
     ->group(function () {
         Route::post('/auth', [SanctumController::class,'auth'])->name('auth');
     });
+
 
