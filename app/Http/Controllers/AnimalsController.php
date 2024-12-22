@@ -10,16 +10,19 @@ use App\Models\Breed;
 use App\Models\Organisation;
 use App\Models\Status;
 use App\Services\Animal\AnimalService;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class AnimalsController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return View|Factory
      */
-    public function index()
+    public function index(): View|Factory
     {
-        $animals = Animal::orderBy('name')->get();
+        $animals = Animal::query()->orderBy('name')->get();
         $title = "Animals";
         return view('animals.index', compact('animals', 'title'));
     }
