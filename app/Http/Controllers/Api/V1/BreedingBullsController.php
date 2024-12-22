@@ -114,15 +114,16 @@ class BreedingBullsController extends Controller
      * @param BreedingBullService $breedingBullService
      * @return JsonResponse
      */
-    public function selectedBreedingBulls(IndexBreedingBullRequest $request, BreedingBullService $breedingBullService) :JsonResponse
-    {
-        try {
-            $breedingBulls = $breedingBullService->selectedBreedingBulls($request->validated());
-            return ApiResponse::success(BreedingBullResource::paginatedCollection($breedingBulls));
-        } catch (\Throwable $throwable) {
-            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
-        }
-
-        return ApiResponse::error('Something went wrong!');
-    }
+    //TODO: на консервации
+//    public function selectedBreedingBulls(IndexBreedingBullRequest $request, BreedingBullService $breedingBullService) :JsonResponse
+//    {
+//        try {
+//            $breedingBulls = $breedingBullService->selectedBreedingBulls($request->validated());
+//            return ApiResponse::success(BreedingBullResource::paginatedCollection($breedingBulls));
+//        } catch (\Throwable $throwable) {
+//            ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
+//        }
+//
+//        return ApiResponse::error('Something went wrong!');
+//    }
 }
