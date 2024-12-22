@@ -38,8 +38,8 @@ use function Symfony\Component\Clock\now;
         $result = BreedingBull::create($data);
 
         foreach ($data as $key => $value) {
-            $this->assertEquals($value, $result->$key);
         }
+        $this->assertEquals($value, $result->$key);
     }
 
     public function test_create()

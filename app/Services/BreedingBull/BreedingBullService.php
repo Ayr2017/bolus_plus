@@ -7,6 +7,8 @@ use \App\Services\Service;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BreedingBullService extends Service
 {
@@ -24,7 +26,15 @@ class BreedingBullService extends Service
         $perPage = Arr::get($data, 'per_page', 50);
         $page = Arr::get($data, 'page', 1);
 
-        return BreedingBull::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
+        return QueryBuilder::for(BreedingBull::class)
+            ->allowedFilters([
+                AllowedFilter::exact('is_selected'),
+                AllowedFilter::exact('is_own'),
+                AllowedFilter::exact('is_active'),
+            ])
+            ->paginate(perPage: $perPage, page: $page);
+
+//        return BreedingBull::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
     }
 
     public function update(array $validated, BreedingBull $breedingBull): ?BreedingBull
