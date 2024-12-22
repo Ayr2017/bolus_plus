@@ -25,6 +25,7 @@ class StoreOrganisationRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'structural_unit_id' => ['nullable', 'exists:structural_units,id'],
             'parent_id' => ['nullable', 'exists:organisations,id'],
+            'is_active' => ['nullable', 'boolean'],
         ];
     }
 }
