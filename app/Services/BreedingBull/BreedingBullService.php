@@ -33,8 +33,6 @@ class BreedingBullService extends Service
                 AllowedFilter::exact('is_active'),
             ])
             ->paginate(perPage: $perPage, page: $page);
-
-//        return BreedingBull::query()->orderBy('id')->paginate(perPage: $perPage, page: $page);
     }
 
     public function update(array $validated, BreedingBull $breedingBull): ?BreedingBull
