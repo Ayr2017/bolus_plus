@@ -10,9 +10,9 @@ use App\Services\TagColor\TagColorService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class TagColorController extends Controller
+class TagColorsController extends Controller
 {
-    public function __construct(readonly TagColorService $userService)
+    public function __construct(readonly TagColorService $tagColorService)
     {
     }
 
@@ -22,7 +22,7 @@ class TagColorController extends Controller
     public function index(IndexTagColorRequest $request): JsonResponse
     {
         try {
-            $data = $this->userService->getTagColors($request->validated());
+            $data = $this->tagColorService->getTagColors($request->validated());
             return ApiResponse::success($data);
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
