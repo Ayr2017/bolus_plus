@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Helpers\ErrorLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TagColor\IndexTagColorRequest;
+use App\Http\Resources\TagColor\TagColorResource;
 use App\Http\Responses\ApiResponse;
 use App\Services\TagColor\TagColorService;
 use Illuminate\Http\JsonResponse;
@@ -23,7 +24,7 @@ class TagColorsController extends Controller
     {
         try {
             $data = $this->tagColorService->getTagColors($request->validated());
-            return ApiResponse::success($data);
+            return ApiResponse::success(TagColorResource::paginatedCollection($data));
         } catch (\Throwable $throwable) {
             ErrorLog::write(__METHOD__, __LINE__, $throwable->getMessage());
         }
