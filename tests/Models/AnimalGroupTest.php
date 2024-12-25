@@ -130,7 +130,6 @@ use Illuminate\Database\QueryException;
 
     public function test_factory()
     {
-        // TODO: убрать HasFactory из модели или добавить фабрику
         $result = AnimalGroup::factory()->create();
 
         $this->assertDatabaseHas('animal_groups', [
