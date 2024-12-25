@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BreedingBull extends Model
 {
@@ -40,5 +41,9 @@ class BreedingBull extends Model
     public function selected()
     {
         return $this->where('is_selected', true);
+    }
+    public function coatColor():BelongsTo
+    {
+        return $this->belongsTo(CoatColor::class, 'coat_color_id', 'id');
     }
 }
