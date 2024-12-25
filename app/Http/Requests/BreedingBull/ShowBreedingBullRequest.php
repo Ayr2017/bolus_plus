@@ -11,7 +11,7 @@ class ShowBreedingBullRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->hasRole('admin');
     }
 
     /**
@@ -21,9 +21,9 @@ class ShowBreedingBullRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            // Мы проверяем, что сущность с данным ID существует
-            'breeding_bull' => 'required|exists:breeding_bulls,id', // ID записи должен существовать в базе данных
-        ];
+//        return [
+//            // Мы проверяем, что сущность с данным ID существует
+//            'breeding_bull' => 'required|exists:breeding_bulls,id', // ID записи должен существовать в базе данных
+//        ];
     }
 }
