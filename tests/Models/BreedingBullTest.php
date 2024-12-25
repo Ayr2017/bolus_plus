@@ -20,8 +20,7 @@ use function Symfony\Component\Clock\now;
     {
         $data = [
             'type' => 'Test Type',
-            // TODO: в модели в fillable seed_supplier переименовать в semen_supplier, как указано в миграции. и тут тоже
-            'seed_supplier' => 'Test Seed Supplier',
+            'semen_supplier' => 'Test Semen Supplier',
             'nickname' => 'Test Nickname',
             'date_of_birth' =>  now(),
             'country_of_birth' => 'Test Country of Birth',
@@ -70,8 +69,7 @@ use function Symfony\Component\Clock\now;
 
         $result = BreedingBull::create([
             'type' => 'Test Type',
-            // TODO: в модели в fillable seed_supplier переименовать в semen_supplier, как указано в миграции. и тут тоже
-            'seed_supplier' => 'Test Seed Supplier',
+            'semen_supplier' => 'Test Semen Supplier',
             'nickname' => 'Test Nickname',
             'date_of_birth' => $today,
             'country_of_birth' => 'Test Country of Birth',
@@ -87,8 +85,7 @@ use function Symfony\Component\Clock\now;
 
         $result->update([
             'type' => 'Updated Type',
-            // TODO: в модели в fillable seed_supplier переименовать в semen_supplier, как указано в миграции. и тут тоже
-            'seed_supplier' => 'Updated Seed Supplier',
+            'semen_supplier' => 'Updated Semen Supplier',
             'nickname' => 'Updated Nickname',
             'date_of_birth' =>  $tomorrow,
             'country_of_birth' => 'Updated Country of Birth',
@@ -104,8 +101,7 @@ use function Symfony\Component\Clock\now;
 
         $this->assertDatabaseHas('breeding_bulls', [
             'type' => 'Updated Type',
-            // TODO: в модели в fillable seed_supplier переименовать в semen_supplier, как указано в миграции. и тут тоже
-            'seed_supplier' => 'Updated Seed Supplier',
+            'semen_supplier' => 'Updated Semen Supplier',
             'nickname' => 'Updated Nickname',
             'date_of_birth' =>  $tomorrow,
             'country_of_birth' => 'Updated Country of Birth',
@@ -141,13 +137,12 @@ use function Symfony\Component\Clock\now;
 
     public function test_semen_supplier_is_nullable()
     {
-        // TODO: seed_supplier переименовать в semen_supplier, как указано в миграции. и тут тоже
         $result = BreedingBull::create([
             'type' => 'Test Type',
-            'seed_supplier' => null,
+            'semen_supplier' => null,
         ]);
 
-        $this->assertNull($result->seed_supplier);
+        $this->assertNull($result->semen_supplier);
     }
 
     public function test_nickname_is_nullable()

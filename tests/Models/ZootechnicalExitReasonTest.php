@@ -48,6 +48,7 @@ use Illuminate\Database\QueryException;
         ]);
 
         $found = ZootechnicalExitReason::find($result->id);
+
         $this->assertEquals('Test Name', $found->name);
     }
 
@@ -115,7 +116,6 @@ use Illuminate\Database\QueryException;
 
         $result->refresh();
 
-        // TODO: кастовать в модели is_active => boolean
         $this->assertTrue($result->is_active);
     }
 
