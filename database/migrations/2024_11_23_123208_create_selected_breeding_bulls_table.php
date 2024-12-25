@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('selected_breeding_bulls', function (Blueprint $table) {
             $table->id();
             $table->string('type'); // Type
-            $table->string('seed_supplier')->nullable(); // Поставщик семени
+            $table->string('semen_supplier')->nullable(); // Поставщик семени
             $table->string('nickname')->nullable(); // Кличка
             $table->date('date_of_birth')->nullable(); // Дата рождения
             $table->string('country_of_birth')->nullable(); // Страна рождения
             $table->string('tag_number')->nullable(); // Номер бирки
-            $table->string('seed_code')->nullable(); // Код семени
+            $table->string('semen_code')->nullable(); // Код семени
             $table->string('rshn_id')->unique(); // Идентификационный номер РСХН
             $table->string('color')->nullable(); // Масть
             $table->unsignedBigInteger('breed_id')->nullable(); // Порода

@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\CoatColor;
+use App\Models\Breed;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BreedingBull>
@@ -25,8 +27,8 @@ class BreedingBullFactory extends Factory
             'tag_number' => $this->faker->randomNumber(),
             'semen_code' => $this->faker->randomNumber(),
             'rshn_id' => $this->faker->randomNumber(),
-            'coat_color_id' => rand(1, 5), // here you need to use the actual id range of coat colors
-            'breed_id' => rand(1, 5), // here you need to use the actual id range of breeds
+            'coat_color_id' => CoatColor::query()->inRandomOrder()->first()->id, // actual id of coat colors
+            'breed_id' => Breed::query()->inRandomOrder()->first()->id, // actual id of breeds
             'is_selected' => $this->faker->boolean,
             'is_active' => $this->faker->boolean,
             'is_own' => $this->faker->boolean,

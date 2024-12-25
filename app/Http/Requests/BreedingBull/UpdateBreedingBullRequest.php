@@ -25,7 +25,7 @@ class UpdateBreedingBullRequest extends FormRequest
 
         return [
             'type' => 'required|string|max:255', // Тип (обязательное строковое поле)
-            'seed_supplier' => 'nullable|string|max:255', // Поставщик семени (необязательное строковое поле)
+            'semen_supplier' => 'nullable|string|max:255', // Поставщик семени (необязательное строковое поле)
             'nickname' => 'nullable|string|max:255', // Кличка (необязательное строковое поле)
             'date_of_birth' => 'nullable|date', // Дата рождения (необязательное поле, должно быть в формате даты)
             'country_of_birth' => 'nullable|string|max:255', // Страна рождения (необязательное строковое поле)

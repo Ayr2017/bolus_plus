@@ -79,8 +79,6 @@ use Laravel\Sanctum\Sanctum;
         ];
 
         $response = $this->actingAs($this->admin)->postJson(route('api.animal-groups.store'), $data);
-
-        // TODO: после создания отдавать 201 вместо 200
         $response->assertSuccessful();
         $response->assertJsonStructure([
             'message',
@@ -114,7 +112,6 @@ use Laravel\Sanctum\Sanctum;
     {
         $animalGroup = AnimalGroup::query()->first();
 
-        // TODO: если убрать prepareForValidation в ShowAnimalGroupRequest, то работает
         $response = $this->actingAs($this->admin)->json('GET', route('api.animal-groups.show', $animalGroup), ['animal_group' => $animalGroup->id]);
 
         $response->assertOk();
@@ -147,7 +144,6 @@ use Laravel\Sanctum\Sanctum;
     {
         $animalGroup = AnimalGroup::query()->first();
 
-        // TODO: если убрать prepareForValidation в ShowAnimalGroupRequest, то работает
         $response = $this->actingAs($this->user)->json('GET', route('api.animal-groups.show', $animalGroup), ['animal_group' => 1]);
 
         $response->assertOk();

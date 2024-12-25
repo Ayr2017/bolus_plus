@@ -233,7 +233,6 @@ use function Symfony\Component\Clock\now;
 
         $result->refresh();
 
-        // TODO: в модели кастовать is_selected to boolean
         $this->assertFalse($result->is_selected);
     }
 
@@ -266,7 +265,6 @@ use function Symfony\Component\Clock\now;
             'is_selected' => 1
         ]);
 
-        // TODO: в модели кастовать is_selected to boolean
         $this->assertTrue($result->is_selected);
     }
 
