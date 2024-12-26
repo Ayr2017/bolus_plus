@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
-#[AllowDynamicProperties] class ZootechnicalExitReasonControllerTest extends TestCase
+#[AllowDynamicProperties] class ZootechnicalExitReasonsControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -80,9 +80,7 @@ use Tests\TestCase;
         ];
 
         $response = $this->actingAs($this->admin)->postJson(route('api.zootechnical-exit-reasons.store'), $data);
-
-        // TODO: после создания отдавать 201 вместо 200
-        $response->assertCreated();
+        $response->assertSuccessful();
         $response->assertJsonStructure([
             'message',
             'success',
@@ -107,9 +105,7 @@ use Tests\TestCase;
         ];
 
         $response = $this->actingAs($this->user)->postJson(route('api.zootechnical-exit-reasons.store'), $data);
-
-        // TODO: после создания отдавать 201 вместо 200
-        $response->assertCreated();
+        $response->assertSuccessful();
         $response->assertJsonStructure([
             'message',
             'success',
@@ -299,7 +295,7 @@ use Tests\TestCase;
         $this->assertDatabaseMissing('zootechnical_exit_reasons', ['id' => $zootechnicalExitReason->id]);
     }
 
-    // TODO: уточнить, может ли пользователь удалять
+    // TODO: (учтонить) включить, если пользователю запрещено удалять
     // public function test_destroy_forbidden_for_non_admin()
     // {
     //     $zootechnicalExitReason = ZootechnicalExitReason::query()->first();

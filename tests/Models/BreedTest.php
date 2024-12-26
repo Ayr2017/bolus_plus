@@ -166,7 +166,6 @@ use Illuminate\Database\QueryException;
 
     public function test_factory()
     {
-        // TODO: убрать HasFactory из модели или добавить фабрику
         $result = Breed::factory()->create();
 
         $this->assertDatabaseHas('breeds', [
@@ -176,50 +175,4 @@ use Illuminate\Database\QueryException;
         $this->assertNotNull($result->name);
         $this->assertNotNull($result->uuid);
     }
-
-    // проверка scope (условий Eloquent)
-    // public function test_active_scope_returns_only_active_models()
-    // {
-    //     $breed1 = Breed::create([
-    //         'name' => 'Test Breed 1',
-    //         'is_active' => true,
-    //     ]);
-
-    //     $breed2 = Breed::create([
-    //         'name' => 'Test Breed 2',
-    //         'is_active' => false,
-    //     ]);
-
-    //     $activeBreeds = Breed::active()->get();
-
-    //     $this->assertCount(1, $activeBreeds);
-    // }
-
-
-    // проверка мутаторов
-    // public function test_name_is_capitalized()
-    // {
-    //     $breed = Breed::create(['name' => 'test breed']);
-    //     $this->assertEquals('Test Breed', $breed->name);
-    // }
-
-    // проверка уникальности полей
-    // public function test_unique_name_validation()
-    // {
-    //     Breed::create(['name' => 'Test Breed']);
-
-    //     $this->expectException(QueryException::class);
-    //     Breed::create(['name' => 'Test Breed']);
-    // }
-
-    // проверка soft_delete, если она есть в модели
-    // public function test_soft_delete_breed()
-    // {
-    //     $breed = Breed::create([
-    //         'name' => 'Test Breed',
-    //     ]);
-    //     $breed->delete();
-
-    //     $this->assertSoftDeleted($breed);
-    // }
 }

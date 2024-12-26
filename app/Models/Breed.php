@@ -28,7 +28,7 @@ class Breed extends Model
         });
     }
 
-    public function animals():HasMany
+    public function animals(): HasMany
     {
         return $this->hasMany(Animal::class);
     }

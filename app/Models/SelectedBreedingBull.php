@@ -17,12 +17,12 @@ class SelectedBreedingBull extends Model
      */
     protected $fillable = [
         'type',
-        'seed_supplier',
+        'semen_supplier',
         'nickname',
         'date_of_birth',
         'country_of_birth',
         'tag_number',
-        'seed_code',
+        'semen_code',
         'rshn_id',
         'color',
         'breed_id',

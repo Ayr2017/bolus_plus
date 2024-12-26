@@ -30,7 +30,7 @@ class BreedingBull extends Model
         'is_active' => 'boolean',
         'is_own' => 'boolean',
         'is_selected' => 'boolean',
-        'date_of_birth'=>'date',
+        'date_of_birth' => 'date',
     ];
 
     public function breed()
@@ -42,7 +42,7 @@ class BreedingBull extends Model
     {
         return $this->where('is_selected', true);
     }
-    public function coatColor():BelongsTo
+    public function coatColor(): BelongsTo
     {
         return $this->belongsTo(CoatColor::class, 'coat_color_id', 'id');
     }
